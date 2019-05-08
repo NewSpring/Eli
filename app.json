@@ -1,4 +1,8 @@
 {
-  "name": "eli",
-  "displayName": "NewSpring"
+  "expo": {
+    "name": "NewSpring",
+    "icon": "./ns-logo.png",
+    "version": "6.3.0",
+    "sdkVersion": "32.0.0"
+  }
 }
