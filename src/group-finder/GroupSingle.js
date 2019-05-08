@@ -16,7 +16,11 @@ import styled from '@ui/styled';
 import Avatar, { AvatarList } from '@ui/Avatar';
 import Button from '@ui/Button';
 import Chip, { ChipList } from '@ui/Chip';
-import SideBySideView, { ResponsiveSideBySideView, Left, Right } from '@ui/SideBySideView';
+import SideBySideView, {
+  ResponsiveSideBySideView,
+  Left,
+  Right,
+} from '@ui/SideBySideView';
 import { Link } from '@ui/NativeWebRouter';
 import Settings from '@utils/Settings';
 import MediaQuery from '@ui/MediaQuery';
@@ -54,8 +58,12 @@ const StyledImage = styled({
   }),
 })(ProgressiveImage);
 
-const Label = styled(({ theme }) => ({ color: theme.colors.text.tertiary }))(H7);
-const Info = styled(({ theme }) => ({ color: theme.colors.text.secondary }))(H6);
+const Label = styled(({ theme }) => ({ color: theme.colors.text.tertiary }))(
+  H7,
+);
+const Info = styled(({ theme }) => ({ color: theme.colors.text.secondary }))(
+  H6,
+);
 const AdTitle = styled({ textAlign: 'center' })(H4);
 
 const GroupInfoContainer = styled(({ theme }) => ({
@@ -86,7 +94,9 @@ const handleGroupContact = ({ guid, loginParam }) => {
     newLoginParam = `&${loginParam}`;
   }
 
-  WebBrowser.openBrowserAsync(`${rockUrl}Workflows/304?Group=${guid}${newLoginParam}`);
+  WebBrowser.openBrowserAsync(
+    `${rockUrl}Workflows/304?Group=${guid}${newLoginParam}`,
+  );
   track(events.ContactedGroup, categories.Account);
 };
 
@@ -102,7 +112,9 @@ GroupInfo.propTypes = {
   info: PropTypes.string,
 };
 
-const isCurrentPersonLeader = (person, leaders) => person && Array.isArray(leaders) && leaders.filter(x => x.person.id === person.id).length;
+const isCurrentPersonLeader = (person, leaders) => person
+  && Array.isArray(leaders)
+  && leaders.filter(x => x.person.id === person.id).length;
 
 const GroupSingle = enhance(
   ({
@@ -149,7 +161,9 @@ const GroupSingle = enhance(
                   <Label>Group Leaders</Label>
                   <H5>
                     {leaders
-                      .map(leader => `${leader.person.nickName} ${leader.person.lastName}`)
+                      .map(
+                        leader => `${leader.person.nickName} ${leader.person.lastName}`,
+                      )
                       .join(', ')}
                   </H5>
                   <AvatarList>
@@ -239,7 +253,9 @@ const GroupSingle = enhance(
                   <GroupInfoContainer>
                     <Label>Tags</Label>
                     <ChipList>
-                      {tags.map(tag => <Chip key={tag.id} title={tag.value} />)}
+                      {tags.map(tag => (
+                        <Chip key={tag.id} title={tag.value} />
+                      ))}
                       {(() => {
                         if (!type || type === 'Interests') return null;
                         return <Chip title={type} />;
@@ -260,7 +276,13 @@ const GroupSingle = enhance(
               <Card>
                 <GroupFindCTA>
                   <AdTitle>Looking for another group?</AdTitle>
-                  <Link component={Button} to="/groups" pop title="Find A Group" type="default" />
+                  <Link
+                    component={Button}
+                    to="/groups"
+                    pop
+                    title="Find A Group"
+                    type="default"
+                  />
                 </GroupFindCTA>
               </Card>
             </ScrollView>

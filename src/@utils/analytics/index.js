@@ -1,5 +1,4 @@
 import Settings from '@utils/Settings';
-import sentry from '../sentry';
 import google from './google';
 
 // Events
@@ -56,11 +55,6 @@ export const identify = (userId) => {
 
 export const trackScreen = (screenName) => {
   google.analyticsScreen({ screenName });
-  sentry.captureBreadcrumb({
-    message: 'ScreenView',
-    data: { screenName },
-    level: 'info',
-  });
 };
 
 const Analytics = {

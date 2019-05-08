@@ -17,7 +17,6 @@ import TableView, {
 import Chip, { ChipList } from '@ui/Chip';
 import { withTheme } from '@ui/theme';
 import PaddedView from '@ui/PaddedView';
-import sentry from '@utils/sentry';
 
 const StyledTableView = styled({ marginBottom: 0 })(TableView);
 
@@ -59,12 +58,6 @@ class ContributionHistoryFilter extends PureComponent {
     isVisible: false,
   };
 
-  toggle = () => {
-    this.setState({
-      isVisible: !this.state.isVisible,
-    });
-  };
-
   dateRanges = [
     {
       key: moment()
@@ -103,6 +96,12 @@ class ContributionHistoryFilter extends PureComponent {
       endDate: '',
     },
   ];
+
+  toggle = () => {
+    this.setState({
+      isVisible: !this.state.isVisible,
+    });
+  };
 
   clear = () => {
     this.props.setFieldValue('startDate', '');
@@ -226,7 +225,7 @@ const enhance = compose(
         setSubmitting(false);
       } catch (e) {
         // TODO: If there's an error, we want to stay on this page and display it.
-        sentry.captureException(e);
+        console.log(e);
       }
     },
   }),

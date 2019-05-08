@@ -27,9 +27,9 @@ const enhance = compose(
   })),
   withCampuses,
   withProps(({ campuses = [] } = {}) => ({
-    destinations: campuses.map(campus => (
-      `${campus.location.street1} ${campus.location.zip}`
-    )),
+    destinations: campuses.map(
+      campus => `${campus.location.street1} ${campus.location.zip}`,
+    ),
   })),
   withGeoLocation,
 );
@@ -53,22 +53,26 @@ class Locations extends PureComponent {
     // These come in from withCampuses and withGeoLocation, and get passed
     // blindly to CampusFeed
     campuses: PropTypes.array, // eslint-disable-line
-    geoElements: PropTypes.array, // eslint-disable-line
-  }
+    geoElements: PropTypes.array // eslint-disable-line
+  };
 
   state = {
     searchText: this.props.origin,
   };
 
-  handleSearch = (searchText) => {
-    if (searchText !== this.state.searchText) this.setState({ searchText });
-  }
+  debouncedUpdate = debounce(this.update, 500);
 
   update = () => {
-    this.props.history.replace(`${this.props.location.pathname}?${stringify({ q: this.state.searchText })}`);
-  }
+    this.props.history.replace(
+      `${this.props.location.pathname}?${stringify({
+        q: this.state.searchText,
+      })}`,
+    );
+  };
 
-  debouncedUpdate = debounce(this.update, 500);
+  handleSearch = (searchText) => {
+    if (searchText !== this.state.searchText) this.setState({ searchText });
+  };
 
   render() {
     return (
@@ -80,9 +84,7 @@ class Locations extends PureComponent {
             <TextInput
               value={this.state.searchText}
               prefix={<Icon name="search" />}
-              suffix={
-                (this.props.isLoading) ? <ActivityIndicator /> : null
-              }
+              suffix={this.props.isLoading ? <ActivityIndicator /> : null}
               placeholder="Find a campus by city, state or zip"
               onChangeText={this.handleSearch}
               onBlur={this.update}

@@ -22,21 +22,36 @@ const enhance = compose(
   withGroupAttributes,
 );
 
-const Filters = styled({ alignItems: 'center', paddingHorizontal: 0 })(PaddedView);
-const List = styled({ alignItems: 'center', justifyContent: 'center' })(ChipList);
+const Filters = styled({ alignItems: 'center', paddingHorizontal: 0 })(
+  PaddedView,
+);
+const List = styled({ alignItems: 'center', justifyContent: 'center' })(
+  ChipList,
+);
 
 const NumResultsText = styled(({ theme }) => ({
   color: theme.colors.text.tertiary,
 }))(H6);
 
-const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const daysOfWeek = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
 
 const Toolbar = compose(
-  mediaQuery(({ md }) => ({ minWidth: md }), styled(({ theme }) => ({
-    paddingHorizontal: theme.sizing.baseUnit,
-    paddingTop: theme.sizing.baseUnit,
-    paddingBottom: theme.sizing.baseUnit - (theme.sizing.baseUnit / 2),
-  }))),
+  mediaQuery(
+    ({ md }) => ({ minWidth: md }),
+    styled(({ theme }) => ({
+      paddingHorizontal: theme.sizing.baseUnit,
+      paddingTop: theme.sizing.baseUnit,
+      paddingBottom: theme.sizing.baseUnit - theme.sizing.baseUnit / 2,
+    })),
+  ),
   styled(({ theme }) => ({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: theme.colors.shadows.default,
@@ -63,14 +78,18 @@ const SearchPrompt = styled({
 
 class Filter extends PureComponent {
   static propTypes = {
-    groupAttributes: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
-      value: PropTypes.string,
-    })),
-    campuses: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string,
-      id: PropTypes.string,
-    })),
+    groupAttributes: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        value: PropTypes.string,
+      }),
+    ),
+    campuses: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        id: PropTypes.string,
+      }),
+    ),
     query: PropTypes.shape({
       tags: PropTypes.arrayOf(PropTypes.string),
       q: PropTypes.string,
@@ -78,18 +97,23 @@ class Filter extends PureComponent {
     onUpdateFilter: PropTypes.func,
     numResults: PropTypes.number,
     isLoadingResults: PropTypes.bool,
-  }
+  };
 
   static defaultProps = {
     groupAttributes: [],
     campuses: [],
-  }
+  };
 
   state = {
     showFilters: false,
     showSearch: get(this.props, 'query.q', '').length,
     searchText: get(this.props, 'query.q', ''),
-  }
+  };
+
+  debouncedUpdate = debounce(() => {
+    this.props.onUpdateFilter(this.queuedUpdate);
+    this.queuedUpdate = {};
+  }, 500);
 
   get selectedTags() {
     return this.props.groupAttributes.filter(({ value }) => {
@@ -110,7 +134,9 @@ class Filter extends PureComponent {
   get selectedCampuses() {
     return this.props.campuses.filter(({ name = '' }) => {
       const campuses = get(this.props.query, 'campuses', []);
-      return campuses.findIndex(campusId => campusId === name.toLowerCase()) >= 0;
+      return (
+        campuses.findIndex(campusId => campusId === name.toLowerCase()) >= 0
+      );
     });
     // NOTE: Uncomment when Heighliner accepts id's
     // return this.props.campuses.filter(({ id }) => {
@@ -120,8 +146,8 @@ class Filter extends PureComponent {
   }
 
   toggleFilterView = () => {
-    this.setState({ showFilters: !this.state.showFilters });
-  }
+    this.setState(prevState => ({ showFilters: !prevState.showFilters }));
+  };
 
   handleToggle = (filter, value) => {
     const filterObject = get(this.props.query, filter, []);
@@ -132,32 +158,27 @@ class Filter extends PureComponent {
     } else {
       this.props.onUpdateFilter({ [filter]: [...filterObject, value] });
     }
-  }
+  };
 
   queueUpdate = (update) => {
     if (!this.queuedUpdate) this.queuedUpdate = {};
     this.queuedUpdate = { ...this.queuedUpdate, ...update };
     this.debouncedUpdate();
-  }
-
-  debouncedUpdate = debounce(() => {
-    this.props.onUpdateFilter(this.queuedUpdate);
-    this.queuedUpdate = {};
-  }, 500);
+  };
 
   handleTextSearch = (text) => {
     this.setState({ searchText: text });
     this.queueUpdate({ q: text });
-  }
+  };
 
   cancelSearch = () => {
     this.queueUpdate({ q: '' });
     this.setState({ showSearch: false, searchText: '' });
-  }
+  };
 
   toggleSearch = () => {
-    this.setState({ showSearch: !this.state.showSearch });
-  }
+    this.setState(prevState => ({ showSearch: !prevState.showSearch }));
+  };
 
   renderFilter = ({
     filter, value, key, displayValue,
@@ -219,27 +240,21 @@ class Filter extends PureComponent {
             <View>
               <Filters>
                 <H4>Featured Tags</H4>
-                <List>
-                  {this.props.groupAttributes.map(this.renderTag)}
-                </List>
+                <List>{this.props.groupAttributes.map(this.renderTag)}</List>
               </Filters>
               <Filters>
                 <H4>Day of Week</H4>
-                <List>
-                  {daysOfWeek.map(this.renderDay)}
-                </List>
+                <List>{daysOfWeek.map(this.renderDay)}</List>
               </Filters>
               <Filters>
                 <H4>Campuses</H4>
-                <List>
-                  {this.props.campuses.map(this.renderCampus)}
-                </List>
+                <List>{this.props.campuses.map(this.renderCampus)}</List>
               </Filters>
             </View>
           </FilterLists>
         ) : null}
 
-        {(this.state.showSearch || this.props.query.q) ? (
+        {this.state.showSearch || this.props.query.q ? (
           <TableView responsive={false}>
             <FormFields>
               <TextInput
@@ -248,16 +263,16 @@ class Filter extends PureComponent {
                 value={this.state.searchText}
                 onChangeText={this.handleTextSearch}
                 prefix={<Icon name="search" />}
-                suffix={
-                  <H7 onPress={this.cancelSearch}>Cancel</H7>
-                }
+                suffix={<H7 onPress={this.cancelSearch}>Cancel</H7>}
               />
             </FormFields>
           </TableView>
         ) : null}
 
         <SearchPrompt>
-          <NumResultsText isLoading={this.props.isLoadingResults}>{pluralize('Result', this.props.numResults, true)}</NumResultsText>
+          <NumResultsText isLoading={this.props.isLoadingResults}>
+            {pluralize('Result', this.props.numResults, true)}
+          </NumResultsText>
           <Touchable onPress={this.toggleSearch}>
             <Icon isLoading={this.props.isLoadingResults} name="search" />
           </Touchable>
