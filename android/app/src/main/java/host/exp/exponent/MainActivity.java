@@ -14,7 +14,7 @@ public class MainActivity extends DetachActivity {
 
   @Override
   public String publishedUrl() {
-    return "exp://exp.host/@michael.neeley/newspring";
+    return "exp://exp.host/@michael.neeley/eli";
   }
 
   @Override

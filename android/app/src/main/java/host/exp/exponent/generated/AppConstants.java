@@ -12,8 +12,8 @@ import host.exp.exponent.Constants;
 public class AppConstants {
 
   public static final String VERSION_NAME = "2.10.8";
-  public static String INITIAL_URL = "exp://exp.host/@michael.neeley/newspring";
-  public static final String SHELL_APP_SCHEME = "expf0480b9ae47344d19cc9872f1763c3e5";
+  public static String INITIAL_URL = "exp://exp.host/@michael.neeley/eli";
+  public static final String SHELL_APP_SCHEME = "exp9c6c74da2a2e462a85f96e7b33d67fe7";
   public static final String RELEASE_CHANNEL = "default";
   public static boolean SHOW_LOADING_VIEW_IN_SHELL_APP = false;
   public static boolean ARE_REMOTE_UPDATES_ENABLED = true;
