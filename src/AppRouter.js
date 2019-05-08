@@ -62,55 +62,6 @@ class AppRouter extends PureComponent {
     isLargeScreen: PropTypes.bool,
   };
 
-  constructor(...args) {
-    super(...args);
-    orientation.allow(orientation.Orientation.PORTRAIT_UP);
-  }
-
-  state = {
-    universalLinkLoading: false,
-  };
-
-  componentWillMount() {
-    this.trackScreen(this.props);
-    if (!previousLocation) previousLocation = this.props.location;
-  }
-
-  componentWillUpdate(nextProps) {
-    this.trackScreen(nextProps);
-    if (
-      nextProps.history.action !== 'POP'
-      && nextProps.history.action !== 'REPLACE'
-      && !this.isModal
-      && !this.musicPlayerIsOpened
-    ) {
-      previousLocation = this.props.location;
-    }
-  }
-
-  get isModal() {
-    return (
-      this.props.isLargeScreen
-      && previousLocation
-      && previousLocation.pathname !== this.props.location.pathname
-      && previousLocation.pathname !== '/signup'
-      && this.largeScreenModals.find(route => matchPath(this.props.location.pathname, route.props.path))
-    );
-  }
-
-  get musicPlayerIsOpened() {
-    return matchPath(this.props.location.pathname, '/player');
-  }
-
-  trackScreen = ({ location, history }) => {
-    if (location !== previousLocation) {
-      trackScreen(location.pathname, {
-        ...location,
-        sizeOfHistory: history.entries ? history.entries.length : null,
-      });
-    }
-  };
-
   // On large screens we render modals on top of the previous route.
   // These routes should also exist elsewhere in the routing stack, which
   // are used when routed to directly (such as refreshing the page or SSR)
@@ -150,6 +101,56 @@ class AppRouter extends PureComponent {
     />,
     <Route path="/discover" key="discover" component={asModal(tabs.Discover)} />,
   ];
+
+  constructor(...args) {
+    super(...args);
+    orientation.allow(orientation.Orientation.PORTRAIT_UP);
+  }
+
+  state = {
+    universalLinkLoading: false,
+  };
+
+  componentWillMount() {
+    this.trackScreen(this.props);
+    if (!previousLocation) previousLocation = this.props.location;
+  }
+
+  componentWillUpdate(nextProps) {
+    this.trackScreen(nextProps);
+    if (
+      nextProps.history.action !== 'POP'
+      && nextProps.history.action !== 'REPLACE'
+      && !this.isModal
+      && !this.musicPlayerIsOpened
+    ) {
+      previousLocation = this.props.location;
+    }
+  }
+
+  get isModal() {
+    const path = this.props.location.pathname;
+    return (
+      this.props.isLargeScreen
+      && previousLocation
+      && previousLocation.pathname !== path
+      && previousLocation.pathname !== '/signup'
+      && this.largeScreenModals.find(route => matchPath(path, route.props.path))
+    );
+  }
+
+  get musicPlayerIsOpened() {
+    return matchPath(this.props.location.pathname, '/player');
+  }
+
+  trackScreen = ({ location, history }) => {
+    if (location !== previousLocation) {
+      trackScreen(location.pathname, {
+        ...location,
+        sizeOfHistory: history.entries ? history.entries.length : null,
+      });
+    }
+  };
 
   tabs = () => {
     // eslint-disable-line

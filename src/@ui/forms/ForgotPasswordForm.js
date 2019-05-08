@@ -8,7 +8,6 @@ import Yup from 'yup';
 import withUser from '@data/withUser';
 import { Text as TextInput } from '@ui/inputs';
 import Button from '@ui/Button';
-import sentry from '@utils/sentry';
 
 import { withFieldValueHandler, withFieldTouchedHandler } from './formikSetters';
 
@@ -38,8 +37,7 @@ const enhance = compose(
           );
           if (props.onForgotPasswordSuccess) props.onForgotPasswordSuccess(...args);
         })
-        .catch((...e) => {
-          sentry.captureException(e);
+        .catch(() => {
           setStatus(null);
           setFieldError('email', 'Could not find your email'); // todo: show server error messages
         })

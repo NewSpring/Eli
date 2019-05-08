@@ -98,9 +98,9 @@ class ContributionHistoryFilter extends PureComponent {
   ];
 
   toggle = () => {
-    this.setState({
-      isVisible: !this.state.isVisible,
-    });
+    this.setState(prevState => ({
+      isVisible: !prevState.isVisible,
+    }));
   };
 
   clear = () => {

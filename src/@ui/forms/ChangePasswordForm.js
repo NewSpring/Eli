@@ -11,7 +11,6 @@ import TableView from '@ui/TableView';
 import Button from '@ui/Button';
 import { H6 } from '@ui/typography';
 import styled from '@ui/styled';
-import sentry from '@utils/sentry';
 
 import { withFieldValueHandler, withFieldTouchedHandler } from './formikSetters';
 
@@ -30,9 +29,8 @@ const enhance = compose(
     handleSubmit: async (values, { props, setSubmitting, setStatus }) => {
       props
         .onSubmit(values)
-        .catch((...e) => {
+        .catch(() => {
           setStatus('Please make sure your password is correct and try again');
-          sentry.captureException(e);
           // todo: show server error messages
         })
         .then((...args) => {

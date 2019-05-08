@@ -13,9 +13,11 @@ import PaddedView from '@ui/PaddedView';
 import withCampuses from '@data/withCampuses';
 import withUser from '@data/withUser';
 import Button from '@ui/Button';
-import sentry from '@utils/sentry';
 import Status from './FormStatusText';
-import { withFieldValueHandler, withFieldTouchedHandler } from './formikSetters';
+import {
+  withFieldValueHandler,
+  withFieldTouchedHandler,
+} from './formikSetters';
 
 export const ProfileDetailsFormWithoutData = ({
   createFieldValueHandler,
@@ -73,7 +75,9 @@ export const ProfileDetailsFormWithoutData = ({
           value={values.birthday}
           placeholder="mm/dd/yyyy"
           displayValue={
-            values.birthday ? moment(values.birthday).format('MM/DD/YYYY') : values.birthDay
+            values.birthday
+              ? moment(values.birthday).format('MM/DD/YYYY')
+              : values.birthDay
           }
           onChange={createFieldValueHandler('birthday')}
           onBlur={createFieldTouchedHandler('birthday')}
@@ -86,17 +90,27 @@ export const ProfileDetailsFormWithoutData = ({
         <Inputs.Picker
           label="Campus"
           value={values.campusId}
-          displayValue={get(campuses.find(campus => campus.id === values.campusId), 'name')}
+          displayValue={get(
+            campuses.find(campus => campus.id === values.campusId),
+            'name',
+          )}
           onValueChange={createFieldValueHandler('campusId')}
           error={errors.campusId}
         >
-          {campuses.map(({ name, id }) => <Inputs.PickerItem label={name} value={id} key={id} />)}
+          {campuses.map(({ name, id }) => (
+            <Inputs.PickerItem label={name} value={id} key={id} />
+          ))}
         </Inputs.Picker>
       </PaddedView>
     </TableView>
     {status ? <Status>{status}</Status> : null}
     <PaddedView>
-      <Button onPress={handleSubmit} title="Save" disabled={!isValid} loading={isSubmitting} />
+      <Button
+        onPress={handleSubmit}
+        title="Save"
+        disabled={!isValid}
+        loading={isSubmitting}
+      />
     </PaddedView>
   </PaddedView>
 );
@@ -153,7 +167,9 @@ const validationSchema = Yup.object().shape({
 const mapPropsToValues = props => ({
   ...(props.user || {}),
   birthday:
-    get(props, 'user.birthYear') && get(props, 'user.birthMonth') && get(props, 'user.birthDay')
+    get(props, 'user.birthYear')
+    && get(props, 'user.birthMonth')
+    && get(props, 'user.birthDay')
       ? moment()
         .year(get(props, 'user.birthYear'))
         .month(get(props, 'user.birthMonth') - 1) // .month() is zero based 🙃
@@ -189,9 +205,10 @@ const ProfileDetailsForm = compose(
       } catch (err) {
         // TODO: Add space for general errors
         // and set via setErrors
-        sentry.captureException(err);
         // throw err;
-        setStatus('There was an error updating your information. Please try again.');
+        setStatus(
+          'There was an error updating your information. Please try again.',
+        );
       } finally {
         setSubmitting(false);
       }

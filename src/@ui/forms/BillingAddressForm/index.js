@@ -14,7 +14,6 @@ import { withRouter } from '@ui/NativeWebRouter';
 import PaddedView from '@ui/PaddedView';
 import TableView, { FormFields } from '@ui/TableView';
 import ActivityIndicator from '@ui/ActivityIndicator';
-import sentry from '@utils/sentry';
 import * as Inputs from '@ui/inputs';
 import Button from '@ui/Button';
 
@@ -179,7 +178,7 @@ const BillingAddressForm = compose(
         if (props.navigateToOnComplete) props.history.push(props.navigateToOnComplete);
       } catch (e) {
         // TODO: If there's an error, we want to stay on this page and display it.
-        sentry.captureException(e);
+        console.log(e);
       }
     },
   }),
