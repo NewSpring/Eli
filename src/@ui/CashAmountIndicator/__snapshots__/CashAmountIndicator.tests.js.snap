@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the CashAmountIndicator component should render a decimal 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#303030",
+        "fontFamily": "Colfax-Bold",
+        "fontSize": 32.4,
+        "lineHeight": 41.04,
+        "paddingBottom": 2.7,
+        "paddingTop": 5.4,
+      }
+    }
+  >
+    $
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#303030",
+        "fontFamily": "Colfax-Bold",
+        "fontSize": 52.2,
+        "lineHeight": 54.81,
+        "paddingTop": 11.7,
+      }
+    }
+  >
+    2
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#303030",
+        "fontFamily": "Colfax-Bold",
+        "fontSize": 32.4,
+        "lineHeight": 41.04,
+        "paddingBottom": 2.7,
+        "paddingTop": 5.4,
+      }
+    }
+  >
+    .22
+  </Text>
+</View>
+`;
+
+exports[`the CashAmountIndicator component should render a number 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#303030",
+        "fontFamily": "Colfax-Bold",
+        "fontSize": 32.4,
+        "lineHeight": 41.04,
+        "paddingBottom": 2.7,
+        "paddingTop": 5.4,
+      }
+    }
+  >
+    $
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#303030",
+        "fontFamily": "Colfax-Bold",
+        "fontSize": 52.2,
+        "lineHeight": 54.81,
+        "paddingTop": 11.7,
+      }
+    }
+  >
+    2
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#303030",
+        "fontFamily": "Colfax-Bold",
+        "fontSize": 32.4,
+        "lineHeight": 41.04,
+        "paddingBottom": 2.7,
+        "paddingTop": 5.4,
+      }
+    }
+  >
+    .00
+  </Text>
+</View>
+`;
+
+exports[`the CashAmountIndicator component should render accept different sizes 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#303030",
+        "fontFamily": "Colfax-Bold",
+        "fontSize": 25.2,
+        "lineHeight": 31.28,
+        "paddingBottom": 3.71,
+        "paddingTop": 5.04,
+      }
+    }
+  >
+    $
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#303030",
+        "fontFamily": "Colfax-Bold",
+        "fontSize": 42.3,
+        "lineHeight": 53.58,
+        "paddingBottom": 3.6,
+        "paddingTop": 6.3,
+      }
+    }
+  >
+    2
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#303030",
+        "fontFamily": "Colfax-Bold",
+        "fontSize": 25.2,
+        "lineHeight": 31.28,
+        "paddingBottom": 3.71,
+        "paddingTop": 5.04,
+      }
+    }
+  >
+    .22
+  </Text>
+</View>
+`;

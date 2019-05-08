@@ -1,0 +1,454 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the ContentView component renders 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "padding": 20,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#303030",
+          "fontFamily": "Colfax-Bold",
+          "fontSize": 32.4,
+          "lineHeight": 41.04,
+          "paddingBottom": 2.7,
+          "paddingTop": 5.4,
+        }
+      }
+    >
+      The great escape
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#303030",
+          "fontFamily": "Colfax-Bold",
+          "fontSize": 15.75,
+          "lineHeight": 17.75,
+          "paddingBottom": 9,
+          "paddingTop": 4.5,
+        }
+      }
+    >
+      By: 
+      Mike Douglas
+    </Text>
+    <View>
+      <View
+        style={
+          Object {
+            "paddingVertical": 10,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          bold={false}
+          ellipsizeMode="tail"
+          italic={false}
+          style={
+            Object {
+              "color": "#303030",
+              "fontFamily": "DroidSerif-Regular",
+              "fontSize": 20.02,
+              "lineHeight": 33.11,
+              "paddingBottom": 2.25,
+              "paddingTop": 1.8,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Yo yo
+          </Text>
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "paddingVertical": 10,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          bold={false}
+          ellipsizeMode="tail"
+          italic={false}
+          style={
+            Object {
+              "color": "#303030",
+              "fontFamily": "DroidSerif-Regular",
+              "fontSize": 20.02,
+              "lineHeight": 33.11,
+              "paddingBottom": 2.25,
+              "paddingTop": 1.8,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            this is some cool html
+          </Text>
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`the ContentView component renders with images 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "aspectRatio": 1,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "aspectRatio": 1,
+            "backgroundColor": "#dddddd",
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        >
+          <Image
+            collapsable={undefined}
+            onLoad={[Function]}
+            source={
+              Array [
+                Object {
+                  "height": 400,
+                  "uri": "https://picsum.photos/600/400/?random",
+                  "width": 600,
+                },
+                Object {
+                  "height": 400,
+                  "uri": "https://picsum.photos/600/400/?random",
+                  "width": 600,
+                },
+              ]
+            }
+            style={
+              Object {
+                "backgroundColor": "#dddddd",
+                "height": "100%",
+                "opacity": 0,
+                "resizeMode": "cover",
+                "width": "100%",
+              }
+            }
+          />
+        </View>
+      </View>
+      <ExponentLinearGradient
+        colors={
+          Array [
+            16416882,
+            4294606962,
+          ]
+        }
+        endPoint={
+          Array [
+            0,
+            1,
+          ]
+        }
+        locations={
+          Array [
+            0.3,
+            1,
+          ]
+        }
+        startPoint={
+          Array [
+            0,
+            0,
+          ]
+        }
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "padding": 20,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#303030",
+          "fontFamily": "Colfax-Bold",
+          "fontSize": 32.4,
+          "lineHeight": 41.04,
+          "paddingBottom": 2.7,
+          "paddingTop": 5.4,
+        }
+      }
+    >
+      The great escape
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#303030",
+          "fontFamily": "Colfax-Bold",
+          "fontSize": 15.75,
+          "lineHeight": 17.75,
+          "paddingBottom": 9,
+          "paddingTop": 4.5,
+        }
+      }
+    >
+      By: 
+      Mike Douglas
+    </Text>
+    <View>
+      <View
+        style={
+          Object {
+            "paddingVertical": 10,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          bold={false}
+          ellipsizeMode="tail"
+          italic={false}
+          style={
+            Object {
+              "color": "#303030",
+              "fontFamily": "DroidSerif-Regular",
+              "fontSize": 20.02,
+              "lineHeight": 33.11,
+              "paddingBottom": 2.25,
+              "paddingTop": 1.8,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Yo yo
+          </Text>
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "paddingVertical": 10,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          bold={false}
+          ellipsizeMode="tail"
+          italic={false}
+          style={
+            Object {
+              "color": "#303030",
+              "fontFamily": "DroidSerif-Regular",
+              "fontSize": 20.02,
+              "lineHeight": 33.11,
+              "paddingBottom": 2.25,
+              "paddingTop": 1.8,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            this is some cool html
+          </Text>
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`the ContentView component renders with video 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "padding": 20,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#303030",
+          "fontFamily": "Colfax-Bold",
+          "fontSize": 32.4,
+          "lineHeight": 41.04,
+          "paddingBottom": 2.7,
+          "paddingTop": 5.4,
+        }
+      }
+    >
+      The great escape
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#303030",
+          "fontFamily": "Colfax-Bold",
+          "fontSize": 15.75,
+          "lineHeight": 17.75,
+          "paddingBottom": 9,
+          "paddingTop": 4.5,
+        }
+      }
+    >
+      By: 
+      Mike Douglas
+    </Text>
+    <View>
+      <View
+        style={
+          Object {
+            "paddingVertical": 10,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          bold={false}
+          ellipsizeMode="tail"
+          italic={false}
+          style={
+            Object {
+              "color": "#303030",
+              "fontFamily": "DroidSerif-Regular",
+              "fontSize": 20.02,
+              "lineHeight": 33.11,
+              "paddingBottom": 2.25,
+              "paddingTop": 1.8,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Yo yo
+          </Text>
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "paddingVertical": 10,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          bold={false}
+          ellipsizeMode="tail"
+          italic={false}
+          style={
+            Object {
+              "color": "#303030",
+              "fontFamily": "DroidSerif-Regular",
+              "fontSize": 20.02,
+              "lineHeight": 33.11,
+              "paddingBottom": 2.25,
+              "paddingTop": 1.8,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            this is some cool html
+          </Text>
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

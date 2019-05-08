@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The TileFeed component renders correctly 1`] = `null`;
+
+exports[`The TileFeed component renders empty state 1`] = `null`;

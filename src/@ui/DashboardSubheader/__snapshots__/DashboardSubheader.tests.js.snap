@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the DashboardSubheader component should render 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "marginBottom": 10,
+      "marginTop": 40,
+      "paddingHorizontal": 10,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#858585",
+        "fontFamily": "Colfax-Bold",
+        "fontSize": 15.75,
+        "lineHeight": 17.75,
+        "paddingBottom": 1.8,
+        "paddingTop": 4.5,
+      }
+    }
+  >
+    title text
+  </Text>
+  <View
+    accessibilityComponentType="button"
+    accessibilityLabel={undefined}
+    accessibilityTraits={
+      Array [
+        "button",
+      ]
+    }
+    accessible={true}
+    collapsable={undefined}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View
+      bordered={true}
+      disabled={false}
+      pill={true}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "transparent",
+          "borderColor": "#858585",
+          "borderRadius": 60,
+          "borderWidth": 1,
+          "flexDirection": "row",
+          "height": 30,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+          "paddingHorizontal": 15,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#858585",
+            "fontFamily": "Colfax-Regular",
+            "fontSize": 14,
+            "lineHeight": 15.78,
+            "paddingBottom": 1.8,
+            "paddingTop": 3.6,
+          }
+        }
+      >
+        click action
+      </Text>
+    </View>
+  </View>
+</View>
+`;
