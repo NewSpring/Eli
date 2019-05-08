@@ -8,10 +8,12 @@ import Yup from 'yup';
 import withUser from '@data/withUser';
 import { Text as TextInput } from '@ui/inputs';
 import Button from '@ui/Button';
-import sentry from '@utils/sentry';
 
 import Status from './FormStatusText';
-import { withFieldValueHandler, withFieldTouchedHandler } from './formikSetters';
+import {
+  withFieldValueHandler,
+  withFieldTouchedHandler,
+} from './formikSetters';
 
 const enhance = compose(
   setPropTypes({
@@ -23,17 +25,19 @@ const enhance = compose(
     validationSchema: Yup.object().shape({
       password: Yup.string().required(),
       passwordConfirm: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords don\'t match.')
+        .oneOf([Yup.ref('password'), null], "Passwords don't match.")
         .required('A password is required'),
     }),
-    handleSubmit: async (values, {
-      props, setFieldError, setSubmitting, setStatus,
-    }) => {
+    handleSubmit: async (
+      values,
+      {
+        props, setFieldError, setSubmitting, setStatus,
+      },
+    ) => {
       props
         .resetPassword({ token: props.token, newPassword: values.password })
-        .catch((...e) => {
+        .catch(() => {
           setStatus('There was an error resetting your password.');
-          sentry.captureException(e);
           setFieldError('password', true); // todo: show real error message from server
         })
         .then((...args) => {
@@ -88,7 +92,12 @@ export const ChangePasswordFormWithoutData = enhance(
         error={touched.passwordConfirm && errors.passwordConfirm}
       />
       {status ? <Status>{status}</Status> : null}
-      <Button onPress={handleSubmit} title="Go" disabled={!isValid} loading={isSubmitting} />
+      <Button
+        onPress={handleSubmit}
+        title="Go"
+        disabled={!isValid}
+        loading={isSubmitting}
+      />
     </View>
   ),
 );

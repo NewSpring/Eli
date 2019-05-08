@@ -24,7 +24,11 @@ describe('the H1 component', () => {
   it('should accept additional props', () => {
     const tree = renderer.create(
       <Providers>
-        <H1 accessible={false}>"Do all the good you can. By all the means you can. In all the ways you can. In all theplaces you can. At all the times you can. To all the people you can. As long as ever you can." ― John Wesley</H1>
+        <H1 accessible={false}>
+          {
+            '"Do all the good you can. By all the means you can. In all the ways you can. In all theplaces you can. At all the times you can. To all the people you can. As long as ever you can." ― John Wesley'
+          }
+        </H1>
       </Providers>,
     );
     expect(tree).toMatchSnapshot();

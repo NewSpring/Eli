@@ -4,7 +4,6 @@ import { compose, withProps, setPropTypes } from 'recompose';
 import { ReactNativeFile } from 'extract-files';
 import Touchable from '@ui/Touchable';
 import { connectActionSheet } from '@ui/ActionSheet';
-import sentry from '@utils/sentry';
 
 const ImagePicker = compose(
   setPropTypes({
@@ -50,7 +49,7 @@ const ImagePicker = compose(
               if (onSelectFile) onSelectFile(file);
             }
           } catch (e) {
-            sentry.captureException(e);
+            console.log(e);
           }
         },
       );

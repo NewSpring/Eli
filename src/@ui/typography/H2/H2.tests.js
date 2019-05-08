@@ -24,7 +24,11 @@ describe('the H2 component', () => {
   it('should accept additional props', () => {
     const tree = renderer.create(
       <Providers>
-        <H2 accessible={false}>"God is most glorified in us when we are most satisfied in Him" ― John Piper</H2>
+        <H2 accessible={false}>
+          {
+            '"God is most glorified in us when we are most satisfied in Him" ― John Piper'
+          }
+        </H2>
       </Providers>,
     );
     expect(tree).toMatchSnapshot();

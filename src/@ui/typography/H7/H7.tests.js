@@ -24,7 +24,11 @@ describe('the H7 component', () => {
   it('should accept additional props', () => {
     const tree = renderer.create(
       <Providers>
-        <H7 accessible={false}>"We may speak about a place where there are no tears, no death, no fear, no night; but those are just the benefits of heaven. The beauty of heaven is seeing God." ― Max Lucado</H7>
+        <H7 accessible={false}>
+          {
+            '"We may speak about a place where there are no tears, no death, no fear, no night; but those are just the benefits of heaven. The beauty of heaven is seeing God." ― Max Lucado'
+          }
+        </H7>
       </Providers>,
     );
     expect(tree).toMatchSnapshot();

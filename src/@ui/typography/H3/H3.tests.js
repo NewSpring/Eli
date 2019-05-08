@@ -24,7 +24,11 @@ describe('the H3 component', () => {
   it('should accept additional props', () => {
     const tree = renderer.create(
       <Providers>
-        <H3 accessible={false}>"The Christian shoemaker does his duty not by putting little crosses on the shoes, but by making good shoes, because God is interested in good craftsmanship." ― Martin Luther</H3>
+        <H3 accessible={false}>
+          {
+            '"The Christian shoemaker does his duty not by putting little crosses on the shoes, but by making good shoes, because God is interested in good craftsmanship." ― Martin Luther'
+          }
+        </H3>
       </Providers>,
     );
     expect(tree).toMatchSnapshot();

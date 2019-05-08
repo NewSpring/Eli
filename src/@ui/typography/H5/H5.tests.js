@@ -24,7 +24,11 @@ describe('the H5 component', () => {
   it('should accept additional props', () => {
     const tree = renderer.create(
       <Providers>
-        <H5 accessible={false}>"Faith does not eliminate questions. But faith knows where to take them." ― Elisabeth Elliot</H5>
+        <H5 accessible={false}>
+          {
+            '"Faith does not eliminate questions. But faith knows where to take them." ― Elisabeth Elliot'
+          }
+        </H5>
       </Providers>,
     );
     expect(tree).toMatchSnapshot();

@@ -5,7 +5,6 @@ import Settings from '@utils/Settings';
 import ImagePicker from '@ui/ImagePicker';
 import withUser from '@data/withUser';
 import fetch from '@utils/fetch';
-import sentry from '@utils/sentry';
 
 const UploadProfileImageForm = compose(
   setPropTypes({
@@ -54,7 +53,6 @@ const UploadProfileImageForm = compose(
 
         return true;
       } catch (err) {
-        sentry.captureException(err);
         throw err;
       }
     },
