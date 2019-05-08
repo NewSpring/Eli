@@ -4,7 +4,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js"
+    "lint": "eslint . --ext .js",
+    "postinstall": "sh ./fix.sh"
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^2.1.0",
@@ -23,6 +24,7 @@
     "extract-files": "^5.0.1",
     "file-saver": "^2.0.1",
     "formik": "^1.5.4",
+    "graphql": "^14.3.0",
     "graphql-tag": "^2.10.1",
     "graphql-tools": "^4.0.4",
     "history": "^4.9.0",
