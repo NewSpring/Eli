@@ -1,4 +1,3 @@
-import setprototypeof from 'setprototypeof';
 import {
   AppRegistry, Platform, StyleSheet, View,
 } from 'react-native';
