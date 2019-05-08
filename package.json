@@ -12,6 +12,7 @@
     "react": "16.6.3",
     "react-native": "0.58.6",
     "react-native-unimodules": "0.3.1",
+    "react-test-renderer": "^16.8.6",
     "recompose": "^0.30.0"
   },
   "devDependencies": {
@@ -27,8 +28,7 @@
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-react-native": "^3.7.0",
     "jest": "24.1.0",
-    "metro-react-native-babel-preset": "0.52.0",
-    "react-test-renderer": "^16.8.6"
+    "metro-react-native-babel-preset": "0.52.0"
   },
   "jest": {
     "preset": "react-native"
