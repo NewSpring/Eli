@@ -155,10 +155,10 @@ const GroupSingle = enhance(
                   <AvatarList>
                     {(isLoading ? leadersLoadingState : leaders).map(leader => (
                       <Avatar
-                          key={leader.person.id}
-                          source={{ url: leader.person.photo }}
-                          size="medium"
-                        />
+                        key={leader.person.id}
+                        source={{ url: leader.person.photo }}
+                        size="medium"
+                      />
                     ))}
                   </AvatarList>
                 </PaddedView>
@@ -170,19 +170,19 @@ const GroupSingle = enhance(
                     <AdTitle>#TheseAreMyPeople</AdTitle>
                     {isLeader ? (
                       <Button
-                          title="Manage"
-                          bordered
-                          onPress={() => WebBrowser.openBrowserAsync(
-                            `${rockUrl}page/521?GroupId=${entityId}&${loginParam}`,
-                          )
+                        title="Manage"
+                        bordered
+                        onPress={() => WebBrowser.openBrowserAsync(
+                          `${rockUrl}page/521?GroupId=${entityId}&${loginParam}`,
+                        )
                         }
-                        />
+                      />
                     ) : (
-                        <Button
-                          title="Contact"
-                          bordered
-                          onPress={() => handleGroupContact({ guid, loginParam })}
-                        />
+                      <Button
+                        title="Contact"
+                        bordered
+                        onPress={() => handleGroupContact({ guid, loginParam })}
+                      />
                     )}
                   </CenteredSideBySideView>
                 </PaddedView>
@@ -196,9 +196,9 @@ const GroupSingle = enhance(
                     if (!loc) return null;
                     return (
                       <GroupInfo
-                          label="Address"
-                          info={`${loc.location.city}, ${loc.location.state}`}
-                        />
+                        label="Address"
+                        info={`${loc.location.city}, ${loc.location.state}`}
+                      />
                     );
                   })()}
                   {(() => {
@@ -225,14 +225,14 @@ const GroupSingle = enhance(
                     <Label>Members</Label>
                     <AvatarList>
                       {members
-                          .filter(x => x.person && x.person.photo)
-                          .map(member => (
-                            <Avatar
-                              key={member.person.id}
-                              source={{ url: member.person.photo }}
-                              size="small"
-                            />
-                          ))}
+                        .filter(x => x.person && x.person.photo)
+                        .map(member => (
+                          <Avatar
+                            key={member.person.id}
+                            source={{ url: member.person.photo }}
+                            size="small"
+                          />
+                        ))}
                     </AvatarList>
                   </GroupInfoContainer>
 
@@ -241,17 +241,17 @@ const GroupSingle = enhance(
                     <ChipList>
                       {tags.map(tag => <Chip key={tag.id} title={tag.value} />)}
                       {(() => {
-                          if (!type || type === 'Interests') return null;
-                          return <Chip title={type} />;
-                        })()}
+                        if (!type || type === 'Interests') return null;
+                        return <Chip title={type} />;
+                      })()}
                       {(() => {
-                          if (!kidFriendly) return null;
-                          return <Chip title="Kid Friendly" />;
-                        })()}
+                        if (!kidFriendly) return null;
+                        return <Chip title="Kid Friendly" />;
+                      })()}
                       {(() => {
-                          if (!demographic) return null;
-                          return <Chip title={demographic} />;
-                        })()}
+                        if (!demographic) return null;
+                        return <Chip title={demographic} />;
+                      })()}
                     </ChipList>
                   </GroupInfoContainer>
                 </PaddedView>
