@@ -1,6 +1,6 @@
 {
 	"parser": "babel-eslint",
-	"extends": ["google"],
+	"extends": ["airbnb"],
 	"plugins": [
 		"jest",
 	],
