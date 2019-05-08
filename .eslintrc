@@ -10,4 +10,8 @@
 		"react/destructuring-assignment": 0,
 	},
 	"settings": { "import/resolver": { "babel-module": {} } },
+	"env": {
+		"jest": true,
+		"browser": true,
+	},
 }
