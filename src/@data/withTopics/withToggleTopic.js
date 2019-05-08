@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 
-import {QUERY as USER_QUERY} from '@data/withUser/withUser';
+import { QUERY as USER_QUERY } from '@data/withUser/withUser';
 
 export const MUTATION = gql`
   mutation ToggleTopic($topic: String!) {
@@ -10,13 +10,13 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    toggleTopic: (topic) => (mutate({
+  props: ({ mutate }) => ({
+    toggleTopic: topic => (mutate({
       variables: {
         topic,
       },
       update: async (store) => {
-        const data = store.readQuery({query: USER_QUERY});
+        const data = store.readQuery({ query: USER_QUERY });
         if (data.user) {
           const followedTopics = [...(data.user.followedTopics || [])];
           const idx = followedTopics.indexOf(topic);
@@ -25,8 +25,8 @@ export default graphql(MUTATION, {
           } else {
             followedTopics.push(topic);
           }
-          const user = {...data.user, followedTopics};
-          store.writeQuery({query: USER_QUERY, data: {user}});
+          const user = { ...data.user, followedTopics };
+          store.writeQuery({ query: USER_QUERY, data: { user } });
         }
       },
     })),

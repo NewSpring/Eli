@@ -1,4 +1,4 @@
-import {Location, Permissions} from 'expo';
+import { Location, Permissions } from 'expo';
 
 let locationStatus;
 

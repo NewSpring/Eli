@@ -1,14 +1,14 @@
-import React, {PureComponent} from 'react';
-import {View} from 'react-native';
+import React, { PureComponent } from 'react';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import {groupBy, map, orderBy} from 'lodash';
+import { groupBy, map, orderBy } from 'lodash';
 import HistoricalContributionCard from '@ui/HistoricalContributionCard';
 import FlatList from '@ui/WebCompatibleFlatList';
 import FlexedView from '@ui/FlexedView';
 import PaddedView from '@ui/PaddedView';
 import ActivityIndicator from '@ui/ActivityIndicator';
-import {BodyText} from '@ui/typography';
-import {ButtonLink} from '@ui/Button';
+import { BodyText } from '@ui/typography';
+import { ButtonLink } from '@ui/Button';
 import Touchable from '@ui/Touchable';
 import LoginPromptCard from '@ui/LoginPromptCard';
 import WebBrowser from '@ui/WebBrowser';
@@ -21,19 +21,19 @@ class ContributionHistoryList extends PureComponent {
     isLoading: PropTypes.bool,
     refetch: PropTypes.func,
     transactions: PropTypes.arrayOf(
-        PropTypes.shape({
-          date: PropTypes.string,
-          person: PropTypes.shape({
-            firstName: PropTypes.string,
-            lastName: PropTypes.string,
-            photo: PropTypes.string,
-          }),
-          id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-          amount: PropTypes.number,
-          account: PropTypes.shape({
-            name: PropTypes.string,
-          }),
+      PropTypes.shape({
+        date: PropTypes.string,
+        person: PropTypes.shape({
+          firstName: PropTypes.string,
+          lastName: PropTypes.string,
+          photo: PropTypes.string,
         }),
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        amount: PropTypes.number,
+        account: PropTypes.shape({
+          name: PropTypes.string,
+        }),
+      }),
     ),
     onPressNoDataButton: PropTypes.func,
     onPressContributionCard: PropTypes.func,
@@ -50,10 +50,10 @@ class ContributionHistoryList extends PureComponent {
     FilterComponent: ContributionHistoryFilter,
   };
 
-  renderItem = ({item}) => (
+  renderItem = ({ item }) => (
     <View>
       <ContributionHistoryHeader year={item.year} />
-      {item.transactions.map((transaction) => (
+      {item.transactions.map(transaction => (
         <Touchable
           key={transaction.id}
           onPress={() => {
@@ -74,12 +74,12 @@ class ContributionHistoryList extends PureComponent {
 
   render() {
     const transactionsPerYear = orderBy(
-        map(groupBy(this.props.transactions, 'year'), (transactions, year) => ({
-          year,
-          transactions,
-        })),
-        ['year'],
-        ['desc'],
+      map(groupBy(this.props.transactions, 'year'), (transactions, year) => ({
+        year,
+        transactions,
+      })),
+      ['year'],
+      ['desc'],
     );
 
     if (this.props.isLoading && transactionsPerYear.length === 0) {
@@ -99,13 +99,13 @@ class ContributionHistoryList extends PureComponent {
       Header = (
         <View>
           <this.props.FilterComponent />
-          <LoginPromptCard prompt={'Login to view your contribution history.'} />
+          <LoginPromptCard prompt="Login to view your contribution history." />
           <PaddedView>
             <BodyText>
               {
                 'We didn\'t find any contributions associated with your account. If you would like to start giving, you can '
               }
-              <ButtonLink onPress={this.props.onPressNoDataButton}>{'give now'}</ButtonLink>
+              <ButtonLink onPress={this.props.onPressNoDataButton}>give now</ButtonLink>
               {'.'}
             </BodyText>
           </PaddedView>
@@ -116,7 +116,8 @@ class ContributionHistoryList extends PureComponent {
                 onPress={() => WebBrowser.openBrowserAsync('https://newspring.cc/contact')}
               >
                 {' '}
-                contact us{' '}
+                contact us
+                {' '}
               </ButtonLink>
               and someone will be happy to assist you.
             </BodyText>
@@ -139,7 +140,7 @@ class ContributionHistoryList extends PureComponent {
         numColumns={1}
         onEndReachedThreshold={0.7}
         ListHeaderComponent={Header}
-        keyExtractor={({year}) => year}
+        keyExtractor={({ year }) => year}
       />
     );
   }

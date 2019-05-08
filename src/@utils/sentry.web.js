@@ -1,1 +1,1 @@
-export {default} from 'raven-js';
+export { default } from 'raven-js';

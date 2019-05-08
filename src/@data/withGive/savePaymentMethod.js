@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import pushNewPaymentMethod from '@data/withGivingDashboard/pushNewPaymentMethod';
 
 export const MUTATION = gql`
@@ -21,12 +21,12 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    savePaymentMethod: (variables) => (mutate({
+  props: ({ mutate }) => ({
+    savePaymentMethod: variables => (mutate({
       variables,
       // NOTE: refetch is less efficient but if query shapes change this won't need to
       // refetchQueries: ['GivingDashboard'],
-      update(_, {data: {error, response: {savedPaymentMethod}}}) {
+      update(_, { data: { error, response: { savedPaymentMethod } } }) {
         if (error) return error;
         return pushNewPaymentMethod(savedPaymentMethod);
       },

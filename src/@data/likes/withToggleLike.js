@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
-import {compose} from 'recompose';
+import { graphql } from 'react-apollo';
+import { compose } from 'recompose';
 import get from 'lodash/get';
 import Client from '@data/Client';
-import {withProtectedFunction} from '@ui/NativeWebRouter';
-import {track, events, categories} from '@utils/analytics';
+import { withProtectedFunction } from '@ui/NativeWebRouter';
+import { track, events, categories } from '@utils/analytics';
 
 const contentCard = gql`
   fragment ContentCard on Content {
@@ -42,41 +42,41 @@ export const MUTATION = gql`
 
 // TODO: Need to update optimisticResponse to work with groups
 export default compose(
-    graphql(MUTATION, {
-      props: ({mutate}) => ({
-        toggleLike: (id) => {
-          const state = Client.readFragment({
-            id: `Content:${id}`,
-            fragment: contentCard,
-          });
+  graphql(MUTATION, {
+    props: ({ mutate }) => ({
+      toggleLike: (id) => {
+        const state = Client.readFragment({
+          id: `Content:${id}`,
+          fragment: contentCard,
+        });
 
-          const isLiked = !get(state, 'content.isLiked');
+        const isLiked = !get(state, 'content.isLiked');
 
-          track(events.Liked, categories.Content, id);
+        track(events.Liked, categories.Content, id);
 
-          return mutate({
-            variables: {
-              id,
-            },
-            refetchQueries: ['UserLikes', 'RecentlyLiked'],
-            optimisticResponse: {
-              toggleLike: {
-                __typename: 'LikesMutationResponse',
-                like: {
-                  __typename: 'Content',
-                  id,
-                  content: {
-                    __typename: 'ContentData',
-                    isLiked,
-                  },
+        return mutate({
+          variables: {
+            id,
+          },
+          refetchQueries: ['UserLikes', 'RecentlyLiked'],
+          optimisticResponse: {
+            toggleLike: {
+              __typename: 'LikesMutationResponse',
+              like: {
+                __typename: 'Content',
+                id,
+                content: {
+                  __typename: 'ContentData',
+                  isLiked,
                 },
               },
             },
-          });
-        },
-      }),
+          },
+        });
+      },
     }),
-    withProtectedFunction((protect, {toggleLike}) => ({
-      toggleLike: (id) => protect(() => toggleLike(id)),
-    })),
+  }),
+  withProtectedFunction((protect, { toggleLike }) => ({
+    toggleLike: id => protect(() => toggleLike(id)),
+  })),
 );

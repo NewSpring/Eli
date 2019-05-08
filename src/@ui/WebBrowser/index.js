@@ -1,3 +1,3 @@
-import {WebBrowser} from 'expo';
+import { WebBrowser } from 'expo';
 
 export default WebBrowser;

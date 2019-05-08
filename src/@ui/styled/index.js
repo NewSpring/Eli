@@ -1,6 +1,6 @@
-import {withPropsOnChange, compose, mapProps} from 'recompose';
-import {isEqual, get} from 'lodash';
-import {withTheme} from '@ui/theme';
+import { withPropsOnChange, compose, mapProps } from 'recompose';
+import { isEqual, get } from 'lodash';
+import { withTheme } from '@ui/theme';
 
 import mergeStyles from './mergeStyles';
 import createStyleSheet from './createStyleSheet';
@@ -29,35 +29,35 @@ import createStyleSheet from './createStyleSheet';
 
 // Generates a style object from a given styleInput.
 // styleInput is the argument passed to `styled`
-const getStyleLiteralFromStyledInput = (styleInput, {ownProps = {}, theme = {}}) => {
+const getStyleLiteralFromStyledInput = (styleInput, { ownProps = {}, theme = {} }) => {
   let generatedStyle = styleInput;
-  if (typeof generatedStyle === 'function') generatedStyle = generatedStyle({theme, ...ownProps});
+  if (typeof generatedStyle === 'function') generatedStyle = generatedStyle({ theme, ...ownProps });
   return generatedStyle;
 };
 
 const styled = (styleInput, fqn) => compose(
-    mapProps((props) => ({ownProps: props})),
-    withTheme(({theme}) => ({theme})),
-    withPropsOnChange(
+  mapProps(props => ({ ownProps: props })),
+  withTheme(({ theme }) => ({ theme })),
+  withPropsOnChange(
     // Only re-eval styles if style prop changes, or the generated style from
     // styleInput is different. Both of these checks should be exteremely cheap.
-        (props, nextProps) => props.ownProps.style !== nextProps.ownProps.style || !isEqual(
-            getStyleLiteralFromStyledInput(styleInput, props),
-            getStyleLiteralFromStyledInput(styleInput, nextProps),
-        ),
-        ({ownProps, theme}) => {
-          let style = getStyleLiteralFromStyledInput(styleInput, {ownProps, theme});
-
-          const themeOverrides = fqn ? get(theme, `overrides['${fqn}']`, {}) : {};
-          const {style: ownPropsStyle = {}} = ownProps;
-
-          style = mergeStyles(style, themeOverrides, ownPropsStyle);
-          style = createStyleSheet(style);
-
-          return {style};
-        },
+    (props, nextProps) => props.ownProps.style !== nextProps.ownProps.style || !isEqual(
+      getStyleLiteralFromStyledInput(styleInput, props),
+      getStyleLiteralFromStyledInput(styleInput, nextProps),
     ),
-    mapProps(({ownProps, style}) => ({...ownProps, style})),
+    ({ ownProps, theme }) => {
+      let style = getStyleLiteralFromStyledInput(styleInput, { ownProps, theme });
+
+      const themeOverrides = fqn ? get(theme, `overrides['${fqn}']`, {}) : {};
+      const { style: ownPropsStyle = {} } = ownProps;
+
+      style = mergeStyles(style, themeOverrides, ownPropsStyle);
+      style = createStyleSheet(style);
+
+      return { style };
+    },
+  ),
+  mapProps(({ ownProps, style }) => ({ ...ownProps, style })),
 );
 
 export default styled;

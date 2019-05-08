@@ -1,4 +1,4 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 export const QUERY = gql`
@@ -57,15 +57,14 @@ export const QUERY = gql`
 `;
 
 export default graphql(QUERY, {
-  options: (ownProps) => ({
+  options: ownProps => ({
     variables: {
       id: ownProps.id,
     },
   }),
-  props: ({data: {error, transaction, loading}}) => ({
+  props: ({ data: { error, transaction, loading } }) => ({
     error,
     transaction,
     isLoading: loading,
   }),
 });
-

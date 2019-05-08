@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import pick from 'lodash/pick';
 
 export const MUTATION = gql`
@@ -23,22 +23,21 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    updateHomeAddress: (params = {}) =>
-      mutate({
-        variables: pick(params, ['street1', 'street2', 'city', 'stateId', 'zip']),
-        optimisticResponse: {
-          __typename: 'Mutation',
-          updateHomeAddress: {
-            id: params.id,
-            __typename: 'Location',
-            street1: params.street1,
-            street2: params.street2,
-            city: params.city,
-            stateId: params.stateId,
-            zip: params.zip,
-          },
+  props: ({ mutate }) => ({
+    updateHomeAddress: (params = {}) => mutate({
+      variables: pick(params, ['street1', 'street2', 'city', 'stateId', 'zip']),
+      optimisticResponse: {
+        __typename: 'Mutation',
+        updateHomeAddress: {
+          id: params.id,
+          __typename: 'Location',
+          street1: params.street1,
+          street2: params.street2,
+          city: params.city,
+          stateId: params.stateId,
+          zip: params.zip,
         },
-      }),
+      },
+    }),
   }),
 });

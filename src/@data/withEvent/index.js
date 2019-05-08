@@ -1,8 +1,8 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import eventQuery from './eventQuery';
 
 export default graphql(eventQuery, {
-  props: ({data: {error, content}}) => ({
+  props: ({ data: { error, content } }) => ({
     error,
     content,
   }),
@@ -12,4 +12,3 @@ export default graphql(eventQuery, {
     },
   }),
 });
-

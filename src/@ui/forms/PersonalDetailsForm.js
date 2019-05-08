@@ -1,20 +1,20 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose, branch, renderComponent} from 'recompose';
+import { compose, branch, renderComponent } from 'recompose';
 import get from 'lodash/get';
-import {withFormik} from 'formik';
+import { withFormik } from 'formik';
 import Yup from 'yup';
 import withGive from '@data/withGive';
 import withCheckout from '@data/withCheckout';
-import {withRouter} from '@ui/NativeWebRouter';
+import { withRouter } from '@ui/NativeWebRouter';
 import ActivityIndicator from '@ui/ActivityIndicator';
 import PaddedView from '@ui/PaddedView';
-import TableView, {FormFields} from '@ui/TableView';
+import TableView, { FormFields } from '@ui/TableView';
 
 import * as Inputs from '@ui/inputs';
 import Button from '@ui/Button';
-import {withFieldValueHandler, withFieldTouchedHandler} from './formikSetters';
+import { withFieldValueHandler, withFieldTouchedHandler } from './formikSetters';
 
 export const PersonalDetailsFormWithoutData = ({
   createFieldValueHandler,
@@ -55,11 +55,11 @@ export const PersonalDetailsFormWithoutData = ({
         <Inputs.Picker
           label="Campus"
           value={values.campusId}
-          displayValue={get(campuses.find((campus) => campus.id === values.campusId), 'label')}
+          displayValue={get(campuses.find(campus => campus.id === values.campusId), 'label')}
           onValueChange={createFieldValueHandler('campusId')}
           error={errors.campusId}
         >
-          {campuses.map(({label, id}) => <Inputs.PickerItem label={label} value={id} key={id} />)}
+          {campuses.map(({ label, id }) => <Inputs.PickerItem label={label} value={id} key={id} />)}
         </Inputs.Picker>
       </FormFields>
     </TableView>
@@ -94,10 +94,10 @@ PersonalDetailsFormWithoutData.propTypes = {
   isSubmitting: PropTypes.bool,
   isValid: PropTypes.bool,
   campuses: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        label: PropTypes.string,
-      }),
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.string,
+    }),
   ),
 };
 
@@ -105,39 +105,38 @@ const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('First Name is a required field'),
   lastName: Yup.string().required('Last Name is a required field'),
   email: Yup.string()
-      .email()
-      .required('Email is a required field'),
+    .email()
+    .required('Email is a required field'),
   campusId: Yup.number().required('Campus is required'),
 });
 
-const mapPropsToValues = (props) => ({
+const mapPropsToValues = props => ({
   firstName: get(props, 'contributions.firstName') || get(props, 'person.firstName'),
   lastName: get(props, 'contributions.lastName') || get(props, 'person.lastName'),
   email: get(props, 'contributions.email') || get(props, 'person.email'),
   campusId:
-    get(props, 'contributions.campusId') ||
-    get(props, 'person.campus.id') ||
-    get(props, 'campuses.0.id'),
+    get(props, 'contributions.campusId')
+    || get(props, 'person.campus.id')
+    || get(props, 'campuses.0.id'),
 });
 
 const PersonalDetailsForm = compose(
-    withGive,
-    withCheckout,
-    withRouter,
-    branch(({isLoading}) => isLoading, renderComponent(ActivityIndicator)),
-    withFormik({
-      mapPropsToValues,
-      validationSchema,
-      handleSubmit: (values, {props}) =>
-        props.setBillingPerson(values).then(() => {
-          if (props.navigateToOnComplete) props.history.push(props.navigateToOnComplete);
-        }),
-      isInitialValid(props) {
-        return validationSchema.isValidSync(mapPropsToValues(props));
-      },
+  withGive,
+  withCheckout,
+  withRouter,
+  branch(({ isLoading }) => isLoading, renderComponent(ActivityIndicator)),
+  withFormik({
+    mapPropsToValues,
+    validationSchema,
+    handleSubmit: (values, { props }) => props.setBillingPerson(values).then(() => {
+      if (props.navigateToOnComplete) props.history.push(props.navigateToOnComplete);
     }),
-    withFieldValueHandler,
-    withFieldTouchedHandler,
+    isInitialValid(props) {
+      return validationSchema.isValidSync(mapPropsToValues(props));
+    },
+  }),
+  withFieldValueHandler,
+  withFieldTouchedHandler,
 )(PersonalDetailsFormWithoutData);
 
 export default PersonalDetailsForm;

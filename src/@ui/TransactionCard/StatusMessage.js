@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
-import {BodyText} from '@ui/typography';
+import { BodyText } from '@ui/typography';
 import styled from '@ui/styled';
 
-const StyledText = styled(({theme}) => ({
+const StyledText = styled(({ theme }) => ({
   color: theme.colors.text.secondary,
 }))(BodyText);
 
-const ContributionAmountNameText = ({amount = 0, account: {name = ''} = {}}) => (
+const ContributionAmountNameText = ({ amount = 0, account: { name = '' } = {} }) => (
   <StyledText>
     <StyledText bold>{amount.toFixed(2)}</StyledText>
     {' to '}
@@ -18,7 +18,7 @@ const ContributionAmountNameText = ({amount = 0, account: {name = ''} = {}}) => 
 
 ContributionAmountNameText.propTypes = {
   amount: PropTypes.number,
-  account: PropTypes.shape({name: PropTypes.string}),
+  account: PropTypes.shape({ name: PropTypes.string }),
 };
 
 // TODO: Missing is expiring soon message
@@ -33,7 +33,9 @@ function StatusMessage(props = {}) {
   if (didPass) {
     return (
       <StyledText>
-        Your {isScheduled ? 'scheduled ' : ''}
+        Your
+        {' '}
+        {isScheduled ? 'scheduled ' : ''}
         {'contribution of '}
         <ContributionAmountNameText {...get(details, '0')} />
         {details.length > 1 ? (
@@ -49,13 +51,18 @@ function StatusMessage(props = {}) {
   if (didFail) {
     return (
       <StyledText>
-        Your {isScheduled ? 'scheduled ' : ''}contribution to
+        Your
+        {' '}
+        {isScheduled ? 'scheduled ' : ''}
+contribution to
         <StyledText bold>{` ${get(details, '0.account.name')} `}</StyledText>
         {details.length > 1 ? (
           <StyledText>
-            and<StyledText bold>{` ${get(details, '1.account.name')} `}</StyledText>
+            and
+            <StyledText bold>{` ${get(details, '1.account.name')} `}</StyledText>
           </StyledText>
-        ) : null}{' '}
+        ) : null}
+        {' '}
         was unsuccessful.
         {error !== null && error !== '' ? ` Unfortunately, ${error}.` : ''}
       </StyledText>
@@ -64,14 +71,22 @@ function StatusMessage(props = {}) {
   if (isPending) {
     return (
       <StyledText>
-        Your {isScheduled ? 'scheduled ' : ''}contribution to
+        Your
+        {' '}
+        {isScheduled ? 'scheduled ' : ''}
+contribution to
         <StyledText bold>{` ${get(details, '0.account.name')} `}</StyledText>
         {details.length > 1 ? (
           <StyledText>
-            and<StyledText bold>{` ${get(details, '1.account.name')} `}</StyledText>
+            and
+            <StyledText bold>{` ${get(details, '1.account.name')} `}</StyledText>
           </StyledText>
-        ) : null}{' '}
-        is <StyledText>pending</StyledText>.
+        ) : null}
+        {' '}
+        is
+        {' '}
+        <StyledText>pending</StyledText>
+.
       </StyledText>
     );
   }

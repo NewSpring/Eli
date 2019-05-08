@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 export const MUTATION = gql`
   mutation attachPhotoIdToUser($id: ID!) {
@@ -8,8 +8,8 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    attachPhotoIdToUser: ({id} = {}) => (mutate({
+  props: ({ mutate }) => ({
+    attachPhotoIdToUser: ({ id } = {}) => (mutate({
       variables: {
         id,
       },

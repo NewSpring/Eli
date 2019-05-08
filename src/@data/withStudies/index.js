@@ -1,4 +1,4 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import fetchMoreResolver from '@data/utils/fetchMoreResolver';
 import identifyCategory from '@data/utils/identifyCategory';
 import studiesQuery from './studiesQuery';
@@ -10,7 +10,7 @@ export default graphql(studiesQuery, {
       skip: ownProps.skip || 0,
     },
   }),
-  props: ({ownProps, data} = {}) => ({
+  props: ({ ownProps, data } = {}) => ({
     error: data.error || ownProps.error,
     content: data.content && data.content.map(identifyCategory),
     isLoading: ownProps.isLoading || data.loading,
@@ -20,4 +20,3 @@ export default graphql(studiesQuery, {
     }),
   }),
 });
-

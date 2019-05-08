@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import pick from 'lodash/pick';
 
 export const MUTATION = gql`
@@ -27,7 +27,7 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
+  props: ({ mutate }) => ({
     updateProfile: (params = {}) => (mutate({
       variables: pick(params, [
         'nickName',

@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import {
   Animated,
   View,
@@ -8,9 +8,9 @@ import {
 import PropTypes from 'prop-types';
 import Color from 'color';
 import styled from '@ui/styled';
-import {withTheme} from '@ui/theme';
+import { withTheme } from '@ui/theme';
 
-const Container = styled(({theme}) => ({
+const Container = styled(({ theme }) => ({
   minWidth: '65%',
   marginHorizontal: theme.sizing.baseUnit,
   overflow: 'visible',
@@ -18,19 +18,19 @@ const Container = styled(({theme}) => ({
   paddingVertical: (theme.sizing.baseUnit / 2) - (theme.sizing.borderRadius / 2),
 }), 'Seeker.Container')(View);
 
-const Track = styled(({theme}) => ({
+const Track = styled(({ theme }) => ({
   backgroundColor: Color(theme.colors.text.primary).fade(theme.alpha.medium).string(),
   height: theme.sizing.borderRadius,
   borderRadius: theme.sizing.borderRadius,
   overflow: 'hidden',
 }), 'Seeker.Track')(View);
 
-const ProgressBar = styled(({theme}) => ({
+const ProgressBar = styled(({ theme }) => ({
   backgroundColor: theme.colors.text.primary,
   ...StyleSheet.absoluteFillObject,
 }), 'Seeker.ProgressBar')(View);
 
-const Knob = styled(({theme}) => ({
+const Knob = styled(({ theme }) => ({
   backgroundColor: theme.colors.text.primary,
   borderRadius: theme.sizing.baseUnit,
   position: 'absolute',
@@ -63,7 +63,7 @@ export class Seeker extends PureComponent {
     this.listen(this.props.progress);
   }
 
-  componentWillReceiveProps({progress}) {
+  componentWillReceiveProps({ progress }) {
     if (progress !== this.props.progress) {
       this.listen(progress);
     }
@@ -88,20 +88,20 @@ export class Seeker extends PureComponent {
       width: '100%',
       overflow: 'visible',
       transform: [
-        {translateX: this.trackBarOffset},
+        { translateX: this.trackBarOffset },
       ],
     });
   }
 
   get progressBarStyles() {
     return ([StyleSheet.absoluteFill, {
-      transform: [{translateX: this.trackBarOffset}],
+      transform: [{ translateX: this.trackBarOffset }],
     }]);
   }
 
   listen = (progress) => {
     if (this.listener) this.props.progress.removeListener(progress);
-    this.listener = progress.addListener(({value}) => {
+    this.listener = progress.addListener(({ value }) => {
       this.lastProgressValue = value;
       this.lastPosition = value * this.state.width;
     });
@@ -111,23 +111,23 @@ export class Seeker extends PureComponent {
 
   panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => !!this.props.onSeeking,
-    onPanResponderMove: (e, {dx}) => {
+    onPanResponderMove: (e, { dx }) => {
       let offset = dx;
       offset = Math.min(this.state.width - this.lastPosition, offset);
       offset = Math.max(-this.lastPosition, offset);
       this.offsetDriver.setValue(offset || 0);
 
-      const {onSeeking} = this.props;
+      const { onSeeking } = this.props;
       onSeeking((this.lastPosition + dx) / this.state.width);
     },
-    onPanResponderRelease: (e, {dx}) => {
+    onPanResponderRelease: (e, { dx }) => {
       this.offsetDriver.setValue(0);
-      const {onSeek} = this.props;
+      const { onSeek } = this.props;
       if (onSeek) onSeek(((this.lastPosition || 0) + dx) / this.state.width);
     },
   });
 
-  handleOnLayout = ({nativeEvent: {layout: {width}}}) => {
+  handleOnLayout = ({ nativeEvent: { layout: { width } } }) => {
     this.setState({
       width,
     });
@@ -153,7 +153,7 @@ export class Seeker extends PureComponent {
   }
 }
 
-export default withTheme(({theme, ...otherProps} = {}) => ({
+export default withTheme(({ theme, ...otherProps } = {}) => ({
   progressColor: theme.colors.primary,
   knobColor: theme.colors.secondary,
   trackColor: theme.colors.darkPrimary,

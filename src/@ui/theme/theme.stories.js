@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {storiesOf} from '@storybook/react-native';
+import { storiesOf } from '@storybook/react-native';
 
 import FlexedView from '@ui/FlexedView';
-import {H3, H7, BodyText} from '@ui/typography';
-import {ThemeProvider, ThemeMixin, withThemeMixin} from './';
+import { H3, H7, BodyText } from '@ui/typography';
+import { ThemeProvider, ThemeMixin, withThemeMixin } from '.';
 
 const TypeExample = () => (
   <FlexedView>
@@ -22,7 +22,7 @@ const DarkTypeExample = withThemeMixin({
   type: 'dark',
 })(TypeExample);
 
-const TypeExampleWithProps = withThemeMixin(({color, isLight = true}) => ({
+const TypeExampleWithProps = withThemeMixin(({ color, isLight = true }) => ({
   type: isLight ? 'light' : 'dark',
   colors: {
     primary: color,
@@ -30,44 +30,43 @@ const TypeExampleWithProps = withThemeMixin(({color, isLight = true}) => ({
 }))(TypeExample);
 
 storiesOf('Theming', module)
-    .add('ThemeProvider - default', () => (
-      <ThemeProvider>
+  .add('ThemeProvider - default', () => (
+    <ThemeProvider>
+      <TypeExample />
+    </ThemeProvider>
+  ))
+  .add('ThemeProvider - dark theme', () => (
+    <ThemeProvider
+      themeInput={{
+        type: 'dark',
+      }}
+    >
+      <TypeExample />
+    </ThemeProvider>
+  ))
+  .add('ThemeMixin', () => (
+    <ThemeProvider>
+      <FlexedView>
         <TypeExample />
-      </ThemeProvider>
-    ))
-    .add('ThemeProvider - dark theme', () => (
-      <ThemeProvider
-        themeInput={{
-          type: 'dark',
-        }}
-      >
+        <ThemeMixin mixin={{ type: 'dark' }}>
+          <TypeExample />
+        </ThemeMixin>
+      </FlexedView>
+    </ThemeProvider>
+  ))
+  .add('withThemeMixin', () => (
+    <ThemeProvider>
+      <FlexedView>
         <TypeExample />
-      </ThemeProvider>
-    ))
-    .add('ThemeMixin', () => (
-      <ThemeProvider>
-        <FlexedView>
-          <TypeExample />
-          <ThemeMixin mixin={{type: 'dark'}}>
-            <TypeExample />
-          </ThemeMixin>
-        </FlexedView>
-      </ThemeProvider>
-    ))
-    .add('withThemeMixin', () => (
-      <ThemeProvider>
-        <FlexedView>
-          <TypeExample />
-          <DarkTypeExample />
-        </FlexedView>
-      </ThemeProvider>
-    ))
-    .add('withThemeMixin using props', () => (
-      <ThemeProvider>
-        <FlexedView>
-          <TypeExampleWithProps isLight color="red" />
-          <TypeExampleWithProps isLight={false} color="blue" />
-        </FlexedView>
-      </ThemeProvider>
-    ));
-
+        <DarkTypeExample />
+      </FlexedView>
+    </ThemeProvider>
+  ))
+  .add('withThemeMixin using props', () => (
+    <ThemeProvider>
+      <FlexedView>
+        <TypeExampleWithProps isLight color="red" />
+        <TypeExampleWithProps isLight={false} color="blue" />
+      </FlexedView>
+    </ThemeProvider>
+  ));

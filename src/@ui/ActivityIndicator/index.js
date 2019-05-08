@@ -1,4 +1,4 @@
-import {ActivityIndicator as NativeActivityIndicator, StyleSheet} from 'react-native';
+import { ActivityIndicator as NativeActivityIndicator, StyleSheet } from 'react-native';
 import styled from '@ui/styled';
 
 const ActivityIndicator = styled({

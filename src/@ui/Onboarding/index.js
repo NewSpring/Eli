@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose, pure, setPropTypes} from 'recompose';
+import { compose, pure, setPropTypes } from 'recompose';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Chip from '@ui/Chip';
 
-const enhance = compose(pure, setPropTypes({closeModal: PropTypes.func}));
+const enhance = compose(pure, setPropTypes({ closeModal: PropTypes.func }));
 
 const styles = StyleSheet.create({
   image: {
@@ -68,7 +68,7 @@ const slides = [
 
 const renderDoneButton = () => <Chip pill title="Go" type="secondary" />;
 
-const Onboarding = enhance(({closeModal}) => (
+const Onboarding = enhance(({ closeModal }) => (
   <AppIntroSlider
     hideNextButton
     onDone={closeModal}

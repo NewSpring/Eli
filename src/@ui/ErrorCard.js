@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Card, {CardContent} from '@ui/Card';
-import {H4, H7} from '@ui/typography';
+import Card, { CardContent } from '@ui/Card';
+import { H4, H7 } from '@ui/typography';
 import styled from '@ui/styled';
 
-const Header = styled({textAlign: 'center'}, 'Error.Header')(H4);
-const ErrorText = styled({textAlign: 'center'}, 'Error.Text')(H7);
+const Header = styled({ textAlign: 'center' }, 'Error.Header')(H4);
+const ErrorText = styled({ textAlign: 'center' }, 'Error.Text')(H7);
 
-const Err = ({message = 'Uh oh!', error}) => {
+const Err = ({ message = 'Uh oh!', error }) => {
   let errorMessage;
   if (typeof error !== 'string') {
     if (error && error.message) {

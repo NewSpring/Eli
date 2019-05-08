@@ -1,33 +1,33 @@
 import React from 'react';
-import {shouldUpdate} from 'recompose';
+import { shouldUpdate } from 'recompose';
 import withUser from '@data/withUser';
 // import withTopics from '@data/withTopics';
 import Header from '@ui/Header';
 import BackgroundView from '@ui/BackgroundView';
-import TabView, {SceneMap} from '@ui/TabView';
+import TabView, { SceneMap } from '@ui/TabView';
 import UserAvatarView from '@ui/UserAvatarView';
 import MediaQuery from '@ui/MediaQuery';
-import {ResponsiveSideBySideView as SideBySideView, Left, Right} from '@ui/SideBySideView';
+import { ResponsiveSideBySideView as SideBySideView, Left, Right } from '@ui/SideBySideView';
 import styled from '@ui/styled';
 import Icon from '@ui/Icon';
-import {Link} from '@ui/NativeWebRouter';
-import {H7} from '@ui/typography';
+import { Link } from '@ui/NativeWebRouter';
+import { H7 } from '@ui/typography';
 import Meta from '@ui/Meta';
 
 import Topics from './Topics';
 import Likes from './Likes';
 
-const FlexedSideBySideView = styled({flex: 1})(SideBySideView);
+const FlexedSideBySideView = styled({ flex: 1 })(SideBySideView);
 
 const CurrentUserAvatar = withUser(UserAvatarView);
-const DesktopCurrentUserAvatar = styled({height: '100%'})(CurrentUserAvatar);
-const FlexedLeft = styled({flex: 1})(Left);
+const DesktopCurrentUserAvatar = styled({ height: '100%' })(CurrentUserAvatar);
+const FlexedLeft = styled({ flex: 1 })(Left);
 
-const UserMeta = withUser(({user: {photo, firstName, lastName} = {}}) => (
+const UserMeta = withUser(({ user: { photo, firstName, lastName } = {} }) => (
   <Meta title={`${firstName} ${lastName}`} photo={photo} />
 ));
 
-const tabRoutes = [{title: 'Likes', key: 'likes'}, {title: 'Topics', key: 'topics'}];
+const tabRoutes = [{ title: 'Likes', key: 'likes' }, { title: 'Topics', key: 'topics' }];
 
 const enhance = shouldUpdate(() => false);
 
@@ -39,7 +39,7 @@ const Profile = enhance(() => (
         <Header
           webEnabled
           titleText="Profile"
-          right={
+          right={(
             <Link to="/settings">
               <SideBySideView stretched={false}>
                 <Icon name="settings" size={24} />
@@ -48,7 +48,7 @@ const Profile = enhance(() => (
                 </MediaQuery>
               </SideBySideView>
             </Link>
-          }
+)}
         />
         <TabView
           routes={tabRoutes}

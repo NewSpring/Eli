@@ -1,9 +1,9 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {Platform, View} from 'react-native';
-import {compose, withProps, nest} from 'recompose';
-import {withWindow} from '@ui/MediaQuery';
-import {withTheme} from '@ui/theme';
+import { Platform, View } from 'react-native';
+import { compose, withProps, nest } from 'recompose';
+import { withWindow } from '@ui/MediaQuery';
+import { withTheme } from '@ui/theme';
 import {
   Router,
   Route,
@@ -17,34 +17,33 @@ import {
 } from '@ui/NativeWebRouter';
 import ActivityIndicator from '@ui/ActivityIndicator';
 import CardStack from '@ui/CardStack';
-import {asModal} from '@ui/ModalView';
+import { asModal } from '@ui/ModalView';
 import orientation from '@utils/orientation';
 import BackgroundView from '@ui/BackgroundView';
 import Meta from '@ui/Meta';
 import getAppPathForUrl from '@utils/getAppPathForUrl';
-import {trackScreen} from '@utils/analytics';
+import { trackScreen } from '@utils/analytics';
 
 import * as tabs from './tabs';
 import * as give from './give';
 
-import Articles, {ArticlesSingle} from './articles';
-import Stories, {StoriesSingle} from './stories';
-import Series, {Sermon, SeriesSingle, SeriesTrailer} from './series';
-import Studies, {StudiesSingle, StudiesEntry} from './studies';
-import News, {NewsSingle} from './news';
-import Music, {Playlist, Player, TrackContextual} from './music';
+import Articles, { ArticlesSingle } from './articles';
+import Stories, { StoriesSingle } from './stories';
+import Series, { Sermon, SeriesSingle, SeriesTrailer } from './series';
+import Studies, { StudiesSingle, StudiesEntry } from './studies';
+import News, { NewsSingle } from './news';
+import Music, { Playlist, Player, TrackContextual } from './music';
 import Locations from './locations';
-import Auth, {ForgotPassword, ResetPassword} from './auth';
+import Auth, { ForgotPassword, ResetPassword } from './auth';
 import Settings, {
   ProfileDetails,
   ProfileAddress,
   ChangePassword,
 } from './settings';
 
-import {Results as GroupFinderResults, GroupSingle} from './group-finder';
+import { Results as GroupFinderResults, GroupSingle } from './group-finder';
 
-const redirectToNewspring = (path) =>
-  window.location.replace(`https://newspring.cc/${path}`);
+const redirectToNewspring = path => window.location.replace(`https://newspring.cc/${path}`);
 
 let previousLocation;
 
@@ -80,10 +79,10 @@ class AppRouter extends PureComponent {
   componentWillUpdate(nextProps) {
     this.trackScreen(nextProps);
     if (
-      nextProps.history.action !== 'POP' &&
-      nextProps.history.action !== 'REPLACE' &&
-      !this.isModal &&
-      !this.musicPlayerIsOpened
+      nextProps.history.action !== 'POP'
+      && nextProps.history.action !== 'REPLACE'
+      && !this.isModal
+      && !this.musicPlayerIsOpened
     ) {
       previousLocation = this.props.location;
     }
@@ -91,13 +90,11 @@ class AppRouter extends PureComponent {
 
   get isModal() {
     return (
-      this.props.isLargeScreen &&
-      previousLocation &&
-      previousLocation.pathname !== this.props.location.pathname &&
-      previousLocation.pathname !== '/signup' &&
-      this.largeScreenModals.find((route) =>
-        matchPath(this.props.location.pathname, route.props.path),
-      )
+      this.props.isLargeScreen
+      && previousLocation
+      && previousLocation.pathname !== this.props.location.pathname
+      && previousLocation.pathname !== '/signup'
+      && this.largeScreenModals.find(route => matchPath(this.props.location.pathname, route.props.path))
     );
   }
 
@@ -105,7 +102,7 @@ class AppRouter extends PureComponent {
     return matchPath(this.props.location.pathname, '/player');
   }
 
-  trackScreen = ({location, history}) => {
+  trackScreen = ({ location, history }) => {
     if (location !== previousLocation) {
       trackScreen(location.pathname, {
         ...location,
@@ -174,26 +171,26 @@ class AppRouter extends PureComponent {
   };
 
   go = (...args) => {
-    this.setState({universalLinkLoading: false});
+    this.setState({ universalLinkLoading: false });
     this.props.history.push(...args);
   };
 
-  handleUniversalLink = async ({url: _url}) => {
+  handleUniversalLink = async ({ url: _url }) => {
     let url = _url;
     if (url.startsWith('exp')) url = `http${url.substr(3)}`; // handle weird expo bug
-    if (universalLinksToHandle.find((link) => url.includes(link))) {
-      this.setState({universalLinkLoading: true});
+    if (universalLinksToHandle.find(link => url.includes(link))) {
+      this.setState({ universalLinkLoading: true });
       try {
         let realUrl = url;
-        if (universalLinksToFetch.find((link) => url.includes(link))) {
+        if (universalLinksToFetch.find(link => url.includes(link))) {
           realUrl = (await fetch(url)).url;
         }
 
         const path = await getAppPathForUrl(realUrl);
-        this.setState({universalLinkLoading: false});
+        this.setState({ universalLinkLoading: false });
         if (path) this.props.history.push(path);
       } catch (e) {
-        this.setState({universalLinkLoading: false});
+        this.setState({ universalLinkLoading: false });
       }
     }
   };
@@ -397,12 +394,12 @@ class AppRouter extends PureComponent {
 }
 
 const enhance = compose(
-    withRouter,
-    withWindow,
-    withTheme(),
-    withProps(({theme, window}) => ({
-      isLargeScreen: window.width > theme.breakpoints.md,
-    })),
+  withRouter,
+  withWindow,
+  withTheme(),
+  withProps(({ theme, window }) => ({
+    isLargeScreen: window.width > theme.breakpoints.md,
+  })),
 );
 
 export default nest(Router, enhance(AppRouter));

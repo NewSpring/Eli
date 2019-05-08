@@ -1,32 +1,32 @@
-import React, {PureComponent} from 'react';
-import {View} from 'react-native';
+import React, { PureComponent } from 'react';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import {withFormik} from 'formik';
+import { withFormik } from 'formik';
 import Yup from 'yup';
-import {compose, mapProps} from 'recompose';
+import { compose, mapProps } from 'recompose';
 import get from 'lodash/get';
 import Icon from '@ui/Icon';
-import {withRouter} from '@ui/NativeWebRouter';
+import { withRouter } from '@ui/NativeWebRouter';
 import Radio from '@ui/inputs/Radio';
 import ErrorText from '@ui/inputs/ErrorText';
-import Button, {ButtonLink} from '@ui/Button';
+import Button, { ButtonLink } from '@ui/Button';
 import withCheckout from '@data/withCheckout';
 import withGive from '@data/withGive';
 import ActivityIndicator from '@ui/ActivityIndicator';
 import last4 from '@utils/last4';
 import styled from '@ui/styled';
 import PaddedView from '@ui/PaddedView';
-import TableView, {Divider} from '@ui/TableView';
-import {H6, H7} from '@ui/typography';
+import TableView, { Divider } from '@ui/TableView';
+import { H6, H7 } from '@ui/typography';
 
-const Row = styled(({theme}) => ({
+const Row = styled(({ theme }) => ({
   padding: theme.sizing.baseUnit / 2,
   flexDirection: 'row',
   justifyContent: 'space-between',
   flex: 1,
 }))(View);
 
-const ButtonLinkWrapper = styled(({theme}) => ({
+const ButtonLinkWrapper = styled(({ theme }) => ({
   alignItems: 'center',
   paddingTop: theme.sizing.baseUnit,
 }))(View);
@@ -44,12 +44,12 @@ export class ChangePaymentMethodForm extends PureComponent {
     }),
     onPressNewPaymentMethod: PropTypes.func,
     savedPaymentMethods: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-          name: PropTypes.string,
-          paymentMethod: PropTypes.oneOf(['bankAccount', 'creditCard']),
-          accountNumber: PropTypes.string,
-        }),
+      PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+        name: PropTypes.string,
+        paymentMethod: PropTypes.oneOf(['bankAccount', 'creditCard']),
+        accountNumber: PropTypes.string,
+      }),
     ),
     isLoading: PropTypes.bool,
   };
@@ -115,43 +115,43 @@ export class ChangePaymentMethodForm extends PureComponent {
 }
 
 const enhance = compose(
-    withCheckout,
-    withGive,
-    withRouter,
-    withFormik({
-      mapPropsToValues: (props) => ({
-        paymentMethod:
+  withCheckout,
+  withGive,
+  withRouter,
+  withFormik({
+    mapPropsToValues: props => ({
+      paymentMethod:
         get(props, 'contributions.savedPaymentMethodId') || get(props, 'savedPaymentMethods.0.id'),
-      }),
-      validationSchema: Yup.object().shape({
-        paymentMethod: Yup.mixed().required('Payment method is a required field'),
-      }),
-      enableReinitialize: true,
-      handleSubmit: async (values, {setSubmitting, setErrors, props}) => {
-        let shouldRedirect = false;
-        try {
-          setSubmitting(true);
-          props.setSavedPaymentMethod(values.paymentMethod);
-          shouldRedirect = true;
-        } catch (err) {
-          setErrors({
-            general: err.message,
-          });
-        } finally {
-          setSubmitting(false);
-        }
-        if (shouldRedirect) props.history.push('/give/checkout/confirm');
-      },
     }),
-    mapProps((props) => ({
-      ...props,
-      handleOnChange(value) {
-        return props.setFieldValue('paymentMethod', value);
-      },
-      onPressNewPaymentMethod() {
-        return props.history.push('/give/checkout/personal');
-      },
-    })),
+    validationSchema: Yup.object().shape({
+      paymentMethod: Yup.mixed().required('Payment method is a required field'),
+    }),
+    enableReinitialize: true,
+    handleSubmit: async (values, { setSubmitting, setErrors, props }) => {
+      let shouldRedirect = false;
+      try {
+        setSubmitting(true);
+        props.setSavedPaymentMethod(values.paymentMethod);
+        shouldRedirect = true;
+      } catch (err) {
+        setErrors({
+          general: err.message,
+        });
+      } finally {
+        setSubmitting(false);
+      }
+      if (shouldRedirect) props.history.push('/give/checkout/confirm');
+    },
+  }),
+  mapProps(props => ({
+    ...props,
+    handleOnChange(value) {
+      return props.setFieldValue('paymentMethod', value);
+    },
+    onPressNewPaymentMethod() {
+      return props.history.push('/give/checkout/personal');
+    },
+  })),
 );
 
 export default enhance(ChangePaymentMethodForm);

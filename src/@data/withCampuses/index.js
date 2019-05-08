@@ -1,4 +1,4 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 export const QUERY = gql`
@@ -21,10 +21,9 @@ export const QUERY = gql`
 `;
 
 export default graphql(QUERY, {
-  props: ({ownProps, data} = {}) => ({
+  props: ({ ownProps, data } = {}) => ({
     error: data.error || ownProps.error,
     campuses: data.campuses,
     isLoading: ownProps.isLoading || data.loading,
   }),
 });
-

@@ -1,15 +1,15 @@
 import React from 'react';
-import {get} from 'lodash';
+import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import * as Inputs from '@ui/inputs';
 
 // NOTE: Id's are resolved to frequencies for
 // NMI at withGive
 export const FREQUENCY_IDS = [
-  {label: 'one time', id: 'once'},
-  {label: 'every week', id: 'weekly'},
-  {label: 'every two weeks', id: 'biweekly'},
-  {label: 'once a month', id: 'monthly'},
+  { label: 'one time', id: 'once' },
+  { label: 'every week', id: 'weekly' },
+  { label: 'every two weeks', id: 'biweekly' },
+  { label: 'once a month', id: 'monthly' },
 ];
 
 const FrequencyInput = (({
@@ -22,10 +22,10 @@ const FrequencyInput = (({
     label="Frequency"
     onValueChange={onChange}
     value={value}
-    displayValue={get(scheduleFrequencies.find((f) => f.id === value), 'label')}
+    displayValue={get(scheduleFrequencies.find(f => f.id === value), 'label')}
     {...pickerProps}
   >
-    {scheduleFrequencies.map(({label, id}) => (
+    {scheduleFrequencies.map(({ label, id }) => (
       <Inputs.PickerItem label={label} value={id} key={id} />
     ))}
   </Inputs.Picker>

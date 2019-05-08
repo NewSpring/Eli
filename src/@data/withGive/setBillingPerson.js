@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 export const MUTATION = gql`
   mutation setBillingPerson($firstName: String!, $lastName: String!, $email: String!, $campusId: Number!) {
@@ -8,8 +8,8 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    setBillingPerson: (props) => (mutate({
+  props: ({ mutate }) => ({
+    setBillingPerson: props => (mutate({
       variables: {
         firstName: props.firstName,
         lastName: props.lastName,

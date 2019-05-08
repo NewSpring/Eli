@@ -1,12 +1,12 @@
-import {View} from 'react-native';
-import {compose, renderComponent} from 'recompose';
+import { View } from 'react-native';
+import { compose, renderComponent } from 'recompose';
 import styled from '@ui/styled';
-import {enhancer as mediaQuery} from '@ui/MediaQuery';
+import { enhancer as mediaQuery } from '@ui/MediaQuery';
 
-export {default as Right} from './Right';
-export {default as Left} from './Left';
+export { default as Right } from './Right';
+export { default as Left } from './Left';
 
-const SideBySideView = styled(({reversed = false, stretched = true}) => ({
+const SideBySideView = styled(({ reversed = false, stretched = true }) => ({
   flexDirection: reversed ? 'row-reverse' : 'row',
   flexWrap: 'nowrap',
   justifyContent: 'space-between',
@@ -14,7 +14,7 @@ const SideBySideView = styled(({reversed = false, stretched = true}) => ({
 }))(View);
 
 const ResponsiveSideBySideView = compose(
-    mediaQuery(({md}) => ({minWidth: md}), renderComponent(SideBySideView)),
+  mediaQuery(({ md }) => ({ minWidth: md }), renderComponent(SideBySideView)),
 )(View);
 
 export {

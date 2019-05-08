@@ -1,9 +1,9 @@
-import React, {PureComponent} from 'react';
-import {View} from 'react-native';
+import React, { PureComponent } from 'react';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from '@ui/styled';
 
-const OutlinedCircle = styled(({theme, isSelected}) => ({
+const OutlinedCircle = styled(({ theme, isSelected }) => ({
   height: 20,
   width: 20,
   borderRadius: 99,
@@ -13,7 +13,7 @@ const OutlinedCircle = styled(({theme, isSelected}) => ({
   justifyContent: 'center',
 }))(View);
 
-const FilledCircle = styled(({theme}) => ({
+const FilledCircle = styled(({ theme }) => ({
   height: 12,
   width: 12,
   borderRadius: 99,

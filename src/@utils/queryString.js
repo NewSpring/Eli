@@ -5,11 +5,11 @@ const defaultOptions = {
 };
 
 const parse = (object, opts = {}) => (
-  queryString.parse(object, {...defaultOptions, ...opts})
+  queryString.parse(object, { ...defaultOptions, ...opts })
 );
 
 const stringify = (object, opts = {}) => (
-  queryString.stringify(object, {...defaultOptions, ...opts})
+  queryString.stringify(object, { ...defaultOptions, ...opts })
 );
 
-export {parse, stringify};
+export { parse, stringify };

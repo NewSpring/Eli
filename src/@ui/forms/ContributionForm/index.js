@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {View, Platform} from 'react-native';
+import React, { Component } from 'react';
+import { View, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import {
   compose,
@@ -9,19 +9,19 @@ import {
   setPropTypes,
   defaultProps,
 } from 'recompose';
-import {isEmpty, get} from 'lodash';
-import {withFormik} from 'formik';
+import { isEmpty, get } from 'lodash';
+import { withFormik } from 'formik';
 import Yup from 'yup';
 import moment from 'moment';
 
-import {withRouter, withProtectedFunction} from '@ui/NativeWebRouter';
+import { withRouter, withProtectedFunction } from '@ui/NativeWebRouter';
 import Icon from '@ui/Icon';
 import withGive from '@data/withGive';
 import withFinancialAccounts from '@data/withFinancialAccounts';
 import withIsLoggedIn from '@data/withUser/withIsLoggedIn';
 import withCheckout from '@data/withCheckout';
 import ActivityIndicator from '@ui/ActivityIndicator';
-import {H5, H3, BodyText} from '@ui/typography';
+import { H5, H3, BodyText } from '@ui/typography';
 import CashAmountIndicator from '@ui/CashAmountIndicator';
 import Button from '@ui/Button';
 import * as Inputs from '@ui/inputs';
@@ -31,7 +31,7 @@ import styled from '@ui/styled';
 import ErrorCard from '@ui/ErrorCard';
 
 import FundInput from './FundInput';
-import FrequencyInput, {FREQUENCY_IDS} from './FrequencyInput';
+import FrequencyInput, { FREQUENCY_IDS } from './FrequencyInput';
 
 const LoadingView = styled({
   height: 300,
@@ -39,12 +39,11 @@ const LoadingView = styled({
   position: 'relative',
 })(ActivityIndicator);
 
-const ButtonWrapper =
-  Platform.OS === 'web'
-    ? styled({
-      alignItems: 'flex-start',
-    })(View)
-    : View;
+const ButtonWrapper = Platform.OS === 'web'
+  ? styled({
+    alignItems: 'flex-start',
+  })(View)
+  : View;
 
 const Row = styled({
   flexDirection: 'row',
@@ -52,12 +51,11 @@ const Row = styled({
   flexWrap: 'wrap',
 })(View);
 
-const Totals =
-  Platform.OS === 'web'
-    ? styled({
-      alignItems: 'flex-start',
-    })(PaddedView)
-    : PaddedView;
+const Totals = Platform.OS === 'web'
+  ? styled({
+    alignItems: 'flex-start',
+  })(PaddedView)
+  : PaddedView;
 
 const FundContributionType = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -126,17 +124,17 @@ export class ContributionFormWithoutData extends Component {
 
   get totalContribution() {
     const firstContribution = parseFloat(
-        get(this.props.values, 'firstContribution.amount', 0),
+      get(this.props.values, 'firstContribution.amount', 0),
     );
     const secondContribution = parseFloat(
-        get(this.props.values, 'secondContribution.amount', 0),
+      get(this.props.values, 'secondContribution.amount', 0),
     );
     return firstContribution + secondContribution;
   }
 
   get remainingFunds() {
     const firstFundId = get(this.props.values.firstContribution, 'id');
-    const isNotFirstFund = (fund) => fund.id !== firstFundId;
+    const isNotFirstFund = fund => fund.id !== firstFundId;
     return this.props.funds.filter(isNotFirstFund);
   }
 
@@ -144,16 +142,16 @@ export class ContributionFormWithoutData extends Component {
     const secondFundVisible = !this.state.secondFundVisible;
 
     this.props.setFieldValue(
-        'secondContribution',
+      'secondContribution',
       secondFundVisible ? this.remainingFunds[0] : null,
     );
 
-    this.setState({secondFundVisible});
+    this.setState({ secondFundVisible });
   };
 
   handleToggleRecurringPaymentOptionsVisibility = () => {
     const recurringPaymentOptionsVisible = !this.state
-        .recurringPaymentOptionsVisible;
+      .recurringPaymentOptionsVisible;
 
     let frequencyId = FREQUENCY_IDS[0].id;
     if (recurringPaymentOptionsVisible) {
@@ -163,7 +161,7 @@ export class ContributionFormWithoutData extends Component {
     }
 
     this.props.setFieldValue('frequencyId', frequencyId);
-    this.setState({recurringPaymentOptionsVisible});
+    this.setState({ recurringPaymentOptionsVisible });
   };
 
   renderOfflineMessage() {
@@ -194,7 +192,7 @@ export class ContributionFormWithoutData extends Component {
 
     const total = (parseFloat(this.totalContribution || 0) || 0).toFixed(2);
 
-    const {touched, errors} = this.props;
+    const { touched, errors } = this.props;
 
     return (
       <PaddedView horizontal={false}>
@@ -209,28 +207,24 @@ export class ContributionFormWithoutData extends Component {
               value={
                 this.props.values.firstContribution
               }
-              onChange={(value) =>
-                this.props.setFieldValue('firstContribution', value)
+              onChange={value => this.props.setFieldValue('firstContribution', value)
               }
-              onBlur={() =>
-                this.props.setFieldTouched('firstContribution', true)
+              onBlur={() => this.props.setFieldTouched('firstContribution', true)
               }
               error={Boolean(
-                  touched.firstContribution && errors.firstContribution,
+                touched.firstContribution && errors.firstContribution,
               )}
             />
             {this.state.secondFundVisible && (
               <FundInput
                 funds={this.props.funds}
                 value={this.props.values.secondContribution}
-                onChange={(value) =>
-                  this.props.setFieldValue('secondContribution', value)
+                onChange={value => this.props.setFieldValue('secondContribution', value)
                 }
-                onBlur={() =>
-                  this.props.setFieldTouched('secondContribution', true)
+                onBlur={() => this.props.setFieldTouched('secondContribution', true)
                 }
                 error={Boolean(
-                    touched.secondContribution && errors.secondContribution,
+                  touched.secondContribution && errors.secondContribution,
                 )}
               />
             )}
@@ -259,15 +253,14 @@ export class ContributionFormWithoutData extends Component {
           </PaddedView>
         ) : null}
 
-        {this.props.recurringPaymentOptionsAvailable &&
-        this.state.recurringPaymentOptionsVisible ? (
+        {this.props.recurringPaymentOptionsAvailable
+        && this.state.recurringPaymentOptionsVisible ? (
           <TableView responsive={false}>
             <PaddedView>
               <View>
                 <FrequencyInput
                   value={this.props.values.frequencyId}
-                  onChange={(value) =>
-                    this.props.setFieldValue('frequencyId', value)
+                  onChange={value => this.props.setFieldValue('frequencyId', value)
                   }
                   onBlur={() => this.props.setFieldTouched('frequencyId', true)}
                   error={Boolean(touched.frequencyId && errors.frequencyId)}
@@ -275,11 +268,10 @@ export class ContributionFormWithoutData extends Component {
                 <Inputs.DateInput
                   label="Start Date"
                   displayValue={moment(this.props.values.startDate).format(
-                      'MM/DD/YYYY',
+                    'MM/DD/YYYY',
                   )}
                   value={this.props.values.startDate}
-                  onChange={(value) =>
-                    this.props.setFieldValue('startDate', value)
+                  onChange={value => this.props.setFieldValue('startDate', value)
                   }
                   onBlur={() => this.props.setFieldTouched('startDate', true)}
                   error={touched.startDate && errors.startDate}
@@ -287,7 +279,7 @@ export class ContributionFormWithoutData extends Component {
               </View>
             </PaddedView>
           </TableView>
-        ) : null}
+          ) : null}
 
         <Totals vertical={false}>
           <Row>
@@ -321,111 +313,111 @@ export class ContributionFormWithoutData extends Component {
 }
 
 const initialStartDate = moment(new Date())
-    .add(1, 'days')
-    .toDate();
+  .add(1, 'days')
+  .toDate();
 
 const ContributionForm = compose(
-    setPropTypes({
-      onComplete: PropTypes.func,
-    }),
-    defaultProps({
-      onComplete() {},
-    }),
-    withGive,
-    withRouter,
-    withIsLoggedIn,
-    withFinancialAccounts,
-    withProtectedFunction((protect) => ({triggerLogin: protect})),
-    withCheckout,
-    withProps(({accounts, person}) => ({
-      funds: accounts,
-      recurringPaymentOptionsAvailable: !!person,
-    })),
-    branch(({isLoading}) => isLoading, renderComponent(LoadingView)),
-    withFormik({
-      mapPropsToValues: (props) => ({
-        firstContribution: {
-          id: props.funds && props.funds[0] && props.funds[0].id,
-          name: props.funds && props.funds[0] && props.funds[0].name,
-        },
-        frequencyId: 'today',
-        secondContribution: null,
-        startDate: initialStartDate,
-      }),
-      validationSchema: Yup.object().shape({
-        firstContribution: Yup.object()
-            .shape({
-              id: Yup.string(),
-              name: Yup.string(),
-              amount: Yup.number()
-                  .min(1)
-                  .required(),
-            })
-            .required(),
-        frequencyId: Yup.string().oneOf([
-          'today',
-          ...FREQUENCY_IDS.map((f) => f.id),
-        ]),
-        secondContribution: Yup.object()
-            .nullable()
-            .shape({
-              id: Yup.string(),
-              name: Yup.string(),
-              amount: Yup.number()
-                  .min(1)
-                  .required(),
-            }),
-        startDate: Yup.date().min(
-            moment()
-                .endOf('day')
-                .toDate(),
-            'Start Date must be a future date',
-        ),
-      }),
-      handleSubmit(values, {props, setSubmitting}) {
-        const result = {...values};
-        if (get(result, 'firstContribution.amount')) {
-          result.firstContribution.amount = parseFloat(
-              result.firstContribution.amount,
-          );
-        }
-
-        if (get(result, 'secondContribution.amount')) {
-          result.secondContribution.amount = parseFloat(
-              result.secondContribution.amount,
-          );
-        }
-
-        props.resetContributions();
-        props.addContribution(result.firstContribution);
-        if (!isEmpty(result.secondContribution)) {
-          props.addContribution(result.secondContribution);
-        }
-
-        props.setContributionFrequency(result.frequencyId);
-        props.setContributionStartDate(result.startDate);
-
-        if (props.person) {
-          props.setBillingPerson({
-            firstName: props.person.firstName,
-            lastName: props.person.lastName,
-            email: props.person.email,
-            campusId: get(props, 'person.campus.id', null),
-          });
-        }
-
-        const userHasPaymentMethods = props.savedPaymentMethods.length > 0;
-        if (userHasPaymentMethods) {
-          props.isPayingWithSavedPaymentMethod();
-          props.setSavedPaymentMethod(get(props, 'savedPaymentMethods.0.id', ''));
-        } else {
-          props.isPayingWithCreditCard();
-        }
-
-        props.onComplete({...props, result});
-        setSubmitting(false);
+  setPropTypes({
+    onComplete: PropTypes.func,
+  }),
+  defaultProps({
+    onComplete() {},
+  }),
+  withGive,
+  withRouter,
+  withIsLoggedIn,
+  withFinancialAccounts,
+  withProtectedFunction(protect => ({ triggerLogin: protect })),
+  withCheckout,
+  withProps(({ accounts, person }) => ({
+    funds: accounts,
+    recurringPaymentOptionsAvailable: !!person,
+  })),
+  branch(({ isLoading }) => isLoading, renderComponent(LoadingView)),
+  withFormik({
+    mapPropsToValues: props => ({
+      firstContribution: {
+        id: props.funds && props.funds[0] && props.funds[0].id,
+        name: props.funds && props.funds[0] && props.funds[0].name,
       },
+      frequencyId: 'today',
+      secondContribution: null,
+      startDate: initialStartDate,
     }),
+    validationSchema: Yup.object().shape({
+      firstContribution: Yup.object()
+        .shape({
+          id: Yup.string(),
+          name: Yup.string(),
+          amount: Yup.number()
+            .min(1)
+            .required(),
+        })
+        .required(),
+      frequencyId: Yup.string().oneOf([
+        'today',
+        ...FREQUENCY_IDS.map(f => f.id),
+      ]),
+      secondContribution: Yup.object()
+        .nullable()
+        .shape({
+          id: Yup.string(),
+          name: Yup.string(),
+          amount: Yup.number()
+            .min(1)
+            .required(),
+        }),
+      startDate: Yup.date().min(
+        moment()
+          .endOf('day')
+          .toDate(),
+        'Start Date must be a future date',
+      ),
+    }),
+    handleSubmit(values, { props, setSubmitting }) {
+      const result = { ...values };
+      if (get(result, 'firstContribution.amount')) {
+        result.firstContribution.amount = parseFloat(
+          result.firstContribution.amount,
+        );
+      }
+
+      if (get(result, 'secondContribution.amount')) {
+        result.secondContribution.amount = parseFloat(
+          result.secondContribution.amount,
+        );
+      }
+
+      props.resetContributions();
+      props.addContribution(result.firstContribution);
+      if (!isEmpty(result.secondContribution)) {
+        props.addContribution(result.secondContribution);
+      }
+
+      props.setContributionFrequency(result.frequencyId);
+      props.setContributionStartDate(result.startDate);
+
+      if (props.person) {
+        props.setBillingPerson({
+          firstName: props.person.firstName,
+          lastName: props.person.lastName,
+          email: props.person.email,
+          campusId: get(props, 'person.campus.id', null),
+        });
+      }
+
+      const userHasPaymentMethods = props.savedPaymentMethods.length > 0;
+      if (userHasPaymentMethods) {
+        props.isPayingWithSavedPaymentMethod();
+        props.setSavedPaymentMethod(get(props, 'savedPaymentMethods.0.id', ''));
+      } else {
+        props.isPayingWithCreditCard();
+      }
+
+      props.onComplete({ ...props, result });
+      setSubmitting(false);
+    },
+  }),
 )(ContributionFormWithoutData);
 
 export default ContributionForm;

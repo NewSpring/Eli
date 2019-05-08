@@ -1,10 +1,10 @@
-import {get} from 'lodash';
+import { get } from 'lodash';
 
 const site = 'https://newspring.cc';
 
 const getSiteLink = (contentItem) => {
   const category = contentItem.channelName;
-  const {meta} = contentItem;
+  const { meta } = contentItem;
 
   if (contentItem && contentItem.__typename === 'Group') { // eslint-disable-line
     return `https://my.newspring.cc/groups/${contentItem.id}`;

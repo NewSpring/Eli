@@ -1,7 +1,7 @@
-import React, {PureComponent} from 'react';
-import {View} from 'react-native';
+import React, { PureComponent } from 'react';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose} from 'recompose';
+import { compose } from 'recompose';
 import {
   VictoryLine,
   VictoryScatter,
@@ -10,7 +10,7 @@ import {
   VictoryAxis,
 } from '@ui/Chart';
 import withContributionsChartData from '@data/withContributionsChartData';
-import {withTheme} from '@ui/theme';
+import { withTheme } from '@ui/theme';
 
 export class ContributionsChart extends PureComponent {
   static propTypes = {
@@ -28,21 +28,21 @@ export class ContributionsChart extends PureComponent {
   static defaultProps = {
     animate: {
       duration: 2000,
-      onLoad: {duration: 1000},
+      onLoad: { duration: 1000 },
     },
     data: [
-      {month: 'January', amount: 0, tick: 'J'},
-      {month: 'February', amount: 0, tick: 'F'},
-      {month: 'March', amount: 0, tick: 'M'},
-      {month: 'April', amount: 0, tick: 'A'},
-      {month: 'May', amount: 0, tick: 'M'},
-      {month: 'June', amount: 0, tick: 'J'},
-      {month: 'July', amount: 0, tick: 'J'},
-      {month: 'August', amount: 0, tick: 'A'},
-      {month: 'September', amount: 0, tick: 'S'},
-      {month: 'October', amount: 0, tick: 'O'},
-      {month: 'November', amount: 0, tick: 'N'},
-      {month: 'December', amount: 0, tick: 'D'},
+      { month: 'January', amount: 0, tick: 'J' },
+      { month: 'February', amount: 0, tick: 'F' },
+      { month: 'March', amount: 0, tick: 'M' },
+      { month: 'April', amount: 0, tick: 'A' },
+      { month: 'May', amount: 0, tick: 'M' },
+      { month: 'June', amount: 0, tick: 'J' },
+      { month: 'July', amount: 0, tick: 'J' },
+      { month: 'August', amount: 0, tick: 'A' },
+      { month: 'September', amount: 0, tick: 'S' },
+      { month: 'October', amount: 0, tick: 'O' },
+      { month: 'November', amount: 0, tick: 'N' },
+      { month: 'December', amount: 0, tick: 'D' },
     ],
     fill: '#6bac43',
     lineWidth: 3,
@@ -85,7 +85,7 @@ export class ContributionsChart extends PureComponent {
   }
 
   get tickFormat() {
-    return this.props.data.map((x) => (x.tick));
+    return this.props.data.map(x => (x.tick));
   }
 
   get axisStyles() {
@@ -101,8 +101,8 @@ export class ContributionsChart extends PureComponent {
     };
   }
 
-  setWidth = ({nativeEvent: {layout: {width}}}) => {
-    this.setState({width});
+  setWidth = ({ nativeEvent: { layout: { width } } }) => {
+    this.setState({ width });
   }
 
   render() {
@@ -148,12 +148,12 @@ export class ContributionsChart extends PureComponent {
 }
 
 const enhance = compose(
-    withContributionsChartData,
-    withTheme(({theme, ...otherProps}) => ({
-      tickFontSize: otherProps.fontSize || theme.helpers.rem(0.75),
-      fill: otherProps.fill || theme.colors.primary,
-      tickLabelFill: otherProps.tickLabelFill || theme.colors.darkTertiary,
-    })),
+  withContributionsChartData,
+  withTheme(({ theme, ...otherProps }) => ({
+    tickFontSize: otherProps.fontSize || theme.helpers.rem(0.75),
+    fill: otherProps.fill || theme.colors.primary,
+    tickLabelFill: otherProps.tickLabelFill || theme.colors.darkTertiary,
+  })),
 );
 
 export default enhance(ContributionsChart);

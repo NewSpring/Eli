@@ -1,32 +1,33 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
-import {BodyText} from '@ui/typography';
+import { BodyText } from '@ui/typography';
 import PaddedView from '@ui/PaddedView';
 import Spacer from '@ui/Spacer';
-import {Link} from '@ui/NativeWebRouter';
-import {ButtonLink} from '@ui/Button';
+import { Link } from '@ui/NativeWebRouter';
+import { ButtonLink } from '@ui/Button';
 import HistoricalContributionCard from '@ui/HistoricalContributionCard';
 import WebBrowser from '@ui/WebBrowser';
 
-const ScheduleTransactionHistory = ({transactions = [], isLoading = false}) => (
+const ScheduleTransactionHistory = ({ transactions = [], isLoading = false }) => (
   <View>
     {!isLoading && !transactions.length ? (
       <PaddedView>
         <BodyText>{'We didn\'t find any contributions associated with this schedule.'}</BodyText>
         <Spacer byHeight />
         <BodyText italic>
-          If you have any questions, please call our Finance Team at 864-965-9990 or{' '}
+          If you have any questions, please call our Finance Team at 864-965-9990 or
+          {' '}
           <ButtonLink
-            onPress={() =>
-              WebBrowser.openBrowserAsync(
-                  'https://rock.newspring.cc/workflows/152?Topic=Stewardship',
-              )
+            onPress={() => WebBrowser.openBrowserAsync(
+              'https://rock.newspring.cc/workflows/152?Topic=Stewardship',
+            )
             }
           >
             Contact Us
-          </ButtonLink>{' '}
+          </ButtonLink>
+          {' '}
           and someone will be happy to assist you.
         </BodyText>
         <Spacer byHeight />
@@ -35,7 +36,7 @@ const ScheduleTransactionHistory = ({transactions = [], isLoading = false}) => (
         </BodyText>
       </PaddedView>
     ) : null}
-    {transactions.map((transaction) => (
+    {transactions.map(transaction => (
       <Link to={`/give/history/${transaction.id}`}>
         <HistoricalContributionCard
           fundName={get(transaction, 'details.0.account.name')}
@@ -54,7 +55,7 @@ ScheduleTransactionHistory.propTypes = {
     id: PropTypes.any, // eslint-disable-line
     details: PropTypes.arrayOf(PropTypes.shape({
       amount: PropTypes.number,
-      account: PropTypes.shape({name: PropTypes.string}),
+      account: PropTypes.shape({ name: PropTypes.string }),
     })),
     person: PropTypes.shape({
       firstName: PropTypes.string,

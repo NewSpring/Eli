@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {createElement} from 'react-native-web';
+import { createElement } from 'react-native-web';
 import styled from '@ui/styled';
 
 const StyledNativeVideo = styled({
   'object-fit': 'cover',
-})((props) => createElement('video', props));
+})(props => createElement('video', props));
 
 // very, very naive implementation of video on web.
 // Currently only supports a limited number of properties.
 // Its use isn't exactly recommended yet, except as uncontrolled background video
 const Video = ({
-  source: {uri} = {},
+  source: { uri } = {},
   posterSource,
   useNativeControls = true,
   shouldPlay = false,

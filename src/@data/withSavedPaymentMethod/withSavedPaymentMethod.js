@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import get from 'lodash/get';
 
 export const QUERY = gql`
@@ -16,7 +16,7 @@ export const QUERY = gql`
 `;
 
 export default graphql(QUERY, {
-  props: ({ownProps, data: {error, savedPaymentMethod, loading}}) => ({
+  props: ({ ownProps, data: { error, savedPaymentMethod, loading } }) => ({
     error: error || ownProps.error,
     savedPaymentMethod: {
       ...savedPaymentMethod,
@@ -31,4 +31,3 @@ export default graphql(QUERY, {
     },
   }),
 });
-

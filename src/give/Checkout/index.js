@@ -1,6 +1,8 @@
 import React from 'react';
 import KeyboardAwareScrollView from '@ui/KeyboardAwareScrollView';
-import {Switch, Route, Redirect, withRouter} from '@ui/NativeWebRouter';
+import {
+  Switch, Route, Redirect, withRouter,
+} from '@ui/NativeWebRouter';
 import Header from '@ui/Header';
 import BackgroundView from '@ui/BackgroundView';
 import Progress from '@ui/Progress';
@@ -18,7 +20,7 @@ function lastDirectory(pathname = '') {
   return pathParts.slice(pathParts.length - 1)[0];
 }
 
-const progressForLocation = ({pathname}) => {
+const progressForLocation = ({ pathname }) => {
   let step = 0;
   const directory = lastDirectory(pathname);
   switch (directory) {
@@ -31,7 +33,7 @@ const progressForLocation = ({pathname}) => {
   return step / 4;
 };
 
-const Checkout = withRouter(({match, location}) => (
+const Checkout = withRouter(({ match, location }) => (
   <ModalView backTo="/give/now" onBackReplace>
     <BackgroundView>
       <Header titleText="My Giving" backButton />

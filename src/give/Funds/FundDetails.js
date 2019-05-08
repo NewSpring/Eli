@@ -1,29 +1,29 @@
 import React from 'react';
-import {Platform, ScrollView} from 'react-native';
-import {compose, mapProps} from 'recompose';
+import { Platform, ScrollView } from 'react-native';
+import { compose, mapProps } from 'recompose';
 import withFinancialAccounts from '@data/withFinancialAccounts';
 import styled from '@ui/styled';
 import Header from '@ui/Header';
 import BackgroundView from '@ui/BackgroundView';
-import SideBySideView, {Left, Right} from '@ui/SideBySideView';
+import SideBySideView, { Left, Right } from '@ui/SideBySideView';
 import MediaQuery from '@ui/MediaQuery';
-import Hero, {BackgroundImage} from '@ui/Hero';
+import Hero, { BackgroundImage } from '@ui/Hero';
 import HTMLView from '@ui/HTMLView';
 import PaddedView from '@ui/PaddedView';
-import {ContributionForm} from '@ui/forms';
+import { ContributionForm } from '@ui/forms';
 import ConnectedImage from '@ui/ConnectedImage';
-import {H2} from '@ui/typography';
+import { H2 } from '@ui/typography';
 
 const enhance = compose(
-    withFinancialAccounts,
-    mapProps(({accounts = [], match: {params: {id}}, ...otherProps}) => ({
-      ...otherProps,
-      fund: accounts.find((account) => `${account.id}` === `${id}`),
-    })),
+  withFinancialAccounts,
+  mapProps(({ accounts = [], match: { params: { id } }, ...otherProps }) => ({
+    ...otherProps,
+    fund: accounts.find(account => `${account.id}` === `${id}`),
+  })),
 );
 
-const FlexedSideBySideView = styled({flex: 1})(SideBySideView);
-const FlexedLeft = styled({flex: 1})(Left);
+const FlexedSideBySideView = styled({ flex: 1 })(SideBySideView);
+const FlexedLeft = styled({ flex: 1 })(Left);
 
 const StyledImage = styled({
   width: '100%',
@@ -65,14 +65,14 @@ const FundDetails = enhance(({
             </HTMLView>
           </PaddedView>
           <ContributionForm
-            onComplete={({history, savedPaymentMethods} = {}) => {
+            onComplete={({ history, savedPaymentMethods } = {}) => {
               const userHasPaymentMethods = savedPaymentMethods.length > 0;
               if (userHasPaymentMethods) {
                 return history.push('/give/checkout/confirm');
               }
               return history.push('/give/checkout');
             }}
-            preselection={{id, name}}
+            preselection={{ id, name }}
           />
         </ScrollView>
       </FlexedLeft>

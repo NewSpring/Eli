@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {get} from 'lodash';
-import {pure} from 'recompose';
+import { get } from 'lodash';
+import { pure } from 'recompose';
 
 import * as Inputs from '@ui/inputs';
 
@@ -13,11 +13,11 @@ const GeographicPicker = enhance(({
   ...pickerProps
 }) => (
   <Inputs.Picker
-    displayValue={get(options.find((option) => option.id === value), 'label')}
+    displayValue={get(options.find(option => option.id === value), 'label')}
     value={value}
     {...pickerProps}
   >
-    {options.map(({label, id}) => (
+    {options.map(({ label, id }) => (
       <Inputs.PickerItem label={label} value={id} key={id} />
     ))}
   </Inputs.Picker>

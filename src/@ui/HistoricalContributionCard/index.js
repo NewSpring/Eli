@@ -1,45 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {compose, pure, setPropTypes, defaultProps} from 'recompose';
-import {Platform, View} from 'react-native';
-import {startCase, toLower} from 'lodash';
+import {
+  compose, pure, setPropTypes, defaultProps,
+} from 'recompose';
+import { Platform, View } from 'react-native';
+import { startCase, toLower } from 'lodash';
 import moment from 'moment';
 
-import {withIsLoading} from '@ui/isLoading';
+import { withIsLoading } from '@ui/isLoading';
 import styled from '@ui/styled';
-import Card, {CardContent} from '@ui/Card';
+import Card, { CardContent } from '@ui/Card';
 import SideBySideView from '@ui/SideBySideView';
 import FlexedView from '@ui/FlexedView';
-import {H5, H6, BodyText} from '@ui/typography';
+import { H5, H6, BodyText } from '@ui/typography';
 import Icon from '@ui/Icon';
-import {withTheme} from '@ui/theme';
+import { withTheme } from '@ui/theme';
 import CashAmountIndicator from '@ui/CashAmountIndicator';
 import MediaQuery from '@ui/MediaQuery';
 import Spacer from '@ui/Spacer';
 import Avatar from '@ui/Avatar';
 
 const enhance = compose(
-    setPropTypes({
-      isLoading: PropTypes.bool,
-      iconSize: PropTypes.number,
-      fundName: PropTypes.string,
-      contributorName: PropTypes.string,
-      amount: PropTypes.number,
-      dateFormat: PropTypes.string,
-      date: PropTypes.string.isRequired,
-    }),
-    defaultProps({
-      isLoading: false,
-      fundName: '',
-      contributorName: '',
-      amount: 0,
-      dateFormat: 'MMM DD, YYYY',
-    }),
-    withIsLoading,
-    withTheme(({theme, ...otherProps}) => ({
-      iconSize: otherProps.iconSize || theme.helpers.rem(1),
-    })),
-    pure,
+  setPropTypes({
+    isLoading: PropTypes.bool,
+    iconSize: PropTypes.number,
+    fundName: PropTypes.string,
+    contributorName: PropTypes.string,
+    amount: PropTypes.number,
+    dateFormat: PropTypes.string,
+    date: PropTypes.string.isRequired,
+  }),
+  defaultProps({
+    isLoading: false,
+    fundName: '',
+    contributorName: '',
+    amount: 0,
+    dateFormat: 'MMM DD, YYYY',
+  }),
+  withIsLoading,
+  withTheme(({ theme, ...otherProps }) => ({
+    iconSize: otherProps.iconSize || theme.helpers.rem(1),
+  })),
+  pure,
 );
 
 const HorizontalLayout = styled({
@@ -61,11 +63,11 @@ const RightColumn = styled({
   }),
 })(FlexedView);
 
-const StyledH6 = styled(({theme}) => ({
+const StyledH6 = styled(({ theme }) => ({
   color: theme.colors.text.tertiary,
 }))(H6);
 
-const DateText = styled(({theme}) => ({
+const DateText = styled(({ theme }) => ({
   color: theme.colors.text.tertiary,
 }))(BodyText);
 
@@ -74,15 +76,15 @@ const Row = styled({
   alignItems: 'center',
 })(View);
 
-const StyledIcon = withTheme(({theme}) => ({
+const StyledIcon = withTheme(({ theme }) => ({
   fill: theme.colors.primary,
 }))(Icon);
 
-const StyledCashAmountIndicator = withTheme(({theme}) => ({
+const StyledCashAmountIndicator = withTheme(({ theme }) => ({
   color: theme.colors.text.tertiary,
 }))(CashAmountIndicator);
 
-const AvatarWrapper = styled(({theme}) => ({
+const AvatarWrapper = styled(({ theme }) => ({
   paddingRight: theme.sizing.baseUnit / 3,
 }))(View);
 

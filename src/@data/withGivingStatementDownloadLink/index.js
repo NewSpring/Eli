@@ -1,4 +1,4 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import moment from 'moment';
 
@@ -17,19 +17,19 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    getPDF: (year) => mutate({
+  props: ({ mutate }) => ({
+    getPDF: year => mutate({
       variables: {
         start: moment()
-            .utc()
-            .year(year)
-            .startOf('year')
-            .format('MM/DD/YYYY'),
+          .utc()
+          .year(year)
+          .startOf('year')
+          .format('MM/DD/YYYY'),
         end: moment()
-            .utc()
-            .year(year)
-            .endOf('year')
-            .format('MM/DD/YYYY 23:59:59'),
+          .utc()
+          .year(year)
+          .endOf('year')
+          .format('MM/DD/YYYY 23:59:59'),
       },
     }),
   }),

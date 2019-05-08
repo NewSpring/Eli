@@ -1,45 +1,45 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
+import { ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose, withProps} from 'recompose';
+import { compose, withProps } from 'recompose';
 import get from 'lodash/get';
-import {withRouter} from '@ui/NativeWebRouter';
+import { withRouter } from '@ui/NativeWebRouter';
 import Header from '@ui/Header';
 import BackgroundView from '@ui/BackgroundView';
 import PaddedView from '@ui/PaddedView';
 import styled from '@ui/styled';
-import {BodyText} from '@ui/typography';
-import SideBySideView, {Left} from '@ui/SideBySideView';
+import { BodyText } from '@ui/typography';
+import SideBySideView, { Left } from '@ui/SideBySideView';
 
 import RecentArticles from 'give/RecentArticles';
 import Transaction from './Transaction';
 
-const FlexedSideBySideView = styled({flex: 1})(SideBySideView);
-const FlexedLeft = styled({flex: 1})(Left);
+const FlexedSideBySideView = styled({ flex: 1 })(SideBySideView);
+const FlexedLeft = styled({ flex: 1 })(Left);
 
-const PaperView = styled(({theme}) => ({
+const PaperView = styled(({ theme }) => ({
   backgroundColor: theme.colors.background.paper,
 }))(PaddedView);
 
-const Note = styled(({theme}) => ({
+const Note = styled(({ theme }) => ({
   paddingVertical: theme.sizing.baseUnit * 2,
   textAlign: 'center',
   color: theme.colors.text.secondary,
 }))(BodyText);
 
 const enhance = compose(
-    withRouter,
-    withProps((props) => ({
-      id: get(props, 'match.params.id'),
-      goBack() {
-        props.history.goBack();
-      },
-    })),
+  withRouter,
+  withProps(props => ({
+    id: get(props, 'match.params.id'),
+    goBack() {
+      props.history.goBack();
+    },
+  })),
 );
 
-const TransactionDetails = enhance(({id}) => (
+const TransactionDetails = enhance(({ id }) => (
   <BackgroundView>
-    <Header titleText={'Contribution Details'} backButton webEnabled />
+    <Header titleText="Contribution Details" backButton webEnabled />
     <FlexedSideBySideView>
       <FlexedLeft>
         <ScrollView>

@@ -1,5 +1,5 @@
-import {Platform, TouchableNativeFeedback, TouchableOpacity} from 'react-native';
-import {defaultProps} from 'recompose';
+import { Platform, TouchableNativeFeedback, TouchableOpacity } from 'react-native';
+import { defaultProps } from 'recompose';
 
 const IOSTouchable = defaultProps({
   activeOpacity: 0.5,

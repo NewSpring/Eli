@@ -1,6 +1,6 @@
 // This does one thing:
 // map website urls to in-app paths
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 import UrlPolyfill from 'url-parse';
 import gql from 'graphql-tag';
 import client from '@data/Client';
@@ -15,7 +15,7 @@ const isQueryRoute = (path) => {
     '/news/',
   ];
 
-  if (queryRoutes.find((url) => path.includes(url))) return path;
+  if (queryRoutes.find(url => path.includes(url))) return path;
   return false;
 };
 
@@ -62,16 +62,16 @@ const withQuery = async (path) => {
   const {
     data,
   } = await client
-      .query({
-        query: URL_TITLE_QUERY,
-        variables: {
-          parentChannel: parentChannelToUse,
-          parentUrl: parent || urlTitle,
-          childChannel: parent ? childChannelToUse : '',
-          childUrl: parent ? urlTitle : '',
-          hasChild: parent,
-        },
-      });
+    .query({
+      query: URL_TITLE_QUERY,
+      variables: {
+        parentChannel: parentChannelToUse,
+        parentUrl: parent || urlTitle,
+        childChannel: parent ? childChannelToUse : '',
+        childUrl: parent ? urlTitle : '',
+        hasChild: parent,
+      },
+    });
 
   if (!data.parent) return null;
 

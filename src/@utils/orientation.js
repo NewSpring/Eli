@@ -1,3 +1,3 @@
-import {ScreenOrientation} from 'expo';
+import { ScreenOrientation } from 'expo';
 
 export default ScreenOrientation;

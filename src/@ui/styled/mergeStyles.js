@@ -1,8 +1,8 @@
-import {flattenDeep} from 'lodash';
+import { flattenDeep } from 'lodash';
 
 // Merges two or more styles into one style object or array
 const mergeStyles = (...stylesToMerge) => flattenDeep(stylesToMerge).reduce((
-    accumulatedStyle, currentStyle,
+  accumulatedStyle, currentStyle,
 ) => {
   let style = accumulatedStyle;
   const styleRight = currentStyle;
@@ -10,8 +10,8 @@ const mergeStyles = (...stylesToMerge) => flattenDeep(stylesToMerge).reduce((
   if (!styleRight && typeof styleRight !== 'number') return accumulatedStyle;
 
   // both styles are objects, we should turn them into a single object:
-  if (typeof style === 'object' && !Array.isArray(style) &&
-      !Array.isArray(styleRight) && typeof styleRight === 'object') {
+  if (typeof style === 'object' && !Array.isArray(style)
+      && !Array.isArray(styleRight) && typeof styleRight === 'object') {
     style = Object.assign({}, style, styleRight);
 
   // styles can't be merged automatically, result to joining them in an array

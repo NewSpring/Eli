@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 export const MUTATION = gql`
   mutation ValidateCard ($token: ID!) {
@@ -13,8 +13,8 @@ export const MUTATION = gql`
 
 // For non-saved CC only START
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    validateCard: (token) => (mutate({
+  props: ({ mutate }) => ({
+    validateCard: token => (mutate({
       variables: {
         token,
       },

@@ -1,10 +1,10 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {Animated, StyleSheet} from 'react-native';
-import {H6} from '@ui/typography';
+import { Animated, StyleSheet } from 'react-native';
+import { H6 } from '@ui/typography';
 import styled from '@ui/styled';
 
-export const LabelText = styled(({theme}) => ({
+export const LabelText = styled(({ theme }) => ({
   color: theme.colors.text.secondary,
   backgroundColor: 'transparent',
   paddingVertical: theme.sizing.baseUnit / 4,
@@ -40,7 +40,7 @@ class FloatingLabel extends PureComponent {
     labelHeight: 0,
   };
 
-  handleLayout = ({nativeEvent: {layout}}) => {
+  handleLayout = ({ nativeEvent: { layout } }) => {
     this.setState({
       labelWidth: layout.width,
       labelHeight: layout.height,
@@ -67,7 +67,7 @@ class FloatingLabel extends PureComponent {
       outputRange: [0, -sideScaledWidth],
     });
     const wrapperStyles = {
-      transform: [{scale}, {translateX}, {translateY}],
+      transform: [{ scale }, { translateX }, { translateY }],
       opacity,
     };
 

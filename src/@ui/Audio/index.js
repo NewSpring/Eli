@@ -1,14 +1,16 @@
-import React, {PureComponent} from 'react';
-import {Audio as ExpoAudio} from 'expo';
+import React, { PureComponent } from 'react';
+import { Audio as ExpoAudio } from 'expo';
 import PropTypes from 'prop-types';
-import {Animated, View} from 'react-native';
+import { Animated, View } from 'react-native';
 import AudioPlay from './AudioPlay';
 import AudioPause from './AudioPause';
 import AudioSeeker from './AudioSeeker';
 
 export default class Audio extends PureComponent {
   static Play = AudioPlay;
+
   static Pause = AudioPause;
+
   static Seeker = AudioSeeker;
 
   static propTypes = {
@@ -74,7 +76,7 @@ export default class Audio extends PureComponent {
     this.loadSource();
   }
 
-  componentDidUpdate({source, isPlaying}) {
+  componentDidUpdate({ source, isPlaying }) {
     if (this.props.source !== source) {
       this.loadSource();
     } else if (this.props.isPlaying !== isPlaying) {
@@ -87,7 +89,7 @@ export default class Audio extends PureComponent {
     if (this.sound) this.sound.unloadAsync();
   }
 
-  onPlaybackStatusUpdate = ({didJustFinish, positionMillis}) => {
+  onPlaybackStatusUpdate = ({ didJustFinish, positionMillis }) => {
     this.positionMillisDriver.setValue(positionMillis);
     this.progressDriver.setValue((positionMillis / this.duration) || 0);
 
@@ -97,11 +99,17 @@ export default class Audio extends PureComponent {
   }
 
   positionMillisDriver = new Animated.Value(0);
+
   progressDriver = new Animated.Value(0);
+
   duration = 0;
+
   positionListener = undefined;
+
   previousSoundStatus = undefined;
+
   isReady = false;
+
   playState = this.props.isPlaying;
 
   play = async () => {
@@ -162,7 +170,7 @@ export default class Audio extends PureComponent {
       }
 
       const sound = this.sound = await new ExpoAudio.Sound(); // eslint-disable-line
-      const soundStatus = await this.sound.loadAsync({uri});
+      const soundStatus = await this.sound.loadAsync({ uri });
       this.soundLoaded = this.sound;
 
       if (sound === this.sound) { // since the above calls are promise base, there's a chance that

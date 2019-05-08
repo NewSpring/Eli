@@ -1,7 +1,7 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {compose, withProps, onlyUpdateForKeys} from 'recompose';
-import {withRouter} from '@ui/NativeWebRouter';
+import { compose, withProps, onlyUpdateForKeys } from 'recompose';
+import { withRouter } from '@ui/NativeWebRouter';
 import BackgroundView from '@ui/BackgroundView';
 import withTransactions from '@data/withTransactions';
 import ContributionHistoryList from './ContributionHistoryList';
@@ -32,7 +32,7 @@ class ContributionHistory extends PureComponent {
     setFilterDateRange() {},
   };
 
-  handleFilter = ({startDate, endDate} = {}) => {
+  handleFilter = ({ startDate, endDate } = {}) => {
     this.props.setFilterDateRange({
       startDate,
       endDate,
@@ -59,19 +59,19 @@ class ContributionHistory extends PureComponent {
 }
 
 const enhance = compose(
-    withRouter,
-    onlyUpdateForKeys([]),
-    withProps((props) => ({
-      onPressContributionCard(id) {
-        props.history.push(`/give/history/${id}`);
-      },
-    })),
-    withTransactions,
-    withProps((props) => ({
-      onPressNoDataButton() {
-        props.route.jumpTo('Now');
-      },
-    })),
+  withRouter,
+  onlyUpdateForKeys([]),
+  withProps(props => ({
+    onPressContributionCard(id) {
+      props.history.push(`/give/history/${id}`);
+    },
+  })),
+  withTransactions,
+  withProps(props => ({
+    onPressNoDataButton() {
+      props.route.jumpTo('Now');
+    },
+  })),
 );
 
 export default enhance(ContributionHistory);

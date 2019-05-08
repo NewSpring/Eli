@@ -1,2 +1,2 @@
-export {default} from './Feed';
-export {default as ArticlesSingle} from './Single';
+export { default } from './Feed';
+export { default as ArticlesSingle } from './Single';

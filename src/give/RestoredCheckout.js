@@ -1,33 +1,33 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 import get from 'lodash/get';
 import {
   compose,
   mapProps,
   pure,
 } from 'recompose';
-import {H4, H7} from '@ui/typography';
-import {parse, stringify} from '@utils/queryString';
+import { H4, H7 } from '@ui/typography';
+import { parse, stringify } from '@utils/queryString';
 import ActivityIndicator from '@ui/ActivityIndicator';
 import withRestoredGive from '@data/withRestoredGive';
-import {PaymentConfirmationForm} from '@ui/forms';
+import { PaymentConfirmationForm } from '@ui/forms';
 import styled from '@ui/styled';
-import {withoutTabBar} from 'tabs/Layout';
+import { withoutTabBar } from 'tabs/Layout';
 
 const PaperView = styled(
-    ({theme}) => ({
-      flex: 1,
-      backgroundColor: theme.colors.background.paper,
-      padding: theme.sizing.baseUnit,
-    }),
-    'PaperView',
+  ({ theme }) => ({
+    flex: 1,
+    backgroundColor: theme.colors.background.paper,
+    padding: theme.sizing.baseUnit,
+  }),
+  'PaperView',
 )(View);
 
 const enhance = compose(
-    mapProps(() => ({})),
-    pure,
-    withoutTabBar,
-    withRestoredGive,
+  mapProps(() => ({})),
+  pure,
+  withoutTabBar,
+  withRestoredGive,
 );
 
 export const RestoredCheckout = enhance((props) => {
@@ -59,7 +59,7 @@ export const RestoredCheckout = enhance((props) => {
   return (
     <PaperView>
       <H4>Secure Web Checkout</H4>
-      <H7>{'Please review your donation'}</H7>
+      <H7>Please review your donation</H7>
       <PaymentConfirmationForm
         hideChangePaymentMethodButton
         fromIos

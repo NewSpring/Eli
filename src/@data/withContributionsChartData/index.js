@@ -1,4 +1,4 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import moment from 'moment';
 import transactionsToChartDataMapper from './transactionsToChartDataMapper';
@@ -21,7 +21,7 @@ export const QUERY = gql`
 `;
 
 export default graphql(QUERY, {
-  props: ({data: {transactions}}) => (
+  props: ({ data: { transactions } }) => (
     transactionsToChartDataMapper(transactions || [])
   ),
   options: (ownProps = {}) => ({
@@ -31,4 +31,3 @@ export default graphql(QUERY, {
     },
   }),
 });
-

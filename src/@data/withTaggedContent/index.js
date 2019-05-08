@@ -1,7 +1,7 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import identifyCategory from '@data/utils/identifyCategory';
-import {contentDataImagesFragment} from '@data/fragments';
+import { contentDataImagesFragment } from '@data/fragments';
 
 export const QUERY = gql`
   query GetTaggedContent {
@@ -47,4 +47,3 @@ export default graphql(QUERY, {
     },
   }),
 });
-

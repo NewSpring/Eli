@@ -1,22 +1,24 @@
 import React from 'react';
-import {compose, mapProps} from 'recompose';
-import {withRouter} from '@ui/NativeWebRouter';
+import { compose, mapProps } from 'recompose';
+import { withRouter } from '@ui/NativeWebRouter';
 import BackgroundView from '@ui/BackgroundView';
 import SavedPaymentReviewForm from '@ui/forms/SavedPaymentReviewForm';
 import PaddedView from '@ui/PaddedView';
-import {Title, Row, TinyButton, TinyButtonText} from '../styles';
+import {
+  Title, Row, TinyButton, TinyButtonText,
+} from '../styles';
 
 
 const enhance = compose(
-    withRouter,
-    mapProps((props) => ({
-      onPressEdit() {
-        props.history.push('address');
-      },
-    })),
+  withRouter,
+  mapProps(props => ({
+    onPressEdit() {
+      props.history.push('address');
+    },
+  })),
 );
 
-const PaymentMethodConfirmation = enhance(({onPressEdit}) => (
+const PaymentMethodConfirmation = enhance(({ onPressEdit }) => (
   <BackgroundView>
     <PaddedView>
       <Row>
@@ -33,4 +35,3 @@ const PaymentMethodConfirmation = enhance(({onPressEdit}) => (
 ));
 
 export default PaymentMethodConfirmation;
-

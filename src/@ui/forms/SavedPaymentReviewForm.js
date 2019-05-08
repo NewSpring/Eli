@@ -1,11 +1,11 @@
-import React, {PureComponent} from 'react';
-import {View} from 'react-native';
+import React, { PureComponent } from 'react';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose, withProps} from 'recompose';
+import { compose, withProps } from 'recompose';
 import get from 'lodash/get';
 
-import {H5, H6, H7} from '@ui/typography';
-import {withRouter} from '@ui/NativeWebRouter';
+import { H5, H6, H7 } from '@ui/typography';
+import { withRouter } from '@ui/NativeWebRouter';
 import withGive from '@data/withGive';
 import withCheckout from '@data/withCheckout';
 import ActivityIndicator from '@ui/ActivityIndicator';
@@ -13,7 +13,7 @@ import styled from '@ui/styled';
 import Button from '@ui/Button';
 import Icon from '@ui/Icon';
 import last4 from '@utils/last4';
-import TableView, {Cell, Divider} from '@ui/TableView';
+import TableView, { Cell, Divider } from '@ui/TableView';
 import PaddedView from '@ui/PaddedView';
 import sentry from '@utils/sentry';
 
@@ -23,14 +23,14 @@ const Row = styled({
   justifyContent: 'space-between',
 })(View);
 
-const LabelText = styled(({theme}) => ({
+const LabelText = styled(({ theme }) => ({
   color: theme.colors.text.tertiary,
 }))(H7);
 
 const SmallValueText = compose(
-    styled(({theme}) => ({
-      color: theme.colors.text.secondary,
-    })),
+  styled(({ theme }) => ({
+    color: theme.colors.text.secondary,
+  })),
 )(H6);
 
 export class PaymentConfirmationFormWithoutData extends PureComponent {
@@ -131,7 +131,7 @@ export class PaymentConfirmationFormWithoutData extends PureComponent {
       <View>
         <TableView>
           <Cell>
-            <H5>{'Billing Address'}</H5>
+            <H5>Billing Address</H5>
           </Cell>
           <Divider />
           <PaddedView>
@@ -143,7 +143,7 @@ export class PaymentConfirmationFormWithoutData extends PureComponent {
 
         <TableView>
           <Cell>
-            <H5>{'Account Details'}</H5>
+            <H5>Account Details</H5>
           </Cell>
           <Divider />
           {this.props.paymentMethod === 'bankAccount'
@@ -164,69 +164,69 @@ export class PaymentConfirmationFormWithoutData extends PureComponent {
 }
 
 const PaymentConfirmationForm = compose(
-    withGive,
-    withRouter,
-    withCheckout,
-    withProps((props) => ({
-      isLoading: get(props, 'isLoading'),
-      isSaving: get(props, 'contributions.isSavingPaymentMethod'),
-      street1: get(props, 'contributions.street1'),
-      street2: get(props, 'contributions.street2'),
-      city: get(props, 'contributions.city'),
-      state: get(props, 'contributions.stateId'),
-      zipCode: get(props, 'contributions.zipCode'),
-      paymentMethod: get(props, 'contributions.paymentMethod'),
-      savedAccountName: get(props, 'contributions.savedAccountName'),
-      accountNumber: get(props, 'contributions.bankAccount.accountNumber'),
-      routingNumber: get(props, 'contributions.bankAccount.routingNumber'),
-      cardNumber: get(props, 'contributions.creditCard.cardNumber'),
-      expirationDate: get(props, 'contributions.creditCard.expirationDate'),
-      cvv: get(props, 'contributions.creditCard.cvv'),
-      onSubmit: async () => {
-        try {
-          props.isSavingPaymentMethod(true);
-          if (props.person) {
-            await props.setBillingPerson({
-              firstName: props.person.firstName,
-              lastName: props.person.lastName,
-              email: props.person.email,
-              campusId: get(props, 'person.campus.id', null),
-            });
-          }
-
-          if (props.contributions.paymentMethod === 'creditCard') {
-            await props.validateSingleCardTransaction(); // This seems unnecessary
-          }
-          const createOrderResponse = await props.createSavePaymentOrder();
-          const order = get(createOrderResponse, 'data.order', {});
-          const token = order.url.split('/').pop();
-          await props.postPayment(order.url);
-
-          // NOTE: Need to keep reading through
-          // the code to understand what id and name are for
-          const savePaymentMethodRes = await props.savePaymentMethod({
-            token,
-            name: props.contributions.savedAccountName,
+  withGive,
+  withRouter,
+  withCheckout,
+  withProps(props => ({
+    isLoading: get(props, 'isLoading'),
+    isSaving: get(props, 'contributions.isSavingPaymentMethod'),
+    street1: get(props, 'contributions.street1'),
+    street2: get(props, 'contributions.street2'),
+    city: get(props, 'contributions.city'),
+    state: get(props, 'contributions.stateId'),
+    zipCode: get(props, 'contributions.zipCode'),
+    paymentMethod: get(props, 'contributions.paymentMethod'),
+    savedAccountName: get(props, 'contributions.savedAccountName'),
+    accountNumber: get(props, 'contributions.bankAccount.accountNumber'),
+    routingNumber: get(props, 'contributions.bankAccount.routingNumber'),
+    cardNumber: get(props, 'contributions.creditCard.cardNumber'),
+    expirationDate: get(props, 'contributions.creditCard.expirationDate'),
+    cvv: get(props, 'contributions.creditCard.cvv'),
+    onSubmit: async () => {
+      try {
+        props.isSavingPaymentMethod(true);
+        if (props.person) {
+          await props.setBillingPerson({
+            firstName: props.person.firstName,
+            lastName: props.person.lastName,
+            email: props.person.email,
+            campusId: get(props, 'person.campus.id', null),
           });
-          const unableToCompleteOrderError = get(savePaymentMethodRes, 'data.response.error');
-          if (unableToCompleteOrderError) throw new Error(unableToCompleteOrderError);
-
-          props.setPaymentResult({
-            success: true,
-          });
-          return true;
-        } catch (err) {
-          sentry.captureException(err);
-          props.setPaymentResult({
-            error: err.message,
-          });
-          return null;
-        } finally {
-          props.isSavingPaymentMethod(false);
-          if (props.navigateToOnComplete) props.history.push(props.navigateToOnComplete);
         }
-      },
-    })),
+
+        if (props.contributions.paymentMethod === 'creditCard') {
+          await props.validateSingleCardTransaction(); // This seems unnecessary
+        }
+        const createOrderResponse = await props.createSavePaymentOrder();
+        const order = get(createOrderResponse, 'data.order', {});
+        const token = order.url.split('/').pop();
+        await props.postPayment(order.url);
+
+        // NOTE: Need to keep reading through
+        // the code to understand what id and name are for
+        const savePaymentMethodRes = await props.savePaymentMethod({
+          token,
+          name: props.contributions.savedAccountName,
+        });
+        const unableToCompleteOrderError = get(savePaymentMethodRes, 'data.response.error');
+        if (unableToCompleteOrderError) throw new Error(unableToCompleteOrderError);
+
+        props.setPaymentResult({
+          success: true,
+        });
+        return true;
+      } catch (err) {
+        sentry.captureException(err);
+        props.setPaymentResult({
+          error: err.message,
+        });
+        return null;
+      } finally {
+        props.isSavingPaymentMethod(false);
+        if (props.navigateToOnComplete) props.history.push(props.navigateToOnComplete);
+      }
+    },
+  })),
 )(PaymentConfirmationFormWithoutData);
 
 export default PaymentConfirmationForm;

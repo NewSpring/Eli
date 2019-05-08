@@ -1,19 +1,19 @@
-import React, {PureComponent} from 'react';
-import {compose, withProps} from 'recompose';
+import React, { PureComponent } from 'react';
+import { compose, withProps } from 'recompose';
 import PropTypes from 'prop-types';
-import {debounce} from 'lodash';
-import {Platform} from 'react-native';
+import { debounce } from 'lodash';
+import { Platform } from 'react-native';
 
-import {withRouter} from '@ui/NativeWebRouter';
-import {parse, stringify} from '@utils/queryString';
-import MediaQuery, {enhancer as mediaQuery} from '@ui/MediaQuery';
-import {withTheme} from '@ui/theme';
+import { withRouter } from '@ui/NativeWebRouter';
+import { parse, stringify } from '@utils/queryString';
+import MediaQuery, { enhancer as mediaQuery } from '@ui/MediaQuery';
+import { withTheme } from '@ui/theme';
 import styled from '@ui/styled';
-import {ResponsiveSideBySideView, Left, Right} from '@ui/SideBySideView';
-import {H1, H7} from '@ui/typography';
+import { ResponsiveSideBySideView, Left, Right } from '@ui/SideBySideView';
+import { H1, H7 } from '@ui/typography';
 import PaddedView from '@ui/PaddedView';
 import FlexedView from '@ui/FlexedView';
-import {Text as TextInput} from '@ui/inputs';
+import { Text as TextInput } from '@ui/inputs';
 import Icon from '@ui/Icon';
 import Header from '@ui/Header';
 import LiveNowButton from '@ui/LiveNowButton';
@@ -24,14 +24,14 @@ import Results from './Results';
 import Feed from './Feed';
 
 const enhance = compose(
-    withRouter,
-    withProps(({location: {search = ''} = {}}) => ({
-      term: parse(search).q,
-    })),
-    withTheme(({theme: {web: {backgroundVideo, backgroundVideoThumbnail = {}} = {}} = {}}) => ({
-      webBackgroundSource: backgroundVideo,
-      webBackgroundThumbnail: backgroundVideoThumbnail,
-    })),
+  withRouter,
+  withProps(({ location: { search = '' } = {} }) => ({
+    term: parse(search).q,
+  })),
+  withTheme(({ theme: { web: { backgroundVideo, backgroundVideoThumbnail = {} } = {} } = {} }) => ({
+    webBackgroundSource: backgroundVideo,
+    webBackgroundThumbnail: backgroundVideoThumbnail,
+  })),
 );
 
 const flexed = styled({
@@ -40,18 +40,18 @@ const flexed = styled({
 const FlexedRight = flexed(Right);
 const FlexedResponsiveSideBySideView = flexed(ResponsiveSideBySideView);
 
-const fixedWidthLeftSide = styled(({theme}) => ({
+const fixedWidthLeftSide = styled(({ theme }) => ({
   maxWidth: theme.breakpoints.sm,
   flex: 1,
   backgroundColor: theme.colors.background.default,
 }));
-const LeftSide = compose(mediaQuery(({md}) => ({minWidth: md}), fixedWidthLeftSide, flexed))(
-    Left,
+const LeftSide = compose(mediaQuery(({ md }) => ({ minWidth: md }), fixedWidthLeftSide, flexed))(
+  Left,
 );
 
-const CancelText = styled(({theme}) => ({paddingHorizontal: theme.sizing.baseUnit / 2}))(H7);
+const CancelText = styled(({ theme }) => ({ paddingHorizontal: theme.sizing.baseUnit / 2 }))(H7);
 
-const WebHeader = styled(({theme}) => ({
+const WebHeader = styled(({ theme }) => ({
   backgroundColor: theme.colors.background.paper,
   borderBottomColor: theme.colors.background.overlay,
   borderBottomWidth: 1,
@@ -81,7 +81,7 @@ class Discover extends PureComponent {
         <TextInput
           value={this.state.searchText}
           onChangeText={this.handleSearch}
-          wrapperStyle={{marginVertical: 0}}
+          wrapperStyle={{ marginVertical: 0 }}
           prefix={<Icon name="search" size={24} />}
           suffix={
             this.state.searchText && this.state.searchText.length ? (
@@ -95,11 +95,11 @@ class Discover extends PureComponent {
   }
 
   debouncedUpdate = debounce((q) => {
-    this.props.history.replace(`${this.props.location.pathname}?${stringify({q})}`);
+    this.props.history.replace(`${this.props.location.pathname}?${stringify({ q })}`);
   }, 500);
 
   handleSearch = (searchText) => {
-    this.setState({searchText});
+    this.setState({ searchText });
     this.debouncedUpdate(searchText);
   };
 
@@ -120,10 +120,10 @@ class Discover extends PureComponent {
           )}
         </LeftSide>
         {this.props.isModal ? null : (
-          <MediaQuery minWidth={'md'}>
+          <MediaQuery minWidth="md">
             <FlexedRight>
               <Hero
-                background={
+                background={(
                   <Video
                     src={this.props.webBackgroundSource}
                     posterSrc={this.props.webBackgroundThumbnail}
@@ -131,7 +131,7 @@ class Discover extends PureComponent {
                     shouldPlay
                     isLooping
                   />
-                }
+)}
               >
                 <H1>Welcome to NewSpring</H1>
               </Hero>

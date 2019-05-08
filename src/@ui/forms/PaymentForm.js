@@ -1,8 +1,8 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose} from 'recompose';
-import {withFormik} from 'formik';
+import { compose } from 'recompose';
+import { withFormik } from 'formik';
 import Yup from 'yup';
 import {
   formatCardNumber,
@@ -17,15 +17,15 @@ import moment from 'moment';
 
 import withGive from '@data/withGive';
 import withCheckout from '@data/withCheckout';
-import {withRouter} from '@ui/NativeWebRouter';
+import { withRouter } from '@ui/NativeWebRouter';
 import Icon from '@ui/Icon';
-import TableView, {FormFields} from '@ui/TableView';
+import TableView, { FormFields } from '@ui/TableView';
 
 import * as Inputs from '@ui/inputs';
 import Button from '@ui/Button';
 import PaddedView from '@ui/PaddedView';
 
-import {withFieldValueHandler, withFieldTouchedHandler} from './formikSetters';
+import { withFieldValueHandler, withFieldTouchedHandler } from './formikSetters';
 
 export const PaymentFormWithoutData = ({
   createFieldValueHandler,
@@ -48,8 +48,8 @@ export const PaymentFormWithoutData = ({
           onValueChange={createFieldValueHandler('paymentMethod')}
           error={touched.paymentMethod && errors.paymentMethod}
         >
-          <Inputs.PickerItem label="Credit Card" value={'creditCard'} />
-          <Inputs.PickerItem label="Bank Account" value={'bankAccount'} />
+          <Inputs.PickerItem label="Credit Card" value="creditCard" />
+          <Inputs.PickerItem label="Bank Account" value="bankAccount" />
         </Inputs.Picker>
 
         {values.paymentMethod === 'bankAccount' ? (
@@ -207,105 +207,102 @@ const mapPropsToValues = (props) => {
         ? 'creditCard'
         : paymentMethod,
     willSavePaymentMethod: get(props, 'enforceAccountName') ? true : get(props, 'contributions.willSavePaymentMethod'),
-    ...get(props, 'contributions.bankAccount', {accountType: 'checking'}),
+    ...get(props, 'contributions.bankAccount', { accountType: 'checking' }),
     ...get(props, 'contributions.creditCard', {}),
   };
 };
 
-const validationSchema = (props) =>
-  Yup.object().shape({
-    paymentMethod: Yup.string()
-        .oneOf(['bankAccount', 'creditCard'])
-        .required(),
-    cardNumber: Yup.string().when('paymentMethod', {
-      is: 'creditCard',
-      then: Yup.string()
+const validationSchema = props => Yup.object().shape({
+  paymentMethod: Yup.string()
+    .oneOf(['bankAccount', 'creditCard'])
+    .required(),
+  cardNumber: Yup.string().when('paymentMethod', {
+    is: 'creditCard',
+    then: Yup.string()
         .test('Credit Card', 'The card number entered is not a valid number', validateCardNumber) // eslint-disable-line
-          .required(),
-    }),
-    expirationDate: Yup.string().when('paymentMethod', {
-      is: 'creditCard',
-      then: Yup.string()
+      .required(),
+  }),
+  expirationDate: Yup.string().when('paymentMethod', {
+    is: 'creditCard',
+    then: Yup.string()
       // eslint-disable-next-line
         .test('Expiration date', 'The expiration date is not a valid expiry date', (value) => {
-            if (!value) return false;
-            const {month, year} = parseCardExpiry(value);
-            return validateCardExpiry(month, year);
-          })
-          .required(),
-    }),
-    cvv: Yup.string().when('paymentMethod', {
-      is: 'creditCard',
-      then: Yup.string()
+        if (!value) return false;
+        const { month, year } = parseCardExpiry(value);
+        return validateCardExpiry(month, year);
+      })
+      .required(),
+  }),
+  cvv: Yup.string().when('paymentMethod', {
+    is: 'creditCard',
+    then: Yup.string()
         .test('CVV', 'The CVV entered is not a valid CVV code', validateCardCVC) // eslint-disable-line
-          .required(),
+      .required(),
+  }),
+  accountName: Yup.string().when('paymentMethod', {
+    is: 'bankAccount',
+    then: Yup.string().required('Account Holder Name is a required field'),
+  }),
+  routingNumber: Yup.string().when('paymentMethod', {
+    is: 'bankAccount',
+    then: Yup.string().required('Routing Number is a required field'),
+  }),
+  accountNumber: Yup.string().when('paymentMethod', {
+    is: 'bankAccount',
+    then: Yup.string().required('Account Number is a required field'),
+  }),
+  accountType: Yup.string().oneOf(['checking', 'savings']),
+  willSavePaymentMethod: Yup.boolean(),
+  savedAccountName: props.enforceAccountName
+    ? Yup.string().required()
+    : Yup.string().when('willSavePaymentMethod', {
+      is: true,
+      then: Yup.string().required('Saved Payment Name is a required field'),
     }),
-    accountName: Yup.string().when('paymentMethod', {
-      is: 'bankAccount',
-      then: Yup.string().required('Account Holder Name is a required field'),
-    }),
-    routingNumber: Yup.string().when('paymentMethod', {
-      is: 'bankAccount',
-      then: Yup.string().required('Routing Number is a required field'),
-    }),
-    accountNumber: Yup.string().when('paymentMethod', {
-      is: 'bankAccount',
-      then: Yup.string().required('Account Number is a required field'),
-    }),
-    accountType: Yup.string().oneOf(['checking', 'savings']),
-    willSavePaymentMethod: Yup.boolean(),
-    savedAccountName: props.enforceAccountName
-      ? Yup.string().required()
-      : Yup.string().when('willSavePaymentMethod', {
-        is: true,
-        then: Yup.string().required('Saved Payment Name is a required field'),
-      }),
-  });
+});
 
 const PaymentForm = compose(
-    withGive,
-    withCheckout,
-    withRouter,
-    withFormik({
-      mapPropsToValues,
-      validationSchema,
-      isInitialValid(props) {
-        return validationSchema(props).isValidSync(mapPropsToValues(props));
-      },
-      handleSubmit: (values, {props, setSubmitting}) => {
-        setSubmitting(true);
-        const formattedValues = {...values};
-        const selectPaymentType =
-        values.paymentMethod === 'bankAccount'
-          ? props.isPayingWithBankAccount
-          : props.isPayingWithCreditCard;
-        selectPaymentType();
+  withGive,
+  withCheckout,
+  withRouter,
+  withFormik({
+    mapPropsToValues,
+    validationSchema,
+    isInitialValid(props) {
+      return validationSchema(props).isValidSync(mapPropsToValues(props));
+    },
+    handleSubmit: (values, { props, setSubmitting }) => {
+      setSubmitting(true);
+      const formattedValues = { ...values };
+      const selectPaymentType = values.paymentMethod === 'bankAccount'
+        ? props.isPayingWithBankAccount
+        : props.isPayingWithCreditCard;
+      selectPaymentType();
 
-        if (formattedValues.cardNumber) {
-          formattedValues.cardNumber = formattedValues.cardNumber.replace(/\D/g, '');
-        }
-        if (formattedValues.expirationDate) {
-          const {month, year} = parseCardExpiry(formattedValues.expirationDate);
-          formattedValues.expirationDate = moment()
-              .month(month - 1)
-              .year(year)
-              .format('MM/YY');
-        }
+      if (formattedValues.cardNumber) {
+        formattedValues.cardNumber = formattedValues.cardNumber.replace(/\D/g, '');
+      }
+      if (formattedValues.expirationDate) {
+        const { month, year } = parseCardExpiry(formattedValues.expirationDate);
+        formattedValues.expirationDate = moment()
+          .month(month - 1)
+          .year(year)
+          .format('MM/YY');
+      }
 
-        const setAccountDetails =
-        values.paymentMethod === 'bankAccount' ? props.setBankAccount : props.setCreditCard;
-        setAccountDetails(formattedValues);
+      const setAccountDetails = values.paymentMethod === 'bankAccount' ? props.setBankAccount : props.setCreditCard;
+      setAccountDetails(formattedValues);
 
-        props.willSavePaymentMethod(formattedValues.willSavePaymentMethod);
-        if (formattedValues.willSavePaymentMethod) {
-          props.setSavedPaymentName(formattedValues.savedAccountName);
-        }
-        setSubmitting(false);
-        if (props.navigateToOnComplete) props.history.push(props.navigateToOnComplete);
-      },
-    }),
-    withFieldValueHandler,
-    withFieldTouchedHandler,
+      props.willSavePaymentMethod(formattedValues.willSavePaymentMethod);
+      if (formattedValues.willSavePaymentMethod) {
+        props.setSavedPaymentName(formattedValues.savedAccountName);
+      }
+      setSubmitting(false);
+      if (props.navigateToOnComplete) props.history.push(props.navigateToOnComplete);
+    },
+  }),
+  withFieldValueHandler,
+  withFieldTouchedHandler,
 )(PaymentFormWithoutData);
 
 export default PaymentForm;

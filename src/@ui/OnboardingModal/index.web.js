@@ -1,2 +1,2 @@
 // no-op on web
-export default ({children}) => children;
+export default ({ children }) => children;

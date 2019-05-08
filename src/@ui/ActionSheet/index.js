@@ -1,1 +1,1 @@
-export {ActionSheetProvider, connectActionSheet} from '@expo/react-native-action-sheet';
+export { ActionSheetProvider, connectActionSheet } from '@expo/react-native-action-sheet';

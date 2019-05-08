@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import Client from '@data/Client';
-import {QUERY as contributionsQuery} from './withContributions';
+import { QUERY as contributionsQuery } from './withContributions';
 import getOrderDetails from './selectors/getOrderDetails';
 
 export const MUTATION = gql`
@@ -16,9 +16,9 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
+  props: ({ mutate }) => ({
     createOrder() {
-      const {contributions: state} = Client.readQuery({
+      const { contributions: state } = Client.readQuery({
         query: contributionsQuery,
       });
       const orderDetails = getOrderDetails(state);

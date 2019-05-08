@@ -1,6 +1,6 @@
-import {ApolloClient} from 'apollo-client';
-import {SchemaLink} from 'apollo-link-schema';
-import {makeExecutableSchema, addMockFunctionsToSchema} from 'graphql-tools';
+import { ApolloClient } from 'apollo-client';
+import { SchemaLink } from 'apollo-link-schema';
+import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 
 import cache from '../cache';
 
@@ -11,11 +11,11 @@ const typeDefs = `
   }
 `;
 
-const schema = makeExecutableSchema({typeDefs});
-addMockFunctionsToSchema({schema});
+const schema = makeExecutableSchema({ typeDefs });
+addMockFunctionsToSchema({ schema });
 
 
 export default new ApolloClient({
   cache,
-  link: new SchemaLink({schema}),
+  link: new SchemaLink({ schema }),
 });

@@ -1,4 +1,4 @@
-import {get} from 'lodash';
+import { get } from 'lodash';
 
 const getItemThumbnail = (item) => {
   let thumbnail = get(item, 'content.thumbnailImage', []);

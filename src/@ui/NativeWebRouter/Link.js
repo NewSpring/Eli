@@ -1,19 +1,19 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import Touchable from '@ui/Touchable';
 import WebBrowser from '@ui/WebBrowser';
-import {track, events, categories} from '@utils/analytics';
+import { track, events, categories } from '@utils/analytics';
 
-import {matchPath} from './';
+import { matchPath } from '.';
 
-export const goBackTo = ({to, history, replace = false}) => {
+export const goBackTo = ({ to, history, replace = false }) => {
   let foundMatchingEntry = false;
   let distance = -1;
 
   if (get(history, 'location.pathname') === to) return true;
   if (to && history.entries) {
-    const routeToPopTo = history.entries.findIndex((location) => matchPath(location.pathname, to));
+    const routeToPopTo = history.entries.findIndex(location => matchPath(location.pathname, to));
     if (routeToPopTo >= 0 && routeToPopTo < history.index) {
       foundMatchingEntry = true;
       distance = routeToPopTo - history.index;
@@ -58,8 +58,8 @@ export default class Link extends PureComponent {
   handlePress = (event) => {
     if (this.props.onPress) this.props.onPress(event);
 
-    const {history} = this.context.router;
-    const {to, replace, pop} = this.props;
+    const { history } = this.context.router;
+    const { to, replace, pop } = this.props;
 
     if (!to && !pop) return null;
 
@@ -70,8 +70,8 @@ export default class Link extends PureComponent {
     }
 
     if (pop) {
-      return goBackTo({to, history, replace});
-    } else if (replace && to) {
+      return goBackTo({ to, history, replace });
+    } if (replace && to) {
       return history.replace(to);
     }
 

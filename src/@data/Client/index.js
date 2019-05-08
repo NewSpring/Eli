@@ -1,5 +1,5 @@
-import {ApolloClient} from 'apollo-client';
-import {ApolloLink} from 'apollo-link';
+import { ApolloClient } from 'apollo-client';
+import { ApolloLink } from 'apollo-link';
 
 import authenticationLink from './authenticationLink';
 import httpLink from './httpLink';

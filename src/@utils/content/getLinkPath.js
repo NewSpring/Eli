@@ -1,4 +1,4 @@
-import {get} from 'lodash';
+import { get } from 'lodash';
 
 const getLinkPath = (contentItem) => {
   if (!contentItem || typeof contentItem !== 'object') return '#';

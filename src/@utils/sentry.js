@@ -1,1 +1,1 @@
-export {default} from 'sentry-expo';
+export { default } from 'sentry-expo';

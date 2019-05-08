@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {get} from 'lodash';
-import {compose, withProps, pure} from 'recompose';
-import {View, Platform, TextInput, Animated} from 'react-native';
+import { get } from 'lodash';
+import { compose, withProps, pure } from 'recompose';
+import {
+  View, Platform, TextInput, Animated,
+} from 'react-native';
 import Color from 'color';
-import {withTheme} from '@ui/theme';
+import { withTheme } from '@ui/theme';
 
 import FloatingLabel from '../FloatingLabel';
 import InputUnderline from '../InputUnderline';
@@ -12,7 +14,7 @@ import InputWrapper from '../InputWrapper';
 import ErrorText from '../ErrorText';
 
 import withFocusAnimation from '../withFocusAnimation';
-import InputAddon, {AddonRow} from '../InputAddon';
+import InputAddon, { AddonRow } from '../InputAddon';
 import withInputControlStyles from '../withInputControlStyles';
 
 const StyledTextInput = withInputControlStyles(TextInput);
@@ -33,9 +35,9 @@ const propsForInputType = {
   },
   numericKeyboard: {
     ...Platform.select({
-      ios: {keyboardType: 'numeric'},
-      android: {keyboardType: 'numeric'},
-      web: {type: 'text'},
+      ios: { keyboardType: 'numeric' },
+      android: { keyboardType: 'numeric' },
+      web: { type: 'text' },
     }),
   },
   phone: {
@@ -43,21 +45,21 @@ const propsForInputType = {
   },
   date: {
     ...Platform.select({
-      ios: {keyboardType: 'numeric'},
-      android: {keyboardType: 'numeric'},
-      web: {type: 'date'},
+      ios: { keyboardType: 'numeric' },
+      android: { keyboardType: 'numeric' },
+      web: { type: 'date' },
     }),
   },
 };
 
 const enhance = compose(
-    withTheme(),
-    pure,
-    withFocusAnimation,
-    withProps(({type, ...props}) => ({
-      ...get(propsForInputType, type, {}),
-      ...props,
-    })),
+  withTheme(),
+  pure,
+  withFocusAnimation,
+  withProps(({ type, ...props }) => ({
+    ...get(propsForInputType, type, {}),
+    ...props,
+  })),
 );
 
 const Text = enhance(({
@@ -79,7 +81,7 @@ const Text = enhance(({
       <View>
         <AddonRow>
           <InputAddon>{prefix}</InputAddon>
-          <Animated.View style={{opacity: focusAnimation, flex: 1}}>
+          <Animated.View style={{ opacity: focusAnimation, flex: 1 }}>
             <Component
               placeholderTextColor={
                 Color(theme.colors.text.primary).fade(theme.alpha.low).string()

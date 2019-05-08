@@ -1,4 +1,4 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import identifyCategory from '@data/utils/identifyCategory';
 import promotionsQuery from './promotionsQuery';
 
@@ -8,7 +8,7 @@ export default graphql(promotionsQuery, {
       setName: 'promotions_newspring',
     },
   }),
-  props: ({data} = {}) => ({
+  props: ({ data } = {}) => ({
     error: data.error,
     content: data.content && data.content.map(identifyCategory),
     isLoading: data.loading,

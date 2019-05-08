@@ -1,7 +1,7 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {compose} from 'recompose';
-import {Route, Redirect} from 'react-router';
+import { compose } from 'recompose';
+import { Route, Redirect } from 'react-router';
 import omit from 'lodash/omit';
 import get from 'lodash/get';
 import withUser from '@data/withUser/withIsLoggedIn';
@@ -12,12 +12,12 @@ import pickProps from '@utils/pickProps';
 import matchLocationToPath from './matchLocationToPath';
 
 const enhance = compose(
-    withUser,
-    // NOTE: This removes all the props noise
-    pickProps([...Object.keys(Route.propTypes), 'isLoggedIn', 'isLoading']),
+  withUser,
+  // NOTE: This removes all the props noise
+  pickProps([...Object.keys(Route.propTypes), 'isLoggedIn', 'isLoading']),
 );
 
-export const isEmptyChildren = (children) => React.Children.count(children) === 0;
+export const isEmptyChildren = children => React.Children.count(children) === 0;
 
 class ProtectedRoute extends PureComponent {
   static propTypes = {
@@ -55,8 +55,8 @@ class ProtectedRoute extends PureComponent {
           }
 
           const currentPathMatchesProtectedRoute = matchLocationToPath(
-              currentPath,
-              {pathname: this.props.path},
+            currentPath,
+            { pathname: this.props.path },
           );
 
           if (!this.props.isLoggedIn && currentPathMatchesProtectedRoute) {
@@ -65,7 +65,7 @@ class ProtectedRoute extends PureComponent {
                 from={this.props.path}
                 to={{
                   pathname: '/login',
-                  state: {referrer: this.props.path},
+                  state: { referrer: this.props.path },
                 }}
               />
             );

@@ -1,6 +1,6 @@
 
-import {Children, isValidElement, cloneElement} from 'react';
-import {matchPath} from '../NativeWebRouter';
+import { Children, isValidElement, cloneElement } from 'react';
+import { matchPath } from '../NativeWebRouter';
 
 // See https://github.com/ReactTraining/react-router/blob/master/packages/react-router/modules/Switch.js
 // for the reference implementation
@@ -21,5 +21,5 @@ export default function findFirstMatch(children, location) {
     }
   });
 
-  return match ? cloneElement(child, {location, computedMatch: match}) : null;
+  return match ? cloneElement(child, { location, computedMatch: match }) : null;
 }

@@ -1,15 +1,15 @@
 import React from 'react';
-import {Platform, View} from 'react-native';
-import {compose} from 'recompose';
+import { Platform, View } from 'react-native';
+import { compose } from 'recompose';
 
 import Placeholder from 'rn-placeholder';
 import styled from '@ui/styled';
 
 const enhance = compose(
-    Placeholder.connect,
+  Placeholder.connect,
 );
 
-const StyledView = styled(({theme}) => ({
+const StyledView = styled(({ theme }) => ({
   width: '100%',
   aspectRatio: 1,
   backgroundColor: theme.colors.background.inactive,

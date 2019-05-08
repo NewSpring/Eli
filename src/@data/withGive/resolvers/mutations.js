@@ -1,10 +1,10 @@
 import pick from 'lodash/pick';
-import {QUERY as contributionsQuery} from '@data/withGive/withContributions';
+import { QUERY as contributionsQuery } from '@data/withGive/withContributions';
 import sentry from '@utils/sentry';
-import {INITIAL_STATE} from './queries';
+import { INITIAL_STATE } from './queries';
 
-export function addContribution(result, variables, {cache}) {
-  const {contributions: state} = cache.readQuery({
+export function addContribution(result, variables, { cache }) {
+  const { contributions: state } = cache.readQuery({
     query: contributionsQuery,
   });
 
@@ -26,7 +26,7 @@ export function addContribution(result, variables, {cache}) {
   return null;
 }
 
-export function resetContributions(result, variables, {cache}) {
+export function resetContributions(result, variables, { cache }) {
   cache.writeQuery({
     query: contributionsQuery,
     data: {
@@ -38,8 +38,8 @@ export function resetContributions(result, variables, {cache}) {
   return null;
 }
 
-export function setContributionFrequency(result, variables, {cache}) {
-  const {contributions: state} = cache.readQuery({
+export function setContributionFrequency(result, variables, { cache }) {
+  const { contributions: state } = cache.readQuery({
     query: contributionsQuery,
   });
 
@@ -55,8 +55,8 @@ export function setContributionFrequency(result, variables, {cache}) {
   return null;
 }
 
-export function setContributionStartDate(result, variables, {cache}) {
-  const {contributions: state} = cache.readQuery({
+export function setContributionStartDate(result, variables, { cache }) {
+  const { contributions: state } = cache.readQuery({
     query: contributionsQuery,
   });
 
@@ -72,8 +72,8 @@ export function setContributionStartDate(result, variables, {cache}) {
   return null;
 }
 
-export function setBillingPerson(result, variables, {cache}) {
-  const {contributions: state} = cache.readQuery({
+export function setBillingPerson(result, variables, { cache }) {
+  const { contributions: state } = cache.readQuery({
     query: contributionsQuery,
   });
 
@@ -90,8 +90,8 @@ export function setBillingPerson(result, variables, {cache}) {
   return null;
 }
 
-export function setBillingAddress(result, variables, {cache}) {
-  const {contributions: state} = cache.readQuery({
+export function setBillingAddress(result, variables, { cache }) {
+  const { contributions: state } = cache.readQuery({
     query: contributionsQuery,
   });
 
@@ -108,8 +108,8 @@ export function setBillingAddress(result, variables, {cache}) {
   return null;
 }
 
-export function setCreditCard(result, variables, {cache}) {
-  const {contributions: state} = cache.readQuery({
+export function setCreditCard(result, variables, { cache }) {
+  const { contributions: state } = cache.readQuery({
     query: contributionsQuery,
   });
 
@@ -130,8 +130,8 @@ export function setCreditCard(result, variables, {cache}) {
   return null;
 }
 
-export function setBankAccount(result, variables, {cache}) {
-  const {contributions: state} = cache.readQuery({
+export function setBankAccount(result, variables, { cache }) {
+  const { contributions: state } = cache.readQuery({
     query: contributionsQuery,
   });
 
@@ -153,8 +153,8 @@ export function setBankAccount(result, variables, {cache}) {
   return null;
 }
 
-export function setPaymentMethod(result, variables, {cache}) {
-  const {contributions: state} = cache.readQuery({
+export function setPaymentMethod(result, variables, { cache }) {
+  const { contributions: state } = cache.readQuery({
     query: contributionsQuery,
   });
 
@@ -170,10 +170,10 @@ export function setPaymentMethod(result, variables, {cache}) {
   return null;
 }
 
-export async function postPayment(result, variables, {cache}) {
+export async function postPayment(result, variables, { cache }) {
   try {
     if (!variables.url) throw new Error('url is required!');
-    const {contributions: state} = cache.readQuery({
+    const { contributions: state } = cache.readQuery({
       query: contributionsQuery,
     });
 
@@ -208,9 +208,9 @@ export async function postPayment(result, variables, {cache}) {
   }
 }
 
-export async function setPaymentResult(result, variables, {cache}) {
+export async function setPaymentResult(result, variables, { cache }) {
   try {
-    const {contributions: state} = cache.readQuery({
+    const { contributions: state } = cache.readQuery({
       query: contributionsQuery,
     });
     const paymentSuccessful = !!variables.success;
@@ -247,9 +247,9 @@ export async function setPaymentResult(result, variables, {cache}) {
   }
 }
 
-export async function isPaying(result, variables, {cache}) {
+export async function isPaying(result, variables, { cache }) {
   try {
-    const {contributions: state} = cache.readQuery({
+    const { contributions: state } = cache.readQuery({
       query: contributionsQuery,
     });
 
@@ -269,9 +269,9 @@ export async function isPaying(result, variables, {cache}) {
   }
 }
 
-export async function isSavingPaymentMethod(result, variables, {cache}) {
+export async function isSavingPaymentMethod(result, variables, { cache }) {
   try {
-    const {contributions: state} = cache.readQuery({
+    const { contributions: state } = cache.readQuery({
       query: contributionsQuery,
     });
 
@@ -291,9 +291,9 @@ export async function isSavingPaymentMethod(result, variables, {cache}) {
   }
 }
 
-export async function willSavePaymentMethod(result, variables, {cache}) {
+export async function willSavePaymentMethod(result, variables, { cache }) {
   try {
-    const {contributions: state} = cache.readQuery({
+    const { contributions: state } = cache.readQuery({
       query: contributionsQuery,
     });
 
@@ -313,9 +313,9 @@ export async function willSavePaymentMethod(result, variables, {cache}) {
   }
 }
 
-export async function setSavedPaymentName(result, variables, {cache}) {
+export async function setSavedPaymentName(result, variables, { cache }) {
   try {
-    const {contributions: state} = cache.readQuery({
+    const { contributions: state } = cache.readQuery({
       query: contributionsQuery,
     });
 
@@ -335,9 +335,9 @@ export async function setSavedPaymentName(result, variables, {cache}) {
   }
 }
 
-export async function setSavedPaymentMethod(result, variables, {cache}) {
+export async function setSavedPaymentMethod(result, variables, { cache }) {
   try {
-    const {contributions: state} = cache.readQuery({
+    const { contributions: state } = cache.readQuery({
       query: contributionsQuery,
     });
 
@@ -347,8 +347,8 @@ export async function setSavedPaymentMethod(result, variables, {cache}) {
         contributions: {
           ...state,
           paymentMethod: 'savedPaymentMethod',
-          creditCard: {...INITIAL_STATE.creditCard},
-          bankAccount: {...INITIAL_STATE.bankAccount},
+          creditCard: { ...INITIAL_STATE.creditCard },
+          bankAccount: { ...INITIAL_STATE.bankAccount },
           willSavePaymentMethod: false,
           savedAccountName: '',
           savedPaymentMethodId: variables.id,
@@ -362,13 +362,13 @@ export async function setSavedPaymentMethod(result, variables, {cache}) {
   }
 }
 
-export function restoreContributions(result, variables, {cache}) {
+export function restoreContributions(result, variables, { cache }) {
   let stateVariables = {};
   try {
     stateVariables = JSON.parse(variables.state);
   } catch (e) {
     sentry.captureException(e, {
-      extra: {stateVariables: variables.state},
+      extra: { stateVariables: variables.state },
     });
   }
 

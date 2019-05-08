@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
-import {compose} from 'recompose';
+import { graphql } from 'react-apollo';
+import { compose } from 'recompose';
 import query from './query';
 
 const didOnboard = gql`
@@ -16,19 +16,19 @@ const showOnboarding = gql`
 `;
 
 export const withDidOnboard = graphql(didOnboard, {
-  props: ({mutate}) => ({
+  props: ({ mutate }) => ({
     didOnboard: () => mutate(),
   }),
 });
 
 export const withShowOnboarding = graphql(showOnboarding, {
-  props: ({mutate}) => ({
+  props: ({ mutate }) => ({
     showOnboarding: () => mutate(),
   }),
 });
 
 const withOnboarding = graphql(query, {
-  props: ({data: {error, onboarded, loading}, ownProps = {}}) => ({
+  props: ({ data: { error, onboarded, loading }, ownProps = {} }) => ({
     error: error || ownProps.error,
     onboarded,
     isLoading: loading || ownProps.isLoading,

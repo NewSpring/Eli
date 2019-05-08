@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 export const MUTATION = gql`
   mutation setBillingAddress(
@@ -22,17 +22,16 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    setBillingAddress: (props) =>
-      mutate({
-        variables: {
-          street1: props.street1,
-          street2: props.street2,
-          countryId: props.countryId,
-          city: props.city,
-          stateId: props.stateId,
-          zipCode: props.zipCode,
-        },
-      }),
+  props: ({ mutate }) => ({
+    setBillingAddress: props => mutate({
+      variables: {
+        street1: props.street1,
+        street2: props.street2,
+        countryId: props.countryId,
+        city: props.city,
+        stateId: props.stateId,
+        zipCode: props.zipCode,
+      },
+    }),
   }),
 });

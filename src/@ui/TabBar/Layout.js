@@ -1,6 +1,6 @@
-import {StyleSheet, View} from 'react-native';
-import {compose} from 'recompose';
-import {enhancer as mediaQuery} from '@ui/MediaQuery';
+import { StyleSheet, View } from 'react-native';
+import { compose } from 'recompose';
+import { enhancer as mediaQuery } from '@ui/MediaQuery';
 import styled from '@ui/styled';
 
 const styles = StyleSheet.create({
@@ -13,14 +13,13 @@ const styles = StyleSheet.create({
 });
 
 const Layout = compose(
-    styled(({theme}) => ({
-      flex: 1,
-      backgroundColor: theme.colors.background.default,
-    }), 'TabBar.Layout'),
-    mediaQuery(({md}) => ({maxWidth: md}),
-        styled(styles.mobile, 'TabBar@narrow'),
-        styled(styles.horizontalLayout, 'TabBar@wide'),
-    ),
+  styled(({ theme }) => ({
+    flex: 1,
+    backgroundColor: theme.colors.background.default,
+  }), 'TabBar.Layout'),
+  mediaQuery(({ md }) => ({ maxWidth: md }),
+    styled(styles.mobile, 'TabBar@narrow'),
+    styled(styles.horizontalLayout, 'TabBar@wide')),
 )(View);
 
 export default Layout;

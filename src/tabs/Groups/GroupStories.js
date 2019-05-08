@@ -1,1 +1,1 @@
-export {default} from '@ui/TaggedContent';
+export { default } from '@ui/TaggedContent';

@@ -1,5 +1,5 @@
-import React, {PureComponent} from 'react';
-import {Dimensions, Platform} from 'react-native';
+import React, { PureComponent } from 'react';
+import { Dimensions, Platform } from 'react-native';
 
 export default function withWindow(ComponentToWrap) {
   return class WithWindow extends PureComponent {
@@ -18,11 +18,11 @@ export default function withWindow(ComponentToWrap) {
       Dimensions.removeEventListener('change', this.handler);
     }
 
-    handler = ({window}) => {
-      if (Platform.OS !== 'web' && // detect orientation change
-        window.width === this.state.window.height &&
-        window.height === this.state.window.width) return;
-      this.setState({window});
+    handler = ({ window }) => {
+      if (Platform.OS !== 'web' // detect orientation change
+        && window.width === this.state.window.height
+        && window.height === this.state.window.width) return;
+      this.setState({ window });
     };
 
     render() {
@@ -30,4 +30,3 @@ export default function withWindow(ComponentToWrap) {
     }
   };
 }
-

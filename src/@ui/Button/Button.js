@@ -1,14 +1,14 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose, withProps} from 'recompose';
-import {get} from 'lodash';
-import {withTheme, withThemeMixin} from '@ui/theme';
+import { compose, withProps } from 'recompose';
+import { get } from 'lodash';
+import { withTheme, withThemeMixin } from '@ui/theme';
 import styled from '@ui/styled';
 import Touchable from '@ui/Touchable';
-import {H5} from '@ui/typography';
-import {InlineActivityIndicator} from '@ui/ActivityIndicator';
-import {withPlaceholder, Line} from '@ui/Placeholder';
+import { H5 } from '@ui/typography';
+import { InlineActivityIndicator } from '@ui/ActivityIndicator';
+import { withPlaceholder, Line } from '@ui/Placeholder';
 import sentry from '@utils/sentry';
 
 const ButtonStyles = styled(({
@@ -36,7 +36,7 @@ const ButtonStyles = styled(({
   }),
 }), 'Button')(View);
 
-const ButtonPlaceholder = styled(({theme}) => ({
+const ButtonPlaceholder = styled(({ theme }) => ({
   width: theme.sizing.baseUnit * 4,
   height: theme.sizing.baseUnit + theme.helpers.rem(1),
 }), 'Button.Placeholder')(Line);
@@ -54,27 +54,27 @@ const trackButton = (props) => {
 };
 
 const enhance = compose(
-    withButtonPlaceholder,
-    withTheme(({theme, type = 'default'}) => ({
-      fill: get(theme, `buttons.${type}.fill`, theme.colors.action.default),
-      accent: get(theme, `buttons.${type}.accent`, theme.colors.text.primary),
-    })),
-    // makes non-text children inherit button styles by default :-D
-    withThemeMixin(({fill, accent, bordered}) => ({
-      colors: {
-        primary: bordered ? fill : accent,
-        text: {primary: bordered ? fill : accent},
-        background: {default: fill, screen: fill},
-      },
-    })),
-    withProps(({onPress, ...otherProps}) => {
-      if (!onPress) return {};
-      const onPressAndTrack = (...args) => {
-        if (onPress) onPress(...args);
-        trackButton(otherProps);
-      };
-      return {onPress: onPressAndTrack};
-    }),
+  withButtonPlaceholder,
+  withTheme(({ theme, type = 'default' }) => ({
+    fill: get(theme, `buttons.${type}.fill`, theme.colors.action.default),
+    accent: get(theme, `buttons.${type}.accent`, theme.colors.text.primary),
+  })),
+  // makes non-text children inherit button styles by default :-D
+  withThemeMixin(({ fill, accent, bordered }) => ({
+    colors: {
+      primary: bordered ? fill : accent,
+      text: { primary: bordered ? fill : accent },
+      background: { default: fill, screen: fill },
+    },
+  })),
+  withProps(({ onPress, ...otherProps }) => {
+    if (!onPress) return {};
+    const onPressAndTrack = (...args) => {
+      if (onPress) onPress(...args);
+      trackButton(otherProps);
+    };
+    return { onPress: onPressAndTrack };
+  }),
 );
 
 // API-Compatible to React-Native's base <Button> component,

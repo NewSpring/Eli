@@ -1,5 +1,5 @@
-import {graphql} from 'react-apollo';
-import {compose} from 'recompose';
+import { graphql } from 'react-apollo';
+import { compose } from 'recompose';
 import fetchMoreResolver from '@data/utils/fetchMoreResolver';
 import identifyCategory from '@data/utils/identifyCategory';
 import playMutation from './playMutation';
@@ -13,60 +13,57 @@ import albumQuery from './albumQuery';
 import albumsQuery from './albumsQuery';
 
 const play = graphql(playMutation, {
-  props: ({mutate}) => ({
+  props: ({ mutate }) => ({
     play: () => mutate(),
   }),
 });
 
 const setNowPlaying = graphql(nowPlayingMutation, {
-  props: ({mutate}) => ({
-    setNowPlaying: ({id, playlist, currentTrack}) =>
-      mutate({
-        variables: {id, playlist, currentTrack},
-      }),
+  props: ({ mutate }) => ({
+    setNowPlaying: ({ id, playlist, currentTrack }) => mutate({
+      variables: { id, playlist, currentTrack },
+    }),
   }),
 });
 
 const shuffle = graphql(shuffleMutation, {
-  props: ({mutate}) => ({
-    shuffle: ({isShuffling}) =>
-      mutate({
-        variables: {isShuffling},
-      }),
+  props: ({ mutate }) => ({
+    shuffle: ({ isShuffling }) => mutate({
+      variables: { isShuffling },
+    }),
   }),
 });
 
 const repeat = graphql(repeatMutation, {
-  props: ({mutate}) => ({
-    repeat: ({isRepeating}) =>
-      mutate({
-        variables: {isRepeating},
-      }),
+  props: ({ mutate }) => ({
+    repeat: ({ isRepeating }) => mutate({
+      variables: { isRepeating },
+    }),
   }),
 });
 
 const pause = graphql(pauseMutation, {
-  props: ({mutate}) => ({
+  props: ({ mutate }) => ({
     pause: () => mutate(),
   }),
 });
 
 const stop = graphql(stopMutation, {
-  props: ({mutate}) => ({
+  props: ({ mutate }) => ({
     stop: () => mutate(),
   }),
 });
 
 export const withNowPlaying = graphql(mediaPlayerQuery, {
-  props: ({data: {error, mediaPlayer}}) => ({
+  props: ({ data: { error, mediaPlayer } }) => ({
     error,
     nowPlaying: mediaPlayer,
   }),
 });
 
 export const withLibrary = graphql(albumsQuery, {
-  options: {variables: {limit: 20, skip: 0}},
-  props: ({data, ownProps}) => ({
+  options: { variables: { limit: 20, skip: 0 } },
+  props: ({ data, ownProps }) => ({
     content: data.library && data.library.map(identifyCategory),
     isLoading: ownProps.isLoading || data.loading,
     refetch: data.refetch,
@@ -83,11 +80,11 @@ export const withPlaylist = graphql(albumQuery, {
       id: ownProps.id,
     },
   }),
-  props: ({data: {error, playlist}}) => ({
+  props: ({ data: { error, playlist } }) => ({
     error,
     content: playlist,
   }),
-  skip: ({id}) => !id,
+  skip: ({ id }) => !id,
 });
 
 export const withMediaPlayerActions = compose(play, pause, shuffle, repeat, setNowPlaying, stop);

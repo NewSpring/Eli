@@ -1,8 +1,8 @@
-import {track, events, categories} from '@utils/analytics';
+import { track, events, categories } from '@utils/analytics';
 import mediaPlayerQuery from './mediaPlayerQuery';
 
-export function play(result, variables, {cache}) {
-  const {mediaPlayer: state} = cache.readQuery({
+export function play(result, variables, { cache }) {
+  const { mediaPlayer: state } = cache.readQuery({
     query: mediaPlayerQuery,
     variables,
   });
@@ -24,8 +24,8 @@ export function play(result, variables, {cache}) {
   return null;
 }
 
-export function nowPlaying(result, variables, {cache}) {
-  const {mediaPlayer: state} = cache.readQuery({
+export function nowPlaying(result, variables, { cache }) {
+  const { mediaPlayer: state } = cache.readQuery({
     query: mediaPlayerQuery,
     variables,
   });
@@ -50,13 +50,13 @@ export function nowPlaying(result, variables, {cache}) {
   return null;
 }
 
-export function shuffle(result, variables, {cache}) {
-  const {mediaPlayer: state} = cache.readQuery({
+export function shuffle(result, variables, { cache }) {
+  const { mediaPlayer: state } = cache.readQuery({
     query: mediaPlayerQuery,
     variables,
   });
 
-  let {isShuffling} = variables;
+  let { isShuffling } = variables;
 
   if (typeof isShuffling === 'undefined') {
     isShuffling = !state.isShuffling;
@@ -75,13 +75,13 @@ export function shuffle(result, variables, {cache}) {
   return null;
 }
 
-export function repeat(result, variables, {cache}) {
-  const {mediaPlayer: state} = cache.readQuery({
+export function repeat(result, variables, { cache }) {
+  const { mediaPlayer: state } = cache.readQuery({
     query: mediaPlayerQuery,
     variables,
   });
 
-  let {isRepeating} = variables;
+  let { isRepeating } = variables;
 
   if (typeof isRepeating === 'undefined') {
     isRepeating = !state.isRepeating;
@@ -100,8 +100,8 @@ export function repeat(result, variables, {cache}) {
   return null;
 }
 
-export function pause(result, variables, {cache}) {
-  const {mediaPlayer: state} = cache.readQuery({
+export function pause(result, variables, { cache }) {
+  const { mediaPlayer: state } = cache.readQuery({
     query: mediaPlayerQuery,
     variables,
   });
@@ -121,8 +121,8 @@ export function pause(result, variables, {cache}) {
   return null;
 }
 
-export function stop(result, variables, {cache}) {
-  const {mediaPlayer: state} = cache.readQuery({
+export function stop(result, variables, { cache }) {
+  const { mediaPlayer: state } = cache.readQuery({
     query: mediaPlayerQuery,
     variables,
   });

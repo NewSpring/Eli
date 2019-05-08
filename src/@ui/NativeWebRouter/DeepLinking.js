@@ -1,6 +1,6 @@
-import {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Linking} from 'react-native';
+import { Linking } from 'react-native';
 
 import linkingUri from '@utils/linkingUri';
 
@@ -23,7 +23,7 @@ class DeepLinking extends Component {
   };
 
   componentDidMount() {
-    Linking.getInitialURL().then((url) => this.push(url));
+    Linking.getInitialURL().then(url => this.push(url));
     Linking.addEventListener('url', this.handleChange);
   }
 
@@ -51,7 +51,7 @@ class DeepLinking extends Component {
     }
 
     if (!url.startsWith(linkingUri) && this.props.handleUniversalLink) {
-      this.props.handleUniversalLink({url});
+      this.props.handleUniversalLink({ url });
     } else if (pathname && pathname.length && pathname !== '/') {
       this.context.router.history.push(pathname);
     }

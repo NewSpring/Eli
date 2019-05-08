@@ -1,39 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {compose, pure, setPropTypes, defaultProps} from 'recompose';
-import {Platform} from 'react-native';
-import {startCase, toLower} from 'lodash';
+import {
+  compose, pure, setPropTypes, defaultProps,
+} from 'recompose';
+import { Platform } from 'react-native';
+import { startCase, toLower } from 'lodash';
 
-import {withIsLoading} from '@ui/isLoading';
+import { withIsLoading } from '@ui/isLoading';
 import styled from '@ui/styled';
-import Card, {CardContent} from '@ui/Card';
+import Card, { CardContent } from '@ui/Card';
 import SideBySideView from '@ui/SideBySideView';
 import FlexedView from '@ui/FlexedView';
-import {H5} from '@ui/typography';
+import { H5 } from '@ui/typography';
 import CategoryLabel from '@ui/CategoryLabel';
 import Icon from '@ui/Icon';
 import last4 from '@utils/last4';
-import {withTheme} from '@ui/theme';
+import { withTheme } from '@ui/theme';
 
 const enhance = compose(
-    setPropTypes({
-      title: PropTypes.string.isRequired,
-      isLoading: PropTypes.bool,
-      accountNumber: PropTypes.string,
-      accountType: PropTypes.string,
-      iconSize: PropTypes.number,
-    }),
-    defaultProps({
-      isLoading: false,
-      accountNumber: '',
-      accountType: 'creditCard',
-      iconSize: undefined,
-    }),
-    withIsLoading,
-    withTheme(({theme, ...otherProps}) => ({
-      iconSize: otherProps.iconSize || theme.helpers.rem(1),
-    })),
-    pure,
+  setPropTypes({
+    title: PropTypes.string.isRequired,
+    isLoading: PropTypes.bool,
+    accountNumber: PropTypes.string,
+    accountType: PropTypes.string,
+    iconSize: PropTypes.number,
+  }),
+  defaultProps({
+    isLoading: false,
+    accountNumber: '',
+    accountType: 'creditCard',
+    iconSize: undefined,
+  }),
+  withIsLoading,
+  withTheme(({ theme, ...otherProps }) => ({
+    iconSize: otherProps.iconSize || theme.helpers.rem(1),
+  })),
+  pure,
 );
 
 const HorizontalLayout = styled({
@@ -45,7 +47,7 @@ const LeftColumn = styled({
   flex: 1.66,
 })(CardContent);
 
-const RightColumn = styled(({theme}) => ({
+const RightColumn = styled(({ theme }) => ({
   paddingRight: theme.sizing.baseUnit,
   alignItems: 'flex-end',
   justifyContent: 'center',

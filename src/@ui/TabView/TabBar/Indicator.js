@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Animated} from 'react-native';
+import { Animated } from 'react-native';
 
 const wrapperStyles = {
   position: 'absolute',
@@ -16,17 +16,17 @@ const Indicator = ({
   indicatorColor: backgroundColor,
 }) => {
   const translateX = Animated.multiply(
-      position.interpolate({
-        inputRange: [0, navigationState.routes.length - 1],
-        outputRange: [0, navigationState.routes.length - 1],
-        extrapolate: 'clamp',
-      }),
-      width,
+    position.interpolate({
+      inputRange: [0, navigationState.routes.length - 1],
+      outputRange: [0, navigationState.routes.length - 1],
+      extrapolate: 'clamp',
+    }),
+    width,
   );
   return (
     <Animated.View
       style={{
-        width, backgroundColor, transform: [{translateX}], ...wrapperStyles,
+        width, backgroundColor, transform: [{ translateX }], ...wrapperStyles,
       }}
     />
   );
@@ -34,8 +34,8 @@ const Indicator = ({
 
 Indicator.propTypes = {
   width: PropTypes.number,
-  position: PropTypes.shape({interpolate: PropTypes.func}),
-  navigationState: PropTypes.shape({routes: PropTypes.array}),
+  position: PropTypes.shape({ interpolate: PropTypes.func }),
+  navigationState: PropTypes.shape({ routes: PropTypes.array }),
   indicatorColor: PropTypes.string,
 };
 

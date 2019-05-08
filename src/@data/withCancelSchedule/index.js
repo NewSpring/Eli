@@ -1,4 +1,4 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 export const MUTATION = gql`
@@ -17,8 +17,8 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    cancelSchedule: (id) => (mutate({
+  props: ({ mutate }) => ({
+    cancelSchedule: id => (mutate({
       refetchQueries: ['GivingDashboard', 'GetTransactions'],
       variables: {
         id,
@@ -26,4 +26,3 @@ export default graphql(MUTATION, {
     })),
   }),
 });
-

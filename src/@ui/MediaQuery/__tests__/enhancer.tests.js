@@ -1,11 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {View, Dimensions} from 'react-native';
+import { View, Dimensions } from 'react-native';
 import Providers from '@ui/TestProviders';
-import {DEFAULT_THEME} from '@ui/constants';
+import { DEFAULT_THEME } from '@ui/constants';
 import enhancer from '../enhancer';
 
-const TestHOC = (mock) => (Component) => {
+const TestHOC = mock => (Component) => {
   mock();
   return Component;
 };
@@ -20,9 +20,9 @@ describe('The mediaQuery enhancer', () => {
 
     const Component = enhancer(mediaQueryThatPasses, TestHOC(firstMock), TestHOC(secondMock))(View);
     const tree = renderer.create(
-        <Providers>
-          <Component />
-        </Providers>,
+      <Providers>
+        <Component />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
     expect(firstMock.mock.calls.length).toBe(1);
@@ -34,9 +34,9 @@ describe('The mediaQuery enhancer', () => {
 
     const Component = enhancer(mediaQueryThatFails, TestHOC(firstMock), TestHOC(secondMock))(View);
     const tree = renderer.create(
-        <Providers>
-          <Component />
-        </Providers>,
+      <Providers>
+        <Component />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
     expect(firstMock.mock.calls.length).toBe(0);
@@ -48,14 +48,14 @@ describe('The mediaQuery enhancer', () => {
     const firstMock = jest.fn();
 
     const Component = enhancer(
-        () => ({maxWidth: testWindow.width + 1}),
-        TestHOC(firstMock),
+      () => ({ maxWidth: testWindow.width + 1 }),
+      TestHOC(firstMock),
     )(View);
 
     const tree = renderer.create(
-        <Providers>
-          <Component />
-        </Providers>,
+      <Providers>
+        <Component />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
     expect(firstMock.mock.calls.length).toBe(1);
@@ -65,21 +65,21 @@ describe('The mediaQuery enhancer', () => {
     const firstMock = jest.fn();
 
     const Component = enhancer(
-        () => ({
-          maxWidth: testWindow.width + 1,
-          minWidth: testWindow.width - 1,
-          maxHeight: testWindow.height + 1,
-          minHeight: testWindow.height - 1,
-          minDeviceAspectRatio: (testWindow.width / testWindow.height) - 1,
-          maxDeviceAspectRatio: (testWindow.width / testWindow.height) + 1,
-        }),
-        TestHOC(firstMock),
+      () => ({
+        maxWidth: testWindow.width + 1,
+        minWidth: testWindow.width - 1,
+        maxHeight: testWindow.height + 1,
+        minHeight: testWindow.height - 1,
+        minDeviceAspectRatio: (testWindow.width / testWindow.height) - 1,
+        maxDeviceAspectRatio: (testWindow.width / testWindow.height) + 1,
+      }),
+      TestHOC(firstMock),
     )(View);
 
     const tree = renderer.create(
-        <Providers>
-          <Component />
-        </Providers>,
+      <Providers>
+        <Component />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
     expect(firstMock.mock.calls.length).toBe(1);
@@ -90,22 +90,22 @@ describe('The mediaQuery enhancer', () => {
     const secondMock = jest.fn();
 
     const Component = enhancer(
-        () => ({
-          maxWidth: testWindow.width - 1,
-          minWidth: testWindow.width + 1,
-          maxHeight: testWindow.height - 1,
-          minHeight: testWindow.height + 1,
-          minDeviceAspectRatio: (testWindow.width / testWindow.height) + 1,
-          maxDeviceAspectRatio: (testWindow.width / testWindow.height) - 1,
-        }),
-        TestHOC(firstMock),
-        TestHOC(secondMock),
+      () => ({
+        maxWidth: testWindow.width - 1,
+        minWidth: testWindow.width + 1,
+        maxHeight: testWindow.height - 1,
+        minHeight: testWindow.height + 1,
+        minDeviceAspectRatio: (testWindow.width / testWindow.height) + 1,
+        maxDeviceAspectRatio: (testWindow.width / testWindow.height) - 1,
+      }),
+      TestHOC(firstMock),
+      TestHOC(secondMock),
     )(View);
 
     const tree = renderer.create(
-        <Providers>
-          <Component />
-        </Providers>,
+      <Providers>
+        <Component />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
     expect(firstMock.mock.calls.length).toBe(0);
@@ -115,7 +115,7 @@ describe('The mediaQuery enhancer', () => {
   it('passes in breakpoints to the test function', () => {
     const firstMock = jest.fn();
 
-    const testFunction = ({height, width, ...breakpoints}) => {
+    const testFunction = ({ height, width, ...breakpoints }) => {
       expect(breakpoints).toEqual(DEFAULT_THEME.breakpoints);
       return true;
     };
@@ -123,9 +123,9 @@ describe('The mediaQuery enhancer', () => {
     const Component = enhancer(testFunction, TestHOC(firstMock))(View);
 
     const tree = renderer.create(
-        <Providers>
-          <Component />
-        </Providers>,
+      <Providers>
+        <Component />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
     expect(firstMock.mock.calls.length).toBe(1);
@@ -134,7 +134,7 @@ describe('The mediaQuery enhancer', () => {
   it('passes in window width and height to the test function', () => {
     const firstMock = jest.fn();
 
-    const testFunction = ({height, width}) => {
+    const testFunction = ({ height, width }) => {
       expect(width).toBeGreaterThan(0);
       expect(height).toBeGreaterThan(0);
       return true;
@@ -143,9 +143,9 @@ describe('The mediaQuery enhancer', () => {
     const Component = enhancer(testFunction, TestHOC(firstMock))(View);
 
     const tree = renderer.create(
-        <Providers>
-          <Component />
-        </Providers>,
+      <Providers>
+        <Component />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
     expect(firstMock.mock.calls.length).toBe(1);

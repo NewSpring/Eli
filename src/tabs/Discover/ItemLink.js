@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {View, StyleSheet} from 'react-native';
-import {withRouter} from '@ui/NativeWebRouter';
+import { View, StyleSheet } from 'react-native';
+import { withRouter } from '@ui/NativeWebRouter';
 import ActivityIndicator from '@ui/ActivityIndicator';
 import Touchable from '@ui/Touchable';
 import getAppPathForUrl from '@utils/getAppPathForUrl';
 import WebBrowser from '@ui/WebBrowser';
 import styled from '@ui/styled';
 
-const Overlay = styled(({theme}) => ({
+const Overlay = styled(({ theme }) => ({
   ...StyleSheet.absoluteFillObject,
   backgroundColor: theme.colors.background.overlay,
 }))(View);
@@ -27,9 +27,9 @@ class ItemLink extends Component {
   };
 
   handlePress = async () => {
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
     const inAppPath = await getAppPathForUrl(this.props.to);
-    this.setState({isLoading: false});
+    this.setState({ isLoading: false });
     if (inAppPath) {
       this.props.history.push(inAppPath);
     } else {

@@ -1,15 +1,15 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import KeyboardAwareScrollView from '@ui/KeyboardAwareScrollView';
 import PropTypes from 'prop-types';
-import {compose, withProps} from 'recompose';
-import {debounce} from 'lodash';
-import {parse, stringify} from '@utils/queryString';
-import {withRouter} from '@ui/NativeWebRouter';
+import { compose, withProps } from 'recompose';
+import { debounce } from 'lodash';
+import { parse, stringify } from '@utils/queryString';
+import { withRouter } from '@ui/NativeWebRouter';
 import BackgroundView from '@ui/BackgroundView';
 import PaddedView from '@ui/PaddedView';
 import Header from '@ui/Header';
-import {H3} from '@ui/typography';
-import {Text as TextInput} from '@ui/inputs';
+import { H3 } from '@ui/typography';
+import { Text as TextInput } from '@ui/inputs';
 import Icon from '@ui/Icon';
 import styled from '@ui/styled';
 import withCampuses from '@data/withCampuses';
@@ -18,23 +18,23 @@ import ActivityIndicator from '@ui/ActivityIndicator';
 
 import CampusFeed from './CampusFeed';
 
-const Title = styled({textAlign: 'center'})(H3);
+const Title = styled({ textAlign: 'center' })(H3);
 
 const enhance = compose(
-    withRouter,
-    withProps(({location: {search = ''} = {}}) => ({
-      origin: parse(search).q,
-    })),
-    withCampuses,
-    withProps(({campuses = []} = {}) => ({
-      destinations: campuses.map((campus) => (
-        `${campus.location.street1} ${campus.location.zip}`
-      )),
-    })),
-    withGeoLocation,
+  withRouter,
+  withProps(({ location: { search = '' } = {} }) => ({
+    origin: parse(search).q,
+  })),
+  withCampuses,
+  withProps(({ campuses = [] } = {}) => ({
+    destinations: campuses.map(campus => (
+      `${campus.location.street1} ${campus.location.zip}`
+    )),
+  })),
+  withGeoLocation,
 );
 
-const Form = styled(({theme}) => ({
+const Form = styled(({ theme }) => ({
   backgroundColor: theme.colors.background.paper,
   paddingVertical: theme.sizing.baseUnit * 2,
 }))(PaddedView);
@@ -61,11 +61,11 @@ class Locations extends PureComponent {
   };
 
   handleSearch = (searchText) => {
-    if (searchText !== this.state.searchText) this.setState({searchText});
+    if (searchText !== this.state.searchText) this.setState({ searchText });
   }
 
   update = () => {
-    this.props.history.replace(`${this.props.location.pathname}?${stringify({q: this.state.searchText})}`);
+    this.props.history.replace(`${this.props.location.pathname}?${stringify({ q: this.state.searchText })}`);
   }
 
   debouncedUpdate = debounce(this.update, 500);

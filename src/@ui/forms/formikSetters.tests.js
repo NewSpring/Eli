@@ -1,8 +1,8 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 import renderer from 'react-test-renderer';
 
-import {withFieldValueHandler, withFieldTouchedHandler} from './formikSetters';
+import { withFieldValueHandler, withFieldTouchedHandler } from './formikSetters';
 
 describe('The withFieldValueHandler HOC', () => {
   it('passes in a createFieldValueHandler function', () => {
@@ -12,7 +12,7 @@ describe('The withFieldValueHandler HOC', () => {
   });
   it('to create a handler that calls setFieldValue', () => {
     const setter = jest.fn();
-    const TestComponent = ({createFieldValueHandler}) => {
+    const TestComponent = ({ createFieldValueHandler }) => {
       expect(createFieldValueHandler).toBeDefined();
       const handler = createFieldValueHandler('testField');
       handler('someValue');
@@ -25,7 +25,7 @@ describe('The withFieldValueHandler HOC', () => {
   it('allows you to pass in a transform function', () => {
     const setter = jest.fn();
     const transform = jest.fn().mockReturnValue('transform');
-    const TestComponent = ({createFieldValueHandler}) => {
+    const TestComponent = ({ createFieldValueHandler }) => {
       expect(createFieldValueHandler).toBeDefined();
       const handler = createFieldValueHandler('testField', transform);
       handler('someValue');
@@ -48,7 +48,7 @@ describe('The withFieldTouchedHandler HOC', () => {
   });
   it('to create a handler that calls setFieldTouched', () => {
     const setter = jest.fn();
-    const TestComponent = ({createFieldTouchedHandler}) => {
+    const TestComponent = ({ createFieldTouchedHandler }) => {
       expect(createFieldTouchedHandler).toBeDefined();
       const handler = createFieldTouchedHandler('testField');
       handler('someValue');

@@ -1,11 +1,11 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose, pure, setPropTypes} from 'recompose';
+import { compose, pure, setPropTypes } from 'recompose';
 
 import styled from '@ui/styled';
 
-const TiledFeed = styled(({theme}) => ({
+const TiledFeed = styled(({ theme }) => ({
   flexDirection: 'row',
   flexWrap: 'wrap',
   paddingVertical: theme.sizing.baseUnit / 2,
@@ -13,17 +13,17 @@ const TiledFeed = styled(({theme}) => ({
 }))(View);
 
 const enhance = compose(
-    pure,
-    setPropTypes({
+  pure,
+  setPropTypes({
     data: PropTypes.array, // eslint-disable-line
-      renderItem: PropTypes.func,
-    }),
+    renderItem: PropTypes.func,
+  }),
 );
 
 const itemRenderer = (data, renderItem) => (
   data.map((item, index) => (
     <View key={item.id}>
-      {renderItem({item, index})}
+      {renderItem({ item, index })}
     </View>
   ))
 );

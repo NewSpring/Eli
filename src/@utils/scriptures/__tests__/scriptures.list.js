@@ -19,8 +19,8 @@ it('returns a blank array if no scriptures and no commas', () => {
 it('returns array of scripture strings', () => {
   const result = scriptureList({
     scripture: [
-      {book: 'Job', passage: '2'},
-      {book: 'Job', passage: '3'},
+      { book: 'Job', passage: '2' },
+      { book: 'Job', passage: '3' },
     ],
     commas: false,
   });
@@ -33,8 +33,8 @@ it('returns array of scripture strings', () => {
 it('returns a comma separated string of scriptures', () => {
   const result = scriptureList({
     scripture: [
-      {book: 'Job', passage: '2'},
-      {book: 'Job', passage: '3'},
+      { book: 'Job', passage: '2' },
+      { book: 'Job', passage: '3' },
     ],
   });
   expect(result).toBe('Job 2, Job 3');

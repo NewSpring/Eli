@@ -4,7 +4,7 @@
 // elements in-pure, and so they also re-render. This causes glaring
 // performance issue. This exposes a higher-order function to provide
 // pure functions to your form's input components.
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 const createSetter = (getSetter, name) => (WrapperComponent) => {
   class FormikSetter extends Component {
@@ -12,13 +12,13 @@ const createSetter = (getSetter, name) => (WrapperComponent) => {
 
     getSetter = (fieldName, ...otherArgs) => {
       if (!this.setters[fieldName]) {
-        this.setters[fieldName] = getSetter(fieldName, {...this.props}, ...otherArgs);
+        this.setters[fieldName] = getSetter(fieldName, { ...this.props }, ...otherArgs);
       }
       return this.setters[fieldName];
     }
 
     render() {
-      const setterProp = {[name]: this.getSetter};
+      const setterProp = { [name]: this.getSetter };
       return <WrapperComponent {...this.props} {...setterProp} />;
     }
   }
@@ -35,7 +35,7 @@ const createSetter = (getSetter, name) => (WrapperComponent) => {
     <Input label="Email" onChangeText={createFieldValueHandler('email')} />
   ));
  */
-const withFieldValueHandler = createSetter((fieldName, {setFieldValue}, transform) => (value) => {
+const withFieldValueHandler = createSetter((fieldName, { setFieldValue }, transform) => (value) => {
   let valueToSet = value;
   if (transform) valueToSet = transform(valueToSet);
   return setFieldValue(fieldName, valueToSet);
@@ -51,8 +51,8 @@ const withFieldValueHandler = createSetter((fieldName, {setFieldValue}, transfor
     <Input label="Email" onBlur={createFieldTouchedHandler('email')} />
   ));
  */
-const withFieldTouchedHandler = createSetter((fieldName, {setFieldTouched}) => () => (
+const withFieldTouchedHandler = createSetter((fieldName, { setFieldTouched }) => () => (
   setFieldTouched(fieldName, true)
 ), 'createFieldTouchedHandler');
 
-export {withFieldValueHandler, withFieldTouchedHandler};
+export { withFieldValueHandler, withFieldTouchedHandler };

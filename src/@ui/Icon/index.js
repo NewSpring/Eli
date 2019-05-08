@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {compose, pure, setPropTypes} from 'recompose';
-import {flow, camelCase, upperFirst, kebabCase} from 'lodash';
+import { compose, pure, setPropTypes } from 'recompose';
+import {
+  flow, camelCase, upperFirst, kebabCase,
+} from 'lodash';
 
 import Placeholder from '@ui/Placeholder';
 import * as Icons from './icons';
 
-const pascalCase = (string) => flow(camelCase, upperFirst)(string);
+const pascalCase = string => flow(camelCase, upperFirst)(string);
 
 // Convenience component to render icons based on the icon's string name, like:
 // <Icon name="skip-next" {...allOtherPropsPassedToComponent} />
@@ -16,13 +18,13 @@ const pascalCase = (string) => flow(camelCase, upperFirst)(string);
 // <SkipNext />
 
 const enhance = compose(
-    pure,
-    setPropTypes({
-      name: PropTypes.oneOf(Object.keys(Icons).map(kebabCase)).isRequired,
-      size: PropTypes.number,
-      fill: PropTypes.string,
-      isLoading: PropTypes.bool,
-    }),
+  pure,
+  setPropTypes({
+    name: PropTypes.oneOf(Object.keys(Icons).map(kebabCase)).isRequired,
+    size: PropTypes.number,
+    fill: PropTypes.string,
+    isLoading: PropTypes.bool,
+  }),
 );
 
 const Icon = enhance(({

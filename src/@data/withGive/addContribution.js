@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 export const MUTATION = gql`
   mutation addContribution($id: String, $amount: Number, $name: String) {
@@ -8,7 +8,7 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    addContribution: (variables) => (mutate({variables})),
+  props: ({ mutate }) => ({
+    addContribution: variables => (mutate({ variables })),
   }),
 });

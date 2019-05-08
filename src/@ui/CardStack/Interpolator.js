@@ -1,7 +1,9 @@
 import React from 'react';
-import {StyleSheet, Animated} from 'react-native';
+import { StyleSheet, Animated } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose, mapProps, onlyUpdateForKeys, setPropTypes} from 'recompose';
+import {
+  compose, mapProps, onlyUpdateForKeys, setPropTypes,
+} from 'recompose';
 
 const interpolate = ({
   animatedPosition, index, width, height, direction,
@@ -27,7 +29,7 @@ const interpolate = ({
       outputRange: [width, 0, width * -0.3],
     });
 
-    style.transform = [{translateX}];
+    style.transform = [{ translateX }];
     style.opacity = animatedPosition.interpolate({
       // This is similar to translateX above, except there are extra "keyframes" at index - 0.99 and
       // index + 0.99 to finer tune the transition (and better emulate what's seen on native OS).
@@ -48,7 +50,7 @@ const interpolate = ({
       outputRange: [1, 0.95],
       extrapolateLeft: 'clamp',
     });
-    style.transform = [{translateY}, {scale}];
+    style.transform = [{ translateY }, { scale }];
 
     style.opacity = animatedPosition.interpolate({
       inputRange: [index, index + 1],
@@ -61,30 +63,30 @@ const interpolate = ({
 };
 
 const enhance = compose(
-    // optimization: prevent unnecessary re-renders when width or height changes
-    // when we're animating in the opposite axis
-    mapProps(({
-      width, height, direction, ...otherProps
-    }) => ({
-      width: direction === 'horizontal' ? width : null,
-      height: direction === 'vertical' ? height : null,
-      direction,
-      ...otherProps,
-    })),
-    onlyUpdateForKeys(['direction', 'index', 'width', 'height', 'children']),
-    setPropTypes({
-      direction: PropTypes.string,
-      index: PropTypes.number,
-      animatedPosition: PropTypes.shape({
-        interpolate: PropTypes.func,
-      }),
-      width: PropTypes.number,
-      height: PropTypes.number,
-      children: PropTypes.node,
+  // optimization: prevent unnecessary re-renders when width or height changes
+  // when we're animating in the opposite axis
+  mapProps(({
+    width, height, direction, ...otherProps
+  }) => ({
+    width: direction === 'horizontal' ? width : null,
+    height: direction === 'vertical' ? height : null,
+    direction,
+    ...otherProps,
+  })),
+  onlyUpdateForKeys(['direction', 'index', 'width', 'height', 'children']),
+  setPropTypes({
+    direction: PropTypes.string,
+    index: PropTypes.number,
+    animatedPosition: PropTypes.shape({
+      interpolate: PropTypes.func,
     }),
+    width: PropTypes.number,
+    height: PropTypes.number,
+    children: PropTypes.node,
+  }),
 );
 
-const Interpolator = enhance((props) => (
+const Interpolator = enhance(props => (
   <Animated.View style={[StyleSheet.absoluteFill, interpolate(props)]}>
     {props.children}
   </Animated.View>

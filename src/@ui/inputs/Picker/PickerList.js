@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Modal, StyleSheet, View, Picker as NativePicker} from 'react-native';
+import {
+  Modal, StyleSheet, View, Picker as NativePicker,
+} from 'react-native';
 import styled from '@ui/styled';
-import {ButtonLink} from '@ui/Button';
+import { ButtonLink } from '@ui/Button';
 
-const StyledPicker = styled(({theme}) => ({
+const StyledPicker = styled(({ theme }) => ({
   borderTopWidth: StyleSheet.hairlineWidth,
   borderTopColor: theme.colors.background.inactive,
 }), 'Inputs.Picker.List')(NativePicker);
 
-const PickerKeyboardView = styled(({theme}) => ({
+const PickerKeyboardView = styled(({ theme }) => ({
   backgroundColor: theme.colors.background.paper,
   position: 'absolute',
   bottom: 0,
@@ -19,7 +21,7 @@ const PickerKeyboardView = styled(({theme}) => ({
   borderTopWidth: StyleSheet.hairlineWidth,
 }), 'Inputs.Picker.List.Keyboard')(View);
 
-const Toolbar = styled(({theme}) => ({
+const Toolbar = styled(({ theme }) => ({
   alignItems: 'flex-end',
   padding: theme.sizing.baseUnit / 2,
   backgroundColor: theme.colors.background.accent,

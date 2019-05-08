@@ -1,9 +1,9 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import Client from '@data/Client';
-import {QUERY as contributionsQuery} from './withContributions';
+import { QUERY as contributionsQuery } from './withContributions';
 import getOrderDetails from './selectors/getOrderDetails';
-import {INITIAL_STATE} from './resolvers/queries';
+import { INITIAL_STATE } from './resolvers/queries';
 
 export const MUTATION = gql`
   mutation order($data: String!, $id: ID, $instant: Boolean) {
@@ -17,9 +17,9 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
+  props: ({ mutate }) => ({
     createSavePaymentOrder() {
-      const {contributions} = Client.readQuery({
+      const { contributions } = Client.readQuery({
         query: contributionsQuery,
       });
 

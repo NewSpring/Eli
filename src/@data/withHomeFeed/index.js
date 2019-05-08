@@ -1,4 +1,4 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import fetchMoreResolver from '@data/utils/fetchMoreResolver';
 import identifyCategory from '@data/utils/identifyCategory';
 import homeFeedQuery from './homeFeedQuery';
@@ -12,7 +12,7 @@ export default graphql(homeFeedQuery, {
       cache: true,
     },
   }),
-  props: ({data, ownProps}) => ({
+  props: ({ data, ownProps }) => ({
     // NOTE: if we need to transform feed with more than one identity function
     // we should use the transducer pattern instead
     content: data.feed && data.feed.map(identifyCategory),

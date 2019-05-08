@@ -1,4 +1,4 @@
-const queryMatcher = ({width, height}) => (selector, query) => {
+const queryMatcher = ({ width, height }) => (selector, query) => {
   switch (query) {
     case 'maxWidth': return width < selector;
     case 'minWidth': return width > selector;

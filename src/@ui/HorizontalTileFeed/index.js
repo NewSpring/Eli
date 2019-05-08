@@ -1,10 +1,12 @@
 import React from 'react';
-import {TouchableWithoutFeedback, Dimensions} from 'react-native';
+import { TouchableWithoutFeedback, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose, pure, branch, withProps, setPropTypes, defaultProps} from 'recompose';
+import {
+  compose, pure, branch, withProps, setPropTypes, defaultProps,
+} from 'recompose';
 
-import {Link} from '@ui/NativeWebRouter';
-import {getLinkPath} from '@utils/content';
+import { Link } from '@ui/NativeWebRouter';
+import { getLinkPath } from '@utils/content';
 import CardTile from '@ui/CardTile';
 
 import TileFeed from './TileFeed';
@@ -34,7 +36,7 @@ const generateLoadingStateData = (numberOfItems = 1) => {
 };
 
 const defaultItemRenderer = (
-    {item, showTileMeta, index}, // eslint-disable-line react/prop-types
+  { item, showTileMeta, index }, // eslint-disable-line react/prop-types
 ) => (
   <Link to={getLinkPath(item)} component={TouchableWithoutFeedback}>
     <CardTile
@@ -49,32 +51,32 @@ const defaultItemRenderer = (
 );
 
 const enhance = compose(
-    setPropTypes({
-      isLoading: PropTypes.bool,
-      content: PropTypes.array,
-      showTileMeta: PropTypes.bool,
-      refetch: PropTypes.func,
-      fetchMore: PropTypes.func,
-      renderItem: PropTypes.func,
+  setPropTypes({
+    isLoading: PropTypes.bool,
+    content: PropTypes.array,
+    showTileMeta: PropTypes.bool,
+    refetch: PropTypes.func,
+    fetchMore: PropTypes.func,
+    renderItem: PropTypes.func,
+  }),
+  defaultProps({
+    keyExtractor: item => item.id,
+    content: [],
+    showTileMeta: false,
+    isLoading: false,
+  }),
+  branch(
+    ({ isLoading, content }) => isLoading && !content.length,
+    withProps({
+      content: generateLoadingStateData(5),
+      fetchMore: false,
     }),
-    defaultProps({
-      keyExtractor: (item) => item.id,
-      content: [],
-      showTileMeta: false,
-      isLoading: false,
-    }),
-    branch(
-        ({isLoading, content}) => isLoading && !content.length,
-        withProps({
-          content: generateLoadingStateData(5),
-          fetchMore: false,
-        }),
-    ),
-    pure,
+  ),
+  pure,
 );
 
 const getTileWidth = () => {
-  const {width} = Dimensions.get('window');
+  const { width } = Dimensions.get('window');
   return width * 0.8; // 80% of width
 };
 
@@ -82,7 +84,7 @@ const HorizontalTileFeed = enhance(({
   content, isLoading, showTileMeta, ...otherProps
 }) => (
   <TileFeed
-    renderItem={(renderItemProps) => defaultItemRenderer({...renderItemProps, showTileMeta})}
+    renderItem={renderItemProps => defaultItemRenderer({ ...renderItemProps, showTileMeta })}
     data={content}
     horizontal
     initialScrollIndex={0}
@@ -95,8 +97,8 @@ const HorizontalTileFeed = enhance(({
      * that padding on each swipe. TODO: find better shadow clipping fix that simplifies this math.
      */
     snapToInterval={getTileWidth() - 10} // passed down to rendered ScrollView.
-    snapToAlignment={'start'} // passed down to rendered ScrollView
-    decelerationRate={'fast'} // passed down to rendered ScrollView
+    snapToAlignment="start" // passed down to rendered ScrollView
+    decelerationRate="fast" // passed down to rendered ScrollView
     {...otherProps}
   />
 ));

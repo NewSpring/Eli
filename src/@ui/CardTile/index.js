@@ -1,49 +1,51 @@
 import React from 'react';
-import {Platform, View, StyleSheet} from 'react-native';
+import { Platform, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose, pure, setPropTypes, defaultProps} from 'recompose';
-import {startCase, toLower} from 'lodash';
+import {
+  compose, pure, setPropTypes, defaultProps,
+} from 'recompose';
+import { startCase, toLower } from 'lodash';
 
 import Placeholder from '@ui/Placeholder';
-import {withIsLoading} from '@ui/isLoading';
-import {withTheme, withThemeMixin} from '@ui/theme';
+import { withIsLoading } from '@ui/isLoading';
+import { withTheme, withThemeMixin } from '@ui/theme';
 import styled from '@ui/styled';
-import {H4, H6, H7} from '@ui/typography';
-import {CardContent, CardActions} from '@ui/Card';
+import { H4, H6, H7 } from '@ui/typography';
+import { CardContent, CardActions } from '@ui/Card';
 import CategoryLabel from '@ui/CategoryLabel';
 import relativeTime from '@utils/relativeTime';
 
 const enhance = compose(
-    setPropTypes({
-      title: PropTypes.string,
-      number: PropTypes.number,
-      showDetails: PropTypes.bool,
-      byLine: PropTypes.string,
-      date: PropTypes.string,
+  setPropTypes({
+    title: PropTypes.string,
+    number: PropTypes.number,
+    showDetails: PropTypes.bool,
+    byLine: PropTypes.string,
+    date: PropTypes.string,
     style: PropTypes.any, // eslint-disable-line
-      isLoading: PropTypes.bool,
-    }),
-    defaultProps({
-      showDetails: false,
-    }),
-    withIsLoading,
-    withThemeMixin(({theme}) => ({
-      type: 'light',
-      colors: {
-        background: {
-          inactive: theme.colors.lightSecondary, // TODO: sort out correct inactive color value.
-        },
+    isLoading: PropTypes.bool,
+  }),
+  defaultProps({
+    showDetails: false,
+  }),
+  withIsLoading,
+  withThemeMixin(({ theme }) => ({
+    type: 'light',
+    colors: {
+      background: {
+        inactive: theme.colors.lightSecondary, // TODO: sort out correct inactive color value.
       },
-    })),
-    withTheme(),
-    pure,
+    },
+  })),
+  withTheme(),
+  pure,
 );
 
-const TileSpacer = styled(({theme}) => ({
+const TileSpacer = styled(({ theme }) => ({
   padding: theme.sizing.baseUnit / 2,
 }))(View);
 
-const Tile = styled(({theme}) => ({
+const Tile = styled(({ theme }) => ({
   height: '100%',
   aspectRatio: 1,
   borderRadius: theme.sizing.borderRadius,
@@ -60,7 +62,7 @@ const Tile = styled(({theme}) => ({
   }),
 }))(View);
 
-const OverflowFix = styled(({theme}) => ({
+const OverflowFix = styled(({ theme }) => ({
   ...StyleSheet.absoluteFillObject,
   borderRadius: theme.sizing.borderRadius,
   overflow: 'hidden',
@@ -71,7 +73,7 @@ const WebAspectRatioFix = styled({
   ...StyleSheet.absoluteFillObject,
 })(View);
 
-const TileNumber = styled(({theme, size}) => ({
+const TileNumber = styled(({ theme, size }) => ({
   position: 'absolute',
   top: 0,
   left: 0,
@@ -130,7 +132,7 @@ const CardTile = enhance(({
             <CardActions>
               <CategoryLabel
                 label={startCase(toLower(byLine))}
-                icon={'video'}
+                icon="video"
                 isLoading={isLoading}
                 withFlex
               />

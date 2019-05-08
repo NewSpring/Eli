@@ -1,22 +1,22 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 import {
   withContext,
   compose,
   withState,
 } from 'recompose';
-import TabBar, {Layout, Link} from '@ui/TabBar';
+import TabBar, { Layout, Link } from '@ui/TabBar';
 import BackgroundView from '@ui/BackgroundView';
 import withoutTabBar from './withoutTabBar';
 
 const withTabBarContextProvider = compose(
-    withState('hideTabBar', 'setHideTabBar'),
-    withContext({
-      setHideTabBar: PropTypes.func,
-    }, ({setHideTabBar} = {}) => ({
-      setHideTabBar,
-    })),
+  withState('hideTabBar', 'setHideTabBar'),
+  withContext({
+    setHideTabBar: PropTypes.func,
+  }, ({ setHideTabBar } = {}) => ({
+    setHideTabBar,
+  })),
 );
 
 class TabBarLayout extends PureComponent {
@@ -47,5 +47,5 @@ class TabBarLayout extends PureComponent {
   }
 }
 
-export {withoutTabBar};
+export { withoutTabBar };
 export default withTabBarContextProvider(TabBarLayout);

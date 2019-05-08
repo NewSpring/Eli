@@ -136,9 +136,9 @@ export const alpha = {
 // base colors above. For example, notice below how `shadows` gets the shadowColor from
 // `colors.shadows`, which is provided by the active theme type.
 export const type = 'light';
-export {types};
+export { types };
 
-export const shadows = ({colors: themeColors}) => ({
+export const shadows = ({ colors: themeColors }) => ({
   default: {
     ios: {
       shadowColor: themeColors.shadows.default,
@@ -158,7 +158,7 @@ export const shadows = ({colors: themeColors}) => ({
   },
 });
 
-export const buttons = ({colors: themeColors}) => ({
+export const buttons = ({ colors: themeColors }) => ({
   default: {
     fill: themeColors.action.default,
     accent: themeColors.text.primary,
@@ -190,12 +190,12 @@ export const buttons = ({colors: themeColors}) => ({
 // the current theme, and returns a function that gets injected into the theme.
 export const helpers = {};
 
-helpers.rem = (theme) => (value) => {
+helpers.rem = theme => (value) => {
   const fontSize = value * theme.typography.baseFontSize;
   return +fontSize.toFixed(2);
 };
 
-helpers.verticalRhythm = (theme) => (fontSize, relativeValue) => {
+helpers.verticalRhythm = theme => (fontSize, relativeValue) => {
   const verticalRatio = theme.typography.baseLineHeight / theme.typography.baseFontSize;
   return helpers.rem(theme)(verticalRatio * (fontSize * relativeValue));
 };

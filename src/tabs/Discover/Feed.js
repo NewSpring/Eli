@@ -1,13 +1,13 @@
 import React from 'react';
-import {compose, withProps} from 'recompose';
-import {View} from 'react-native';
-import FeedView, {defaultFeedItemRenderer} from '@ui/FeedView';
-import {H5, BodyText} from '@ui/typography';
-import {ButtonLink} from '@ui/Button';
-import Card, {CardContent} from '@ui/Card';
+import { compose, withProps } from 'recompose';
+import { View } from 'react-native';
+import FeedView, { defaultFeedItemRenderer } from '@ui/FeedView';
+import { H5, BodyText } from '@ui/typography';
+import { ButtonLink } from '@ui/Button';
+import Card, { CardContent } from '@ui/Card';
 import FeedItemCard from '@ui/FeedItemCard';
 import ThumbnailCard from '@ui/ThumbnailCard';
-import {withRecentLikes} from '@data/likes';
+import { withRecentLikes } from '@data/likes';
 import withPromotions from '@data/withPromotions';
 import styled from '@ui/styled';
 import WebBrowser from '@ui/WebBrowser';
@@ -17,38 +17,38 @@ import ItemLink from './ItemLink';
 const FeaturedCard = defaultFeedItemRenderer(FeedItemCard, ItemLink);
 
 const RecentLikes = compose(
-    withRecentLikes,
-    withProps({
-      numColumns: 1,
-      ItemComponent: ThumbnailCard,
-    }),
+  withRecentLikes,
+  withProps({
+    numColumns: 1,
+    ItemComponent: ThumbnailCard,
+  }),
 )(FeedView);
 
-const Title = styled(({theme}) => ({
+const Title = styled(({ theme }) => ({
   paddingHorizontal: theme.sizing.baseUnit / 2,
   paddingTop: theme.sizing.baseUnit,
   paddingBottom: theme.sizing.baseUnit / 2,
   textAlign: 'center',
 }))(H5);
 
-const FooterCard = styled(({theme}) => ({
+const FooterCard = styled(({ theme }) => ({
   marginVertical: theme.sizing.baseUnit,
 }))(Card);
 
 const enhance = compose(
-    withPromotions,
+  withPromotions,
 );
 
 const Feed = enhance(({
   content = [],
 }) => {
   const featured = (content && content
-      .filter((x) => (x.status.toLowerCase() === 'featured'))) || [];
+    .filter(x => (x.status.toLowerCase() === 'featured'))) || [];
 
   const open = (content && content
-      .filter((x) => (x.status.toLowerCase() === 'open'))) || [];
+    .filter(x => (x.status.toLowerCase() === 'open'))) || [];
 
-  const featuredCards = featured.map((item) => (
+  const featuredCards = featured.map(item => (
     <FeaturedCard key={item.id} item={item} />
   ));
 
@@ -69,7 +69,8 @@ const Feed = enhance(({
         <FooterCard>
           <CardContent>
             <BodyText>
-              Are you looking for{' '}
+              Are you looking for
+              {' '}
               <BodyText>
                 {open.map((x, i) => {
                   let delimeter = ', ';
@@ -87,7 +88,8 @@ const Feed = enhance(({
                       {delimeter}
                     </BodyText>
                   );
-                })}?
+                })}
+?
               </BodyText>
             </BodyText>
           </CardContent>

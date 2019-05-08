@@ -1,7 +1,7 @@
 import PaddedView from '@ui/PaddedView';
 import styled from '@ui/styled';
 
-const Actions = styled(({theme}) => ({
+const Actions = styled(({ theme }) => ({
   flexWrap: 'wrap',
   flexDirection: 'row',
   alignItems: 'center',

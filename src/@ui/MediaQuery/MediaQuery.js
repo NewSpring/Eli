@@ -1,10 +1,10 @@
-import {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
-import {get, every} from 'lodash';
-import {pick, mapValues, flow} from 'lodash/fp';
-import {compose} from 'recompose';
+import { get, every } from 'lodash';
+import { pick, mapValues, flow } from 'lodash/fp';
+import { compose } from 'recompose';
 
-import {withTheme} from '@ui/theme';
+import { withTheme } from '@ui/theme';
 import withWindow from './withWindow';
 import queryMatcher from './queryMatcher';
 
@@ -45,12 +45,12 @@ class MediaQuery extends Component {
 
   get shouldBeVisible() {
     const mediaQuery = flow(
-        pick(Object.keys(supportedMediaQueryTypes)),
-        mapValues((breakpoint) => get(this.props.breakpoints, breakpoint)),
+      pick(Object.keys(supportedMediaQueryTypes)),
+      mapValues(breakpoint => get(this.props.breakpoints, breakpoint)),
     )(this.props);
 
-    const {window: {width, height}} = this.props; // destructuring just to make below line clean
-    return every(mediaQuery, queryMatcher({width, height}));
+    const { window: { width, height } } = this.props; // destructuring just to make below line clean
+    return every(mediaQuery, queryMatcher({ width, height }));
   }
 
   render() {
@@ -59,6 +59,6 @@ class MediaQuery extends Component {
 }
 
 export default compose(
-    withTheme(({theme: {breakpoints} = {}} = {}) => ({breakpoints})),
-    withWindow,
+  withTheme(({ theme: { breakpoints } = {} } = {}) => ({ breakpoints })),
+  withWindow,
 )(MediaQuery);

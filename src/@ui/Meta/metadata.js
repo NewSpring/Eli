@@ -17,9 +17,9 @@ export default function generateData(newData = {}) {
     };
   }
 
-  const data = {...defaultData, ...newData};
+  const data = { ...defaultData, ...newData };
 
-  const {description, title, image} = data;
+  const { description, title, image } = data;
   delete data.description;
   delete data.title;
   delete data.image;

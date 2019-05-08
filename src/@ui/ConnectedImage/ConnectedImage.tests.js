@@ -1,39 +1,39 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {ThemeProvider} from '@ui/theme';
+import { ThemeProvider } from '@ui/theme';
 
 import ConnectedImage, {
   getCachedSources,
   updateCache,
-} from './';
+} from '.';
 
 describe('the ConnectedImage component', () => {
   it('should render immediately with a network image with a known width and height', () => {
     const tree = renderer.create(
-        <ThemeProvider>
-          <ConnectedImage
-            source={{
-              uri: 'https://placeholdit.co/i/150x150?bg=eeeeee&fc=577084',
-              width: 150,
-              height: 150,
-            }}
-          />
-        </ThemeProvider>,
+      <ThemeProvider>
+        <ConnectedImage
+          source={{
+            uri: 'https://placeholdit.co/i/150x150?bg=eeeeee&fc=577084',
+            width: 150,
+            height: 150,
+          }}
+        />
+      </ThemeProvider>,
     );
     expect(tree).toMatchSnapshot();
   });
   it('should maintain aspect ratio', () => {
     const tree = renderer.create(
-        <ThemeProvider>
-          <ConnectedImage
-            source={{
-              uri: 'https://placeholdit.co/i/150x150?bg=eeeeee&fc=577084',
-              width: 150,
-              height: 150,
-            }}
-            maintainAspectRatio
-          />
-        </ThemeProvider>,
+      <ThemeProvider>
+        <ConnectedImage
+          source={{
+            uri: 'https://placeholdit.co/i/150x150?bg=eeeeee&fc=577084',
+            width: 150,
+            height: 150,
+          }}
+          maintainAspectRatio
+        />
+      </ThemeProvider>,
     );
     expect(tree).toMatchSnapshot();
   });

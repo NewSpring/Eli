@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Animated, Picker as NativePicker} from 'react-native';
-import {mapProps} from 'recompose';
+import { Animated, Picker as NativePicker } from 'react-native';
+import { mapProps } from 'recompose';
 
 import InputUnderline from '../InputUnderline';
 import InputWrapper from '../InputWrapper';
@@ -17,7 +17,7 @@ const MappedNativePicker = mapProps(({
   ...otherProps,
 }))(NativePicker);
 
-const Picker = ({wrapperStyle, ...props}) => (
+const Picker = ({ wrapperStyle, ...props }) => (
   <InputWrapper style={wrapperStyle}>
     <MappedNativePicker {...props} />
     <FloatingLabel animation={new Animated.Value(1)}>{props.label}</FloatingLabel>
@@ -31,4 +31,4 @@ Picker.propTypes = {
 };
 
 export default Picker;
-export const {Item} = NativePicker;
+export const { Item } = NativePicker;

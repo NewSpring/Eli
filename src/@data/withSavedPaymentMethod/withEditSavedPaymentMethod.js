@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 export const MUTATION = gql`
   mutation UpdateSavedPayment($id: Int, $name: String!) {
@@ -16,9 +16,9 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    updateSavedPaymentMethod: ({id, name} = {}) => mutate({
-      variables: {id, name},
+  props: ({ mutate }) => ({
+    updateSavedPaymentMethod: ({ id, name } = {}) => mutate({
+      variables: { id, name },
       optimisticResponse: {
         __typename: 'Mutation',
         updateSavedPayment: {

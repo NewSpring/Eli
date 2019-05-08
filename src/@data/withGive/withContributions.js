@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 export const QUERY = gql`
   query Give {
@@ -45,8 +45,8 @@ export const QUERY = gql`
 `;
 
 export default graphql(QUERY, {
-  props({ownProps, data: {error, contributions, loading}}) {
-    if (!contributions) return {contributions, isLoading: ownProps.isLoading || loading};
+  props({ ownProps, data: { error, contributions, loading } }) {
+    if (!contributions) return { contributions, isLoading: ownProps.isLoading || loading };
     return {
       error: error || ownProps.error,
       isLoading: ownProps.isLoading || loading,

@@ -1,4 +1,4 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import fetchMoreResolver from '@data/utils/fetchMoreResolver';
 
@@ -30,7 +30,7 @@ export default graphql(searchQuery, {
       site: ownProps.site || 'https://newspring.cc',
     },
   }),
-  props: ({data, ownProps} = {}) => ({
+  props: ({ data, ownProps } = {}) => ({
     content: (data.content && data.content.items) || [],
     total: data.content && data.content.total,
     isLoading: data.loading || ownProps.isLoading,

@@ -23,21 +23,21 @@ export default function fetchMoreResolver({
     const skip = (get(data, collectionName) || []).length;
 
     data.fetchMore({
-      variables: {...data.variables, skip},
-      updateQuery: (previousResult, {fetchMoreResult}) => {
+      variables: { ...data.variables, skip },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
         // NOTE: not sure what this is doing
         // if (!fetchMoreResult) return previousResult;
 
         // combine previous data and fetchMore data
         const newResult = set(
-            // NOTE: not sure if mapTo is ever used
-            // mapTo || collectionName,
-            collectionName,
-            [
-              ...(get(previousResult, collectionName) || []),
-              ...(get(fetchMoreResult, collectionName) || []),
-            ],
-            {...previousResult},
+          // NOTE: not sure if mapTo is ever used
+          // mapTo || collectionName,
+          collectionName,
+          [
+            ...(get(previousResult, collectionName) || []),
+            ...(get(fetchMoreResult, collectionName) || []),
+          ],
+          { ...previousResult },
         );
         // TODO: the only problem with this may be if another call gets
         // made in between the unlock and the return. Not sure how to fix.

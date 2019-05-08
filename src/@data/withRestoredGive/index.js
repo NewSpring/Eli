@@ -1,21 +1,20 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {compose} from 'recompose';
-import {AsyncStorage} from 'react-native';
+import { compose } from 'recompose';
+import { AsyncStorage } from 'react-native';
 import get from 'lodash/get';
 import withGive from '@data/withGive';
-import {withRouter} from '@ui/NativeWebRouter';
-import {parse} from '@utils/queryString';
+import { withRouter } from '@ui/NativeWebRouter';
+import { parse } from '@utils/queryString';
 
 const enhance = compose(
-    withRouter,
-    withGive,
+  withRouter,
+  withGive,
 );
 
 // TODO: Create a fetcher decorator instead using this logic
-export default (Component) =>
-  enhance(
-      class withRestoredGive extends PureComponent {
+export default Component => enhance(
+  class withRestoredGive extends PureComponent {
       static propTypes = {
         restoreContributions: PropTypes.func,
         location: PropTypes.shape({
@@ -34,7 +33,7 @@ export default (Component) =>
 
       async componentWillMount() {
         try {
-          const {state, userToken} = this.queryParams;
+          const { state, userToken } = this.queryParams;
           if (state) await this.props.restoreContributions(state);
           if (userToken) await AsyncStorage.setItem('authToken', userToken);
 
@@ -53,5 +52,5 @@ export default (Component) =>
       render() {
         return <Component isRestored={this.state.isRestored} {...this.props} />;
       }
-      },
-  );
+  },
+);

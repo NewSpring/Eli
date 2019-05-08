@@ -1,12 +1,14 @@
-import React, {PureComponent} from 'react';
-import {compose, pure} from 'recompose';
-import {View, InteractionManager, Animated, Easing, StyleSheet} from 'react-native';
+import React, { PureComponent } from 'react';
+import { compose, pure } from 'recompose';
+import {
+  View, InteractionManager, Animated, Easing, StyleSheet,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import Color from 'color';
 
 import styled from '@ui/styled';
 import Touchable from '@ui/Touchable';
-import {withTheme, withThemeMixin} from '@ui/theme';
+import { withTheme, withThemeMixin } from '@ui/theme';
 import ConnectedImage from '@ui/ConnectedImage';
 import Icon from '@ui/Icon';
 
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Wrapper = styled(({theme}) => ({
+const Wrapper = styled(({ theme }) => ({
   height: theme.sizing.baseUnit * 2, // based on MiniControls text sizing
   width: theme.sizing.baseUnit * 2,
   overflow: 'hidden',
@@ -25,29 +27,29 @@ const Wrapper = styled(({theme}) => ({
 }))(View);
 
 const IconWrapper = compose(
-    withThemeMixin({type: 'light'}),
-    styled(({theme}) => ({
-      padding: 7,
-      backgroundColor: Color(theme.colors.background.default)
-          .fade(theme.alpha.low)
-          .string(),
-    })),
+  withThemeMixin({ type: 'light' }),
+  styled(({ theme }) => ({
+    padding: 7,
+    backgroundColor: Color(theme.colors.background.default)
+      .fade(theme.alpha.low)
+      .string(),
+  })),
 )(View);
 
 const ThemedIcon = compose(
-    pure,
-    withThemeMixin({type: 'light'}),
-    withTheme(
-        ({
-          theme: {
-            sizing: {baseUnit = {}} = {},
-            colors: {text: {primary: primaryTextColor = {}} = {}} = {},
-          } = {},
-        }) => ({
-          size: baseUnit * 1.3,
-          fill: primaryTextColor,
-        }),
-    ),
+  pure,
+  withThemeMixin({ type: 'light' }),
+  withTheme(
+    ({
+      theme: {
+        sizing: { baseUnit = {} } = {},
+        colors: { text: { primary: primaryTextColor = {} } = {} } = {},
+      } = {},
+    }) => ({
+      size: baseUnit * 1.3,
+      fill: primaryTextColor,
+    }),
+  ),
 )(Icon);
 
 const Image = styled({
@@ -86,7 +88,7 @@ class MiniControlsThumbnail extends PureComponent {
   }
 
   render() {
-    const animate = {transform: [{translateY: this.animatedButtonPosition}]};
+    const animate = { transform: [{ translateY: this.animatedButtonPosition }] };
 
     return (
       <Wrapper>

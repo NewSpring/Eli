@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {flatten} from 'lodash';
+import { StyleSheet } from 'react-native';
+import { flatten } from 'lodash';
 
 export const cachedStyles = {};
 export const styleHasher = JSON.stringify; // todo: how bad is this?

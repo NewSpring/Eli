@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Providers from '@ui/TestProviders';
 
-import {BillingAddressFormWithoutData} from './';
+import { BillingAddressFormWithoutData } from '.';
 
 const createTestData = () => ({
   isLoading: false,
@@ -47,9 +47,9 @@ const createTestData = () => ({
 describe('The ContributionForm component', () => {
   it('renders correctly', () => {
     const tree = renderer.create(
-        <Providers>
-          <BillingAddressFormWithoutData {...createTestData()} />
-        </Providers>,
+      <Providers>
+        <BillingAddressFormWithoutData {...createTestData()} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -57,9 +57,9 @@ describe('The ContributionForm component', () => {
     const data = createTestData();
     data.isLoading = true;
     const tree = renderer.create(
-        <Providers>
-          <BillingAddressFormWithoutData {...data} />
-        </Providers>,
+      <Providers>
+        <BillingAddressFormWithoutData {...data} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -67,9 +67,9 @@ describe('The ContributionForm component', () => {
     const data = createTestData();
     data.values.countryId = 'FOREIGN';
     const tree = renderer.create(
-        <Providers>
-          <BillingAddressFormWithoutData {...data} />
-        </Providers>,
+      <Providers>
+        <BillingAddressFormWithoutData {...data} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });

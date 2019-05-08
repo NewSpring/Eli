@@ -1,4 +1,4 @@
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 import ConnectedImage from '@ui/ConnectedImage';
 import styled from '@ui/styled';
 

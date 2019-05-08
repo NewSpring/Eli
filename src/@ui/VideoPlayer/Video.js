@@ -1,1 +1,1 @@
-export {Video as default} from 'expo';
+export { Video as default } from 'expo';

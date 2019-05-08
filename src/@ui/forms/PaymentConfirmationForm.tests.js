@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import moment from 'moment';
 import Providers from '@ui/TestProviders';
 
-import {PaymentConfirmationFormWithoutData} from './PaymentConfirmationForm';
+import { PaymentConfirmationFormWithoutData } from './PaymentConfirmationForm';
 
 const createTestData = () => ({
   isLoading: false,
@@ -23,9 +23,9 @@ const createTestData = () => ({
 describe('The PaymentConfirmationForm component', () => {
   it('renders correctly', () => {
     const tree = renderer.create(
-        <Providers>
-          <PaymentConfirmationFormWithoutData {...createTestData()} />
-        </Providers>,
+      <Providers>
+        <PaymentConfirmationFormWithoutData {...createTestData()} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -33,9 +33,9 @@ describe('The PaymentConfirmationForm component', () => {
     const data = createTestData();
     data.isLoading = true;
     const tree = renderer.create(
-        <Providers>
-          <PaymentConfirmationFormWithoutData {...data} />
-        </Providers>,
+      <Providers>
+        <PaymentConfirmationFormWithoutData {...data} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -43,9 +43,9 @@ describe('The PaymentConfirmationForm component', () => {
     const data = createTestData();
     data.contributions.isPaying = true;
     const tree = renderer.create(
-        <Providers>
-          <PaymentConfirmationFormWithoutData {...data} />
-        </Providers>,
+      <Providers>
+        <PaymentConfirmationFormWithoutData {...data} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -53,9 +53,9 @@ describe('The PaymentConfirmationForm component', () => {
     const data = createTestData();
     data.contributions.frequencyId = 'monthly';
     const tree = renderer.create(
-        <Providers>
-          <PaymentConfirmationFormWithoutData {...data} />
-        </Providers>,
+      <Providers>
+        <PaymentConfirmationFormWithoutData {...data} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });

@@ -1,14 +1,16 @@
-import React, {PureComponent} from 'react';
-import {StyleSheet} from 'react-native';
+import React, { PureComponent } from 'react';
+import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import {TabViewPagerPan} from 'react-native-tab-view';
-import {Link, Switch, Route, matchPath, withRouter} from '@ui/NativeWebRouter';
-import TabView, {SceneMap} from '@ui/TabView';
+import { TabViewPagerPan } from 'react-native-tab-view';
+import {
+  Link, Switch, Route, matchPath, withRouter,
+} from '@ui/NativeWebRouter';
+import TabView, { SceneMap } from '@ui/TabView';
 import Header from '@ui/Header';
 import BackgroundView from '@ui/BackgroundView';
 import MediaQuery from '@ui/MediaQuery';
-import {ResponsiveSideBySideView as SideBySideView, Left, Right} from '@ui/SideBySideView';
-import Hero, {BackgroundImage} from '@ui/Hero';
+import { ResponsiveSideBySideView as SideBySideView, Left, Right } from '@ui/SideBySideView';
+import Hero, { BackgroundImage } from '@ui/Hero';
 import styled from '@ui/styled';
 import ContributionsChartHero from '@ui/ContributionsChartHero';
 import Meta from '@ui/Meta';
@@ -19,13 +21,11 @@ import ContributionHistory from 'give/ContributionHistory';
 
 const TabViewPager = TabViewPagerPan;
 
-const FlexedSideBySideView = styled({flex: 1})(SideBySideView);
-const FlexedLeft = styled({flex: 1})(Left);
+const FlexedSideBySideView = styled({ flex: 1 })(SideBySideView);
+const FlexedLeft = styled({ flex: 1 })(Left);
 
-const historyImage =
-  'https://dg0ddngxdz549.cloudfront.net/images/cached/images/remote/http_s3.amazonaws.com/ns.images/newspring/_fpo/NScollege-cip-0033_1700_1133_90_c1.jpg';
-const scheduleImage =
-  'https://s3.amazonaws.com/ns.images/newspring/give/42835.marketing.cen.webad.scheduleyourgiving_1x2.jpg';
+const historyImage = 'https://dg0ddngxdz549.cloudfront.net/images/cached/images/remote/http_s3.amazonaws.com/ns.images/newspring/_fpo/NScollege-cip-0033_1700_1133_90_c1.jpg';
+const scheduleImage = 'https://s3.amazonaws.com/ns.images/newspring/give/42835.marketing.cen.webad.scheduleyourgiving_1x2.jpg';
 
 class GiveRoutes extends PureComponent {
   static propTypes = {
@@ -34,12 +34,12 @@ class GiveRoutes extends PureComponent {
       pathname: PropTypes.string,
     }),
     routes: PropTypes.arrayOf(
-        PropTypes.shape({
-          title: PropTypes.string,
-          headerTitle: PropTypes.string,
-          key: PropTypes.string.isRequired,
-          path: PropTypes.string.isRequired,
-        }),
+      PropTypes.shape({
+        title: PropTypes.string,
+        headerTitle: PropTypes.string,
+        key: PropTypes.string.isRequired,
+        path: PropTypes.string.isRequired,
+      }),
     ),
     scenes: TabView.propTypes.renderScene,
     history: PropTypes.shape({
@@ -76,12 +76,10 @@ class GiveRoutes extends PureComponent {
   };
 
   get currentRouteIndex() {
-    return this.props.routes.findIndex((route) =>
-      matchPath(this.props.location.pathname, {
-        path: route.path,
-        exact: true,
-      }),
-    );
+    return this.props.routes.findIndex(route => matchPath(this.props.location.pathname, {
+      path: route.path,
+      exact: true,
+    }));
   }
 
   get currentRoute() {
@@ -102,13 +100,13 @@ class GiveRoutes extends PureComponent {
       <BackgroundView>
         <FlexedSideBySideView>
           <FlexedLeft>
-            <Header webEnabled titleText={'My Giving'} />
+            <Header webEnabled titleText="My Giving" />
             <TabView
               index={this.currentRouteIndex || 0}
               routes={this.props.routes}
               renderScene={this.props.scenes}
               onChange={this.handleOnChangeTab}
-              renderPager={(props) => <TabViewPager {...props} />}
+              renderPager={props => <TabViewPager {...props} />}
             />
           </FlexedLeft>
           <MediaQuery minWidth="md">
@@ -122,14 +120,14 @@ class GiveRoutes extends PureComponent {
                 </Route>
                 <Route>
                   <Hero
-                    background={
+                    background={(
                       <Link
                         onPress={() => this.handleOnChangeTab(0)}
                         style={StyleSheet.absoluteFill}
                       >
                         <BackgroundImage source={scheduleImage} />
                       </Link>
-                    }
+)}
                   />
                 </Route>
               </Switch>

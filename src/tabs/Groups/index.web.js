@@ -1,40 +1,40 @@
 import React from 'react';
 import KeyboardAwareScrollView from '@ui/KeyboardAwareScrollView';
-import {compose, withProps} from 'recompose';
+import { compose, withProps } from 'recompose';
 import withCampuses from '@data/withCampuses';
 import withGroupAttributes from '@data/withGroupAttributes';
 import Header from '@ui/Header';
 import BackgroundView from '@ui/BackgroundView';
 import PaddedView from '@ui/PaddedView';
 import Meta from '@ui/Meta';
-import {H7} from '@ui/typography';
-import {GroupSearchForm} from '@ui/forms';
-import {withRouter} from '@ui/NativeWebRouter';
+import { H7 } from '@ui/typography';
+import { GroupSearchForm } from '@ui/forms';
+import { withRouter } from '@ui/NativeWebRouter';
 import LiveNowButton from '@ui/LiveNowButton';
-import {stringify} from '@utils/queryString';
+import { stringify } from '@utils/queryString';
 import MediaQuery from '@ui/MediaQuery';
-import {ResponsiveSideBySideView as SideBySideView, Left, Right} from '@ui/SideBySideView';
-import Hero, {BackgroundImage} from '@ui/Hero';
+import { ResponsiveSideBySideView as SideBySideView, Left, Right } from '@ui/SideBySideView';
+import Hero, { BackgroundImage } from '@ui/Hero';
 import styled from '@ui/styled';
 
 import GroupStories from './GroupStories';
 import GroupsILead from './GroupsILead';
 
-const FlexedSideBySideView = styled({flex: 1})(SideBySideView);
-const FlexedLeft = styled({flex: 1})(Left);
+const FlexedSideBySideView = styled({ flex: 1 })(SideBySideView);
+const FlexedLeft = styled({ flex: 1 })(Left);
 
 const GroupSearchFormWithData = compose(withCampuses, withGroupAttributes)(GroupSearchForm);
 
 const Instructions = compose(
-    styled(({theme}) => ({color: theme.colors.text.tertiary})),
-    withProps({
-      children: 'Select your interests, campus and location to search for groups near you.',
-    }),
+  styled(({ theme }) => ({ color: theme.colors.text.tertiary })),
+  withProps({
+    children: 'Select your interests, campus and location to search for groups near you.',
+  }),
 )(H7);
 
 const image = 'https://s3.amazonaws.com/ns.images/newspring/groups/groups.1x2.jpg';
 
-const Groups = withRouter(({history}) => (
+const Groups = withRouter(({ history }) => (
   <BackgroundView>
     <Meta
       title="Group Finder"
@@ -43,7 +43,7 @@ const Groups = withRouter(({history}) => (
     />
     <FlexedSideBySideView>
       <FlexedLeft>
-        <Header webEnabled titleText={'Find your people'}>
+        <Header webEnabled titleText="Find your people">
           <Instructions />
         </Header>
         <LiveNowButton />

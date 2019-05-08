@@ -1,9 +1,9 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {Platform, View} from 'react-native';
-import {every, words, trim} from 'lodash';
-import {Text as TextInput} from '@ui/inputs';
-import Chip, {ChipList} from '@ui/Chip';
+import { Platform, View } from 'react-native';
+import { every, words, trim } from 'lodash';
+import { Text as TextInput } from '@ui/inputs';
+import Chip, { ChipList } from '@ui/Chip';
 import Icon from '@ui/Icon';
 import Touchable from '@ui/Touchable';
 
@@ -16,8 +16,8 @@ const arrayIsSubsetOf = (array, check) => array.find((word, index) => (
 ));
 
 export const keywordIsInQuery = (query, keyword) => {
-  const queryWords = words(query).map((word) => word.toLocaleLowerCase());
-  const matchWords = words(keyword).map((word) => word.toLocaleLowerCase());
+  const queryWords = words(query).map(word => word.toLocaleLowerCase());
+  const matchWords = words(keyword).map(word => word.toLocaleLowerCase());
   return arrayIsSubsetOf(queryWords, matchWords);
 };
 
@@ -25,8 +25,8 @@ export const stripKeywordFromQuery = (query, keyword) => {
   const wordExp = words(keyword).join('(\\D|\\W)');
 
   const strippedText = query.replace(
-      new RegExp(`(\\W|\\D|(,(\\s|))|)${wordExp}`, 'gi'),
-      '',
+    new RegExp(`(\\W|\\D|(,(\\s|))|)${wordExp}`, 'gi'),
+    '',
   );
 
   return trim(strippedText, ', ');
@@ -63,12 +63,12 @@ class KeywordSelect extends PureComponent {
 
   handleFocus = (...args) => {
     if (this.props.onFocus) this.props.onFocus(...args);
-    if (!this.state.keywordsVisible) this.setState({keywordsVisible: true});
+    if (!this.state.keywordsVisible) this.setState({ keywordsVisible: true });
   }
 
   handleBlur = (...args) => {
     if (this.props.onBlur) this.props.onBlur(...args);
-    if (Platform.OS !== 'web' && this.state.keywordsVisible) this.setState({keywordsVisible: false});
+    if (Platform.OS !== 'web' && this.state.keywordsVisible) this.setState({ keywordsVisible: false });
   }
 
   renderKeyword = (keyword) => {
@@ -98,7 +98,7 @@ class KeywordSelect extends PureComponent {
           suffix={
             (Platform.OS === 'web') ? (
               <Touchable
-                onPress={() => this.setState({keywordsVisible: !this.state.keywordsVisible})}
+                onPress={() => this.setState({ keywordsVisible: !this.state.keywordsVisible })}
               >
                 <Icon name={this.state.keywordsVisible ? 'arrow-up' : 'arrow-down'} size={18} />
               </Touchable>

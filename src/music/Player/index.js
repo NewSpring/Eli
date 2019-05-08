@@ -1,15 +1,15 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View} from 'react-native';
-import {compose, withProps, withPropsOnChange} from 'recompose';
-import {get, findIndex} from 'lodash';
-import {shuffle} from 'shuffle-seed';
+import { StyleSheet, View } from 'react-native';
+import { compose, withProps, withPropsOnChange } from 'recompose';
+import { get, findIndex } from 'lodash';
+import { shuffle } from 'shuffle-seed';
 import Audio from '@ui/Audio';
-import {withMediaPlayerActions, withNowPlaying} from '@data/mediaPlayer';
+import { withMediaPlayerActions, withNowPlaying } from '@data/mediaPlayer';
 import BackgroundView from '@ui/BackgroundView';
 import CardStack from '@ui/CardStack';
-import {asModal} from '@ui/ModalView';
-import {withRouter, Link, Route} from '@ui/NativeWebRouter';
+import { asModal } from '@ui/ModalView';
+import { withRouter, Link, Route } from '@ui/NativeWebRouter';
 import ConnectedImage from '@ui/ConnectedImage';
 import MiniControls from './MiniControls';
 import FullScreenControls from './FullScreenControls';
@@ -17,48 +17,48 @@ import TrackContextual from '../TrackContextual';
 import Playlist from '../Playlist';
 
 const PlayerTrackContextual = withProps({
-  pathForAlbumId: (id) => `/player/list/${id}`,
+  pathForAlbumId: id => `/player/list/${id}`,
 })(TrackContextual);
 
 const enhance = compose(
-    withRouter,
-    withMediaPlayerActions,
-    withNowPlaying,
-    withPropsOnChange(
-        ['nowPlaying', 'playlist', 'setNowPlaying', 'children'],
-        ({nowPlaying, setNowPlaying, ...otherProps}) => ({
-          ...otherProps,
-          ...(nowPlaying || {}),
-          ...get(nowPlaying, 'playlist', {}),
+  withRouter,
+  withMediaPlayerActions,
+  withNowPlaying,
+  withPropsOnChange(
+    ['nowPlaying', 'playlist', 'setNowPlaying', 'children'],
+    ({ nowPlaying, setNowPlaying, ...otherProps }) => ({
+      ...otherProps,
+      ...(nowPlaying || {}),
+      ...get(nowPlaying, 'playlist', {}),
 
-          // todo: these props should probably be moved to the data HOC "withMediaPlayerActions"
-          playNextTrack: () => {
-            const playlist = get(nowPlaying, 'playlist', {});
-            let tracks = get(playlist, 'tracks', []);
-            if (!tracks.length) return;
-            if (nowPlaying.isShuffling) tracks = shuffle(tracks, nowPlaying.isShuffling);
+      // todo: these props should probably be moved to the data HOC "withMediaPlayerActions"
+      playNextTrack: () => {
+        const playlist = get(nowPlaying, 'playlist', {});
+        let tracks = get(playlist, 'tracks', []);
+        if (!tracks.length) return;
+        if (nowPlaying.isShuffling) tracks = shuffle(tracks, nowPlaying.isShuffling);
 
-            const currentTrack = get(nowPlaying, 'currentTrack.file');
-            const currentTrackIndex = findIndex(tracks, (track) => track.file === currentTrack);
-            const nextTrackIndex = (currentTrackIndex + 1) % tracks.length;
+        const currentTrack = get(nowPlaying, 'currentTrack.file');
+        const currentTrackIndex = findIndex(tracks, track => track.file === currentTrack);
+        const nextTrackIndex = (currentTrackIndex + 1) % tracks.length;
 
-            setNowPlaying({id: nowPlaying.id, currentTrack: tracks[nextTrackIndex]});
-          },
-          playPrevTrack: () => {
-            const playlist = get(nowPlaying, 'playlist', {});
-            let tracks = get(playlist, 'tracks', []);
-            if (!tracks.length) return;
-            if (nowPlaying.isShuffling) tracks = shuffle(tracks, nowPlaying.isShuffling);
+        setNowPlaying({ id: nowPlaying.id, currentTrack: tracks[nextTrackIndex] });
+      },
+      playPrevTrack: () => {
+        const playlist = get(nowPlaying, 'playlist', {});
+        let tracks = get(playlist, 'tracks', []);
+        if (!tracks.length) return;
+        if (nowPlaying.isShuffling) tracks = shuffle(tracks, nowPlaying.isShuffling);
 
-            const currentTrack = get(nowPlaying, 'currentTrack.file');
-            const currentTrackIndex = findIndex(tracks, (track) => track.file === currentTrack);
-            let nextTrackIndex = currentTrackIndex - 1;
-            if (nextTrackIndex < 0) nextTrackIndex = tracks.length - 1;
+        const currentTrack = get(nowPlaying, 'currentTrack.file');
+        const currentTrackIndex = findIndex(tracks, track => track.file === currentTrack);
+        let nextTrackIndex = currentTrackIndex - 1;
+        if (nextTrackIndex < 0) nextTrackIndex = tracks.length - 1;
 
-            setNowPlaying({id: nowPlaying.id, currentTrack: tracks[nextTrackIndex]});
-          },
-        }),
-    ),
+        setNowPlaying({ id: nowPlaying.id, currentTrack: tracks[nextTrackIndex] });
+      },
+    }),
+  ),
 );
 
 const trackType = PropTypes.shape({
@@ -80,7 +80,7 @@ export class DockableMediaPlayer extends PureComponent {
     playlist: PropTypes.shape({
       title: PropTypes.string.isRequired,
       images: ConnectedImage.propTypes.source.isRequired,
-      colors: PropTypes.arrayOf(PropTypes.shape({value: PropTypes.string})).isRequired,
+      colors: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string })).isRequired,
       tracks: PropTypes.arrayOf(trackType),
     }),
     title: PropTypes.string,
@@ -138,7 +138,7 @@ export class DockableMediaPlayer extends PureComponent {
   }
 
   get primaryColor() {
-    const {colors} = this.props;
+    const { colors } = this.props;
     if (!colors || !colors.length) return null;
     return `#${colors[0].value}`;
   }
@@ -213,9 +213,9 @@ export class DockableMediaPlayer extends PureComponent {
         style={StyleSheet.absoluteFill}
       >
         <CardStack direction="vertical">
-          <Route exact path={'/player'} render={this.renderPlayer} />
-          <Route exact path={'/player/list/:id'} component={asModal(Playlist)} />
-          <Route exact path={'/player/:id/:track'} component={PlayerTrackContextual} />
+          <Route exact path="/player" render={this.renderPlayer} />
+          <Route exact path="/player/list/:id" component={asModal(Playlist)} />
+          <Route exact path="/player/:id/:track" component={PlayerTrackContextual} />
           <Route cardStackKey="app">
             <BackgroundView>
               {this.props.children}

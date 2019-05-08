@@ -1,31 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {compose, pure} from 'recompose';
-import {Platform, Switch, View} from 'react-native';
-import {withTheme} from '@ui/theme';
+import { compose, pure } from 'recompose';
+import { Platform, Switch, View } from 'react-native';
+import { withTheme } from '@ui/theme';
 import FlexedView from '@ui/FlexedView';
 import styled from '@ui/styled';
 import Touchable from '@ui/Touchable';
-import InputAddon, {AddonRow} from '../InputAddon';
-import {LabelText} from '../FloatingLabel';
+import InputAddon, { AddonRow } from '../InputAddon';
+import { LabelText } from '../FloatingLabel';
 import InputWrapper from '../InputWrapper';
-import {withInputControlViewStyles} from '../withInputControlStyles';
+import { withInputControlViewStyles } from '../withInputControlStyles';
 import ErrorText from '../ErrorText';
 
 const ControlWrapper = withInputControlViewStyles(View);
 
 const enhance = compose(
-    pure,
-    withTheme(({theme}) => ({
-      onTintColor: theme.colors.background.primary,
-      activeTrackColor: theme.colors.background.primary,
-      trackColor: theme.colors.background.inactive,
-      tintColor: theme.colors.background.inactive,
-      activeThumbColor: theme.colors.background.paper,
-      ...Platform.select({
-        android: {thumbTintColor: theme.colors.background.paper},
-      }),
-    })),
+  pure,
+  withTheme(({ theme }) => ({
+    onTintColor: theme.colors.background.primary,
+    activeTrackColor: theme.colors.background.primary,
+    trackColor: theme.colors.background.inactive,
+    tintColor: theme.colors.background.inactive,
+    activeThumbColor: theme.colors.background.paper,
+    ...Platform.select({
+      android: { thumbTintColor: theme.colors.background.paper },
+    }),
+  })),
 );
 
 const LabelContainer = styled({

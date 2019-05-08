@@ -1,4 +1,4 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import get from 'lodash/get';
 
@@ -61,4 +61,3 @@ export default graphql(QUERY, {
     },
   }),
 });
-

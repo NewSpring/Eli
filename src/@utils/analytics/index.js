@@ -46,19 +46,19 @@ export const categories = {
 // if we want to move away from Amplitude in the future:
 export const track = (eventName, categoryName, label) => {
   if (Settings.NODE_ENV === 'development' || Settings.NODE_ENV === 'testing') return;
-  google.analyticsEvent({categoryName, eventName, label});
+  google.analyticsEvent({ categoryName, eventName, label });
 };
 
 export const identify = (userId) => {
   if (Settings.NODE_ENV === 'development' || Settings.NODE_ENV === 'testing') return;
-  google.setUserId({userId});
+  google.setUserId({ userId });
 };
 
 export const trackScreen = (screenName) => {
-  google.analyticsScreen({screenName});
+  google.analyticsScreen({ screenName });
   sentry.captureBreadcrumb({
     message: 'ScreenView',
-    data: {screenName},
+    data: { screenName },
     level: 'info',
   });
 };

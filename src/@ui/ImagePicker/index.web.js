@@ -1,5 +1,5 @@
-import React, {PureComponent} from 'react';
-import {View} from 'react-native';
+import React, { PureComponent } from 'react';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import Touchable from '@ui/Touchable';
@@ -39,7 +39,7 @@ class ImagePicker extends PureComponent {
             this.input = t;
           }}
           accept=".jpg,.jpeg,.tiff,.png,.gif"
-          onChange={(e) => this.handleOnChange(e)}
+          onChange={e => this.handleOnChange(e)}
           type="file"
         />
       </View>

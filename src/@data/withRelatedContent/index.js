@@ -1,4 +1,4 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import relatedContentQuery from './relatedContentQuery';
 
 export default graphql(relatedContentQuery, {
@@ -12,7 +12,7 @@ export default graphql(relatedContentQuery, {
       },
     };
   },
-  props({ownProps, data: {error, content, loading}} = {}) {
+  props({ ownProps, data: { error, content, loading } } = {}) {
     return {
       error: error || ownProps.error,
       isLoading: ownProps.isLoading || loading,

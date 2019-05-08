@@ -1,9 +1,11 @@
-import React, {PureComponent} from 'react';
-import {Platform} from 'react-native';
+import React, { PureComponent } from 'react';
+import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
-import {TabViewPagerPan, TabViewPagerAndroid} from 'react-native-tab-view';
-import {Switch, Route, matchPath, withRouter} from '@ui/NativeWebRouter';
-import TabView, {SceneMap} from '@ui/TabView';
+import { TabViewPagerPan, TabViewPagerAndroid } from 'react-native-tab-view';
+import {
+  Switch, Route, matchPath, withRouter,
+} from '@ui/NativeWebRouter';
+import TabView, { SceneMap } from '@ui/TabView';
 import Header from '@ui/Header';
 import BackgroundView from '@ui/BackgroundView';
 import Meta from '@ui/Meta';
@@ -22,12 +24,12 @@ class GiveRoutes extends PureComponent {
       pathname: PropTypes.string,
     }),
     routes: PropTypes.arrayOf(
-        PropTypes.shape({
-          title: PropTypes.string,
-          headerTitle: PropTypes.string,
-          key: PropTypes.string.isRequired,
-          path: PropTypes.string.isRequired,
-        }),
+      PropTypes.shape({
+        title: PropTypes.string,
+        headerTitle: PropTypes.string,
+        key: PropTypes.string.isRequired,
+        path: PropTypes.string.isRequired,
+      }),
     ),
     scenes: TabView.propTypes.renderScene,
     history: PropTypes.shape({
@@ -64,12 +66,10 @@ class GiveRoutes extends PureComponent {
   };
 
   get currentRouteIndex() {
-    return this.props.routes.findIndex((route) =>
-      matchPath(this.props.location.pathname, {
-        path: route.path,
-        exact: true,
-      }),
-    );
+    return this.props.routes.findIndex(route => matchPath(this.props.location.pathname, {
+      path: route.path,
+      exact: true,
+    }));
   }
 
   get currentRoute() {
@@ -80,12 +80,12 @@ class GiveRoutes extends PureComponent {
     if (!this.currentRoute) return null;
     return (
       <BackgroundView>
-        <Header webEnabled backButton titleText={'My Giving'} />
+        <Header webEnabled backButton titleText="My Giving" />
         <TabView
           initialIndex={this.currentRouteIndex || 0}
           routes={this.props.routes}
           renderScene={this.props.scenes}
-          renderPager={(props) => <TabViewPager {...props} />}
+          renderPager={props => <TabViewPager {...props} />}
         />
         <Switch>
           <Route path="/give/history">

@@ -1,11 +1,11 @@
-import React, {PureComponent} from 'react';
-import {StyleSheet, View, Animated} from 'react-native';
+import React, { PureComponent } from 'react';
+import { StyleSheet, View, Animated } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose} from 'recompose';
+import { compose } from 'recompose';
 import withDefaultProgressColors from './withDefaultProgressColors';
 
 const enhance = compose(
-    withDefaultProgressColors,
+  withDefaultProgressColors,
 );
 
 const styles = StyleSheet.create({
@@ -27,7 +27,7 @@ class Progress extends PureComponent {
     trackColor: 'transparent',
   };
 
-  state = {layoutWidth: 0};
+  state = { layoutWidth: 0 };
 
   componentDidMount() {
     this.updateProgress();
@@ -49,7 +49,7 @@ class Progress extends PureComponent {
     });
 
     return {
-      transform: [{translateX}, {scaleX}],
+      transform: [{ translateX }, { scaleX }],
     };
   }
 
@@ -64,13 +64,13 @@ class Progress extends PureComponent {
     }).start();
   }
 
-  handleLayout = ({nativeEvent: {layout}}) => {
-    if (this.state.layoutWidth !== layout.width) this.setState({layoutWidth: layout.width});
+  handleLayout = ({ nativeEvent: { layout } }) => {
+    if (this.state.layoutWidth !== layout.width) this.setState({ layoutWidth: layout.width });
   }
 
   render() {
-    const trackColor = {backgroundColor: this.props.trackColor};
-    const barColor = {backgroundColor: this.props.color};
+    const trackColor = { backgroundColor: this.props.trackColor };
+    const barColor = { backgroundColor: this.props.color };
     return (
       <View style={[styles.track, trackColor]} onLayout={this.handleLayout}>
         <Animated.View style={[StyleSheet.absoluteFill, barColor, this.animatedBarStyle]} />

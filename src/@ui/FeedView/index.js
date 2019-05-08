@@ -1,13 +1,17 @@
 import React from 'react';
-import {TouchableWithoutFeedback} from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
-import {Link} from '@ui/NativeWebRouter';
-import {pure, compose, branch, withProps, defaultProps} from 'recompose';
-import {get} from 'lodash';
+import { Link } from '@ui/NativeWebRouter';
+import {
+  pure, compose, branch, withProps, defaultProps,
+} from 'recompose';
+import { get } from 'lodash';
 
-import {getLinkPath, getItemBgColor, getItemImages, getItemIsLight, getItemThumbnail} from '@utils/content';
+import {
+  getLinkPath, getItemBgColor, getItemImages, getItemIsLight, getItemThumbnail,
+} from '@utils/content';
 import FeedItemCard from '@ui/FeedItemCard';
-import {enhancer as mediaQuery} from '@ui/MediaQuery';
+import { enhancer as mediaQuery } from '@ui/MediaQuery';
 import ErrorCard from '@ui/ErrorCard';
 import FeedList from './FeedList';
 
@@ -57,72 +61,72 @@ const generateLoadingStateData = (numberOfItems = 1) => {
 };
 
 const enhance = compose(
-    pure,
-    branch(
-        ({isLoading, content}) => isLoading && !content.length,
-        withProps({
-          isLoading: true,
-          content: generateLoadingStateData(10),
-          fetchMore: false,
-        }),
-    ),
-    mediaQuery(
-        ({md}) => ({maxWidth: md}),
-        defaultProps({numColumns: 1}),
-        defaultProps({numColumns: 2}),
-    ),
+  pure,
+  branch(
+    ({ isLoading, content }) => isLoading && !content.length,
+    withProps({
+      isLoading: true,
+      content: generateLoadingStateData(10),
+      fetchMore: false,
+    }),
+  ),
+  mediaQuery(
+    ({ md }) => ({ maxWidth: md }),
+    defaultProps({ numColumns: 1 }),
+    defaultProps({ numColumns: 2 }),
+  ),
 );
 
-const refetchHandler = ({isLoading, refetch}) => refetch && (
+const refetchHandler = ({ isLoading, refetch }) => refetch && (
   (...args) => !isLoading && (
     refetch(...args)
   )
 );
 
-const fetchMoreHandler = ({fetchMore, error, isLoading}) => fetchMore && (
+const fetchMoreHandler = ({ fetchMore, error, isLoading }) => fetchMore && (
   (...args) => !isLoading && !error && (
     fetchMore(...args)
   )
 );
 
 const FeedView = enhance(
-    ({
-      isLoading,
-      refetch,
-      content,
-      error,
-      fetchMore,
-      numColumns,
-      renderItem,
-      ItemComponent,
-      ListEmptyComponent,
-      ...otherProps
-    }) => {
-      let itemRenderer = renderItem;
-      if (!itemRenderer) {
-        itemRenderer = defaultFeedItemRenderer(ItemComponent);
-      }
-      return (
-        <FeedList
-          {...otherProps}
-          renderItem={itemRenderer}
-          refreshing={isLoading}
-          onRefresh={refetchHandler({isLoading, refetch})}
-          onEndReached={fetchMoreHandler({fetchMore, error, isLoading})}
-          numColumns={numColumns}
-          data={content}
-          ListEmptyComponent={error && !isLoading && (!content || !content.length) ? (
+  ({
+    isLoading,
+    refetch,
+    content,
+    error,
+    fetchMore,
+    numColumns,
+    renderItem,
+    ItemComponent,
+    ListEmptyComponent,
+    ...otherProps
+  }) => {
+    let itemRenderer = renderItem;
+    if (!itemRenderer) {
+      itemRenderer = defaultFeedItemRenderer(ItemComponent);
+    }
+    return (
+      <FeedList
+        {...otherProps}
+        renderItem={itemRenderer}
+        refreshing={isLoading}
+        onRefresh={refetchHandler({ isLoading, refetch })}
+        onEndReached={fetchMoreHandler({ fetchMore, error, isLoading })}
+        numColumns={numColumns}
+        data={content}
+        ListEmptyComponent={error && !isLoading && (!content || !content.length) ? (
           <ErrorCard error={error} />
         ) : ListEmptyComponent}
-        />
-      );
-    },
+      />
+    );
+  },
 );
 
 FeedView.defaultProps = {
   isLoading: false,
   onEndReachedThreshold: 0.7,
-  keyExtractor: (item) => item && (item.id || item.entryId),
+  keyExtractor: item => item && (item.id || item.entryId),
   content: [],
   refetch: undefined,
   fetchMore: undefined,

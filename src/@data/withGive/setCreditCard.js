@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 export const MUTATION = gql`
   mutation setCreditCard($cardNumber: String!, $expirationDate: String!, $cvv: String) {
@@ -8,8 +8,8 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    setCreditCard: (props) => (mutate({
+  props: ({ mutate }) => ({
+    setCreditCard: props => (mutate({
       variables: {
         cardNumber: props.cardNumber,
         expirationDate: props.expirationDate,

@@ -1,18 +1,20 @@
 import React from 'react';
-import {ScrollView, Linking, Platform} from 'react-native';
-import {withProps, compose} from 'recompose';
+import { ScrollView, Linking, Platform } from 'react-native';
+import { withProps, compose } from 'recompose';
 import SafeAreaView from '@ui/SafeAreaView';
 import PaddedView from '@ui/PaddedView';
-import TableView, {Cell, CellText, CellIcon, Divider} from '@ui/TableView';
-import {Link, withRouter} from '@ui/NativeWebRouter';
+import TableView, {
+  Cell, CellText, CellIcon, Divider,
+} from '@ui/TableView';
+import { Link, withRouter } from '@ui/NativeWebRouter';
 import Touchable from '@ui/Touchable';
 import withUser from '@data/withUser';
-import {withShowOnboarding} from '@data/withOnboarding';
+import { withShowOnboarding } from '@data/withOnboarding';
 import UploadProfileImageForm from '@ui/forms/UploadProfileImageForm';
 
 import Layout from './Layout';
 
-export {ProfileDetails, ProfileAddress, ChangePassword} from './forms';
+export { ProfileDetails, ProfileAddress, ChangePassword } from './forms';
 
 const feedbackLink = 'mailto:web.helpdesk@newspring.cc';
 const handleFeedback = () => {
@@ -24,21 +26,21 @@ const handleFeedback = () => {
 };
 
 const LogoutTouchable = compose(
-    withUser,
-    withRouter,
-    withProps(({logout, history}) => ({
-      async onPress() {
-        if (Platform.OS === 'web') {
-          history.push('/give/now'); // redirect to home page
-        }
-        await logout();
-      },
-    })),
+  withUser,
+  withRouter,
+  withProps(({ logout, history }) => ({
+    async onPress() {
+      if (Platform.OS === 'web') {
+        history.push('/give/now'); // redirect to home page
+      }
+      await logout();
+    },
+  })),
 )(Touchable);
 
 const ShowOnboardingTouchable = compose(
-    withShowOnboarding,
-    withProps(({showOnboarding}) => ({onPress: showOnboarding})),
+  withShowOnboarding,
+  withProps(({ showOnboarding }) => ({ onPress: showOnboarding })),
 )(Touchable);
 
 const Arrow = withProps({

@@ -1,7 +1,7 @@
-import React, {PureComponent} from 'react';
-import {Animated, Platform, Image} from 'react-native';
+import React, { PureComponent } from 'react';
+import { Animated, Platform, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import {every} from 'lodash';
+import { every } from 'lodash';
 import makeCancelable from '@utils/makeCancelable';
 import styled from '@ui/styled';
 
@@ -31,18 +31,18 @@ export const getCachedSources = (_sources = []) => {
   let sources = _sources;
   if (!Array.isArray(sources)) sources = [sources];
   sources = sources.map((source) => {
-    if (typeof source === 'string') return {url: source};
+    if (typeof source === 'string') return { url: source };
     return source;
   });
 
-  return sources.map((source) => ({
+  return sources.map(source => ({
     uri: (source.url || '').replace(/^http:\/\/|^\/\//i, 'https://'),
     ...source,
     ...(sizeCache[getCacheKey(source)] || {}),
   }));
 };
 
-export const updateCache = (sources) => Promise.all(getCachedSources(sources).map((source) => {
+export const updateCache = sources => Promise.all(getCachedSources(sources).map((source) => {
   const key = getCacheKey(source);
   if (sizeCache[key] || !key) return Promise.resolve(source);
   return (new Promise((resolve, reject) => {
@@ -54,7 +54,7 @@ export const updateCache = (sources) => Promise.all(getCachedSources(sources).ma
   });
 }));
 
-const withBackgroundColor = styled(({theme}) => ({
+const withBackgroundColor = styled(({ theme }) => ({
   backgroundColor: theme.colors.background.inactive,
 }));
 
@@ -83,6 +83,7 @@ class ConnectedImage extends PureComponent {
   componentWillMount() {
     this.updateCache(this.props.source);
   }
+
   componentWillReceiveProps(newProps) {
     this.updateCache(newProps.source);
   }
@@ -116,7 +117,7 @@ class ConnectedImage extends PureComponent {
   }
 
   get isLoading() {
-    return this.props.isLoading || !every(this.state.source, (image) => image.width && image.height);
+    return this.props.isLoading || !every(this.state.source, image => image.width && image.height);
   }
 
   imageOpacity = new Animated.Value(0);
@@ -127,15 +128,15 @@ class ConnectedImage extends PureComponent {
       const newSource = getCachedSources(sources);
       const oldSource = this.state.source || [];
 
-      if (newSource.length !== oldSource.length ||
-        newSource.find((source, i) => (
-          !oldSource[i] ||
-          getCacheKey(source) !== getCacheKey(oldSource[i]) ||
-          source.width !== oldSource[i].width ||
-          source.height !== oldSource[i].height
+      if (newSource.length !== oldSource.length
+        || newSource.find((source, i) => (
+          !oldSource[i]
+          || getCacheKey(source) !== getCacheKey(oldSource[i])
+          || source.width !== oldSource[i].width
+          || source.height !== oldSource[i].height
         ))
       ) {
-        this.setState({source: getCachedSources(sources)});
+        this.setState({ source: getCachedSources(sources) });
       }
     }).catch(() => {
       // todo: Right now, if there's an error on connected image that means one of two things:
@@ -149,7 +150,7 @@ class ConnectedImage extends PureComponent {
   }
 
   render() {
-    let {source} = this.state;
+    let { source } = this.state;
     if (!Array.isArray(source)) source = [source];
 
     // react-native-web currently doesn't support array-based Image sources
@@ -167,7 +168,7 @@ class ConnectedImage extends PureComponent {
           {...otherProps}
           source={source}
           onLoad={this.onLoad}
-          style={[this.aspectRatio, {opacity: this.imageOpacity}, style]}
+          style={[this.aspectRatio, { opacity: this.imageOpacity }, style]}
         />
       </SkeletonImage>
     );

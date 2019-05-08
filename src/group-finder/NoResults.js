@@ -1,12 +1,12 @@
 import React from 'react';
-import Card, {CardContent} from '@ui/Card';
-import {BodyText} from '@ui/typography';
-import {ButtonLink} from '@ui/Button';
+import Card, { CardContent } from '@ui/Card';
+import { BodyText } from '@ui/typography';
+import { ButtonLink } from '@ui/Button';
 import styled from '@ui/styled';
 import PaddedView from '@ui/PaddedView';
 import WebBrowser from '@ui/WebBrowser';
 
-const StyledBodyText = styled({textAlign: 'center'})(BodyText);
+const StyledBodyText = styled({ textAlign: 'center' })(BodyText);
 
 const AdUnit = () => (
   <Card>

@@ -1,40 +1,42 @@
 import React from 'react';
-import {compose, pure, setPropTypes, nest} from 'recompose';
+import {
+  compose, pure, setPropTypes, nest,
+} from 'recompose';
 import PropTypes from 'prop-types';
-import {Platform} from 'react-native';
-import {TabViewPagerExperimental} from 'react-native-tab-view';
+import { Platform } from 'react-native';
+import { TabViewPagerExperimental } from 'react-native-tab-view';
 import 'react-native-gesture-handler';
 
-import MediaQuery, {enhancer as mediaQuery} from '@ui/MediaQuery';
-import {asModal} from '@ui/ModalView';
-import {withTheme} from '@ui/theme';
+import MediaQuery, { enhancer as mediaQuery } from '@ui/MediaQuery';
+import { asModal } from '@ui/ModalView';
+import { withTheme } from '@ui/theme';
 import styled from '@ui/styled';
-import {ResponsiveSideBySideView, Left, Right} from '@ui/SideBySideView';
+import { ResponsiveSideBySideView, Left, Right } from '@ui/SideBySideView';
 import PaddedView from '@ui/PaddedView';
 import LoginForm from '@ui/forms/LoginForm';
 import SignUpForm from '@ui/forms/SignUpForm';
 import SafeAreaView from '@ui/SafeAreaView';
-import {H1, H3, H7} from '@ui/typography';
+import { H1, H3, H7 } from '@ui/typography';
 import KeyboardAwareScrollView from '@ui/KeyboardAwareScrollView';
-import TabView, {SceneMap} from '@ui/TabView';
+import TabView, { SceneMap } from '@ui/TabView';
 import Hero from '@ui/Hero';
 import Video from '@ui/VideoPlayer';
 
-export {default as ForgotPassword} from './ForgotPassword';
-export {default as ResetPassword} from './ResetPassword';
+export { default as ForgotPassword } from './ForgotPassword';
+export { default as ResetPassword } from './ResetPassword';
 
 const enhance = compose(
-    pure,
-    setPropTypes({
-      webBackgroundSource: PropTypes.string,
-      webBackgroundThumbnail: PropTypes.string,
-      isModal: PropTypes.bool,
-    }),
-    mediaQuery(({md}) => ({maxWidth: md}), asModal),
-    withTheme(({theme: {web: {backgroundVideo, backgroundVideoThumbnail = {}} = {}} = {}}) => ({
-      webBackgroundSource: backgroundVideo,
-      webBackgroundThumbnail: backgroundVideoThumbnail,
-    })),
+  pure,
+  setPropTypes({
+    webBackgroundSource: PropTypes.string,
+    webBackgroundThumbnail: PropTypes.string,
+    isModal: PropTypes.bool,
+  }),
+  mediaQuery(({ md }) => ({ maxWidth: md }), asModal),
+  withTheme(({ theme: { web: { backgroundVideo, backgroundVideoThumbnail = {} } = {} } = {} }) => ({
+    webBackgroundSource: backgroundVideo,
+    webBackgroundThumbnail: backgroundVideoThumbnail,
+  })),
 );
 
 const flexed = styled({
@@ -43,13 +45,13 @@ const flexed = styled({
 const FlexedResponsiveSideBySideView = flexed(ResponsiveSideBySideView);
 const FlexedRight = flexed(Right);
 
-const fixedWidthLeftSide = styled(({theme}) => ({
+const fixedWidthLeftSide = styled(({ theme }) => ({
   maxWidth: theme.breakpoints.sm,
   flex: 1,
   backgroundColor: theme.colors.background.default,
 }));
-const LeftSide = compose(mediaQuery(({md}) => ({minWidth: md}), fixedWidthLeftSide, flexed))(
-    Left,
+const LeftSide = compose(mediaQuery(({ md }) => ({ minWidth: md }), fixedWidthLeftSide, flexed))(
+  Left,
 );
 
 const tabScenes = SceneMap({
@@ -57,9 +59,9 @@ const tabScenes = SceneMap({
   signup: nest(PaddedView, SignUpForm),
 });
 
-const tabRoutes = [{title: 'Sign In', key: 'login'}, {title: 'Register', key: 'signup'}];
+const tabRoutes = [{ title: 'Sign In', key: 'login' }, { title: 'Register', key: 'signup' }];
 
-const Banner = styled(({theme}) => ({
+const Banner = styled(({ theme }) => ({
   alignItems: 'center',
   backgroundColor: theme.colors.primary,
   ...Platform.select({
@@ -69,18 +71,18 @@ const Banner = styled(({theme}) => ({
   }),
 }))(SafeAreaView);
 
-const BannerContent = styled({alignItems: 'center'})(PaddedView);
+const BannerContent = styled({ alignItems: 'center' })(PaddedView);
 
-const renderPager = (props) => <TabViewPagerExperimental {...props} />;
+const renderPager = props => <TabViewPagerExperimental {...props} />;
 
-const asBannerText = styled(({theme}) => ({
+const asBannerText = styled(({ theme }) => ({
   color: theme.colors.lightPrimary,
   textAlign: 'center',
 }));
 const BannerH3 = asBannerText(H3);
 const BannerH7 = asBannerText(H7);
 
-const Auth = enhance(({isModal, webBackgroundSource, webBackgroundThumbnail}) => (
+const Auth = enhance(({ isModal, webBackgroundSource, webBackgroundThumbnail }) => (
   <FlexedResponsiveSideBySideView>
     <LeftSide>
       <KeyboardAwareScrollView>
@@ -98,10 +100,10 @@ const Auth = enhance(({isModal, webBackgroundSource, webBackgroundThumbnail}) =>
       </KeyboardAwareScrollView>
     </LeftSide>
     {isModal ? null : (
-      <MediaQuery minWidth={'md'}>
+      <MediaQuery minWidth="md">
         <FlexedRight>
           <Hero
-            background={
+            background={(
               <Video
                 src={webBackgroundSource}
                 posterSrc={webBackgroundThumbnail}
@@ -109,7 +111,7 @@ const Auth = enhance(({isModal, webBackgroundSource, webBackgroundThumbnail}) =>
                 shouldPlay
                 isLooping
               />
-            }
+)}
           >
             <H1>Welcome to NewSpring</H1>
           </Hero>

@@ -1,7 +1,7 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import identifyCategory from '@data/utils/identifyCategory';
-import {contentCard, groupCard} from './fragments';
+import { contentCard, groupCard } from './fragments';
 
 export const recentLikesQuery = gql`
   query RecentlyLiked {
@@ -15,7 +15,7 @@ export const recentLikesQuery = gql`
 `;
 
 export default graphql(recentLikesQuery, {
-  props: ({data} = {}) => ({
+  props: ({ data } = {}) => ({
     error: data.error,
     content: data.recentlyLiked && data.recentlyLiked.map(identifyCategory),
     isLoading: data.loading,

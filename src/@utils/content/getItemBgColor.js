@@ -1,4 +1,4 @@
-import {get} from 'lodash';
+import { get } from 'lodash';
 import Color from 'color';
 
 export const getItemBgColor = (item) => {

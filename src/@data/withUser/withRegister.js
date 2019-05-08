@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import get from 'lodash/get';
-import {AsyncStorage} from 'react-native';
-import {track, events, categories} from '@utils/analytics';
+import { AsyncStorage } from 'react-native';
+import { track, events, categories } from '@utils/analytics';
 
-import {QUERY as LOGGED_IN_QUERY} from './withIsLoggedIn';
+import { QUERY as LOGGED_IN_QUERY } from './withIsLoggedIn';
 
 export const MUTATION = gql`
   mutation registerUser(
@@ -21,7 +21,7 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
+  props: ({ mutate }) => ({
     register: async (params = {}) => {
       try {
         const {
@@ -35,13 +35,13 @@ export default graphql(MUTATION, {
             firstName,
             lastName,
           },
-          update: async (store, {data: {registerUser}}) => {
-            const data = store.readQuery({query: LOGGED_IN_QUERY});
+          update: async (store, { data: { registerUser } }) => {
+            const data = store.readQuery({ query: LOGGED_IN_QUERY });
             data.person = {
               __typename: 'User',
               id: registerUser.id,
             };
-            store.writeQuery({query: LOGGED_IN_QUERY, data});
+            store.writeQuery({ query: LOGGED_IN_QUERY, data });
             track(events.Login, categories.Account, data.person.id);
             track(events.Register, categories.Account, data.person.id);
             await AsyncStorage.setItem('authToken', get(registerUser, 'token'));

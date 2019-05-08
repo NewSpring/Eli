@@ -1,10 +1,10 @@
 
 
-function scriptureList({scripture, commas = true} = {}) {
+function scriptureList({ scripture, commas = true } = {}) {
   if (!scripture && commas) return '';
   if (!scripture) return [];
 
-  const combo = scripture.map(({book, passage}) => (
+  const combo = scripture.map(({ book, passage }) => (
     `${book} ${passage}`
   ));
 

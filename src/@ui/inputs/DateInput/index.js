@@ -1,13 +1,13 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import {Animated} from 'react-native';
+import { Animated } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Chip from '@ui/Chip';
 import InputWrapper from '../InputWrapper';
 import FloatingLabel from '../FloatingLabel';
 
-const chipStyle = {marginTop: 5};
+const chipStyle = { marginTop: 5 };
 
 class DateInput extends PureComponent {
   static propTypes = {
@@ -26,10 +26,10 @@ class DateInput extends PureComponent {
     isVisible: false,
   };
 
-  handleOpen = () => this.setState({isVisible: true});
+  handleOpen = () => this.setState({ isVisible: true });
 
   handleClose = () => {
-    this.setState({isVisible: false});
+    this.setState({ isVisible: false });
     if (this.props.onBlur) this.props.onBlur();
   };
 
@@ -44,11 +44,10 @@ class DateInput extends PureComponent {
   render() {
     let date = this.props.value;
     if (typeof date === 'string') date = moment(date).toDate();
-    const minimumDate =
-      this.props.minimumDate ||
-      moment()
-          .add(1, 'days')
-          .toDate();
+    const minimumDate = this.props.minimumDate
+      || moment()
+        .add(1, 'days')
+        .toDate();
     return (
       <InputWrapper>
         <Chip

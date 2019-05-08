@@ -1,4 +1,4 @@
-import {AsyncStorage} from 'react-native';
+import { AsyncStorage } from 'react-native';
 
 export async function onboarded() {
   let didOnboard = await AsyncStorage.getItem('onboarded');

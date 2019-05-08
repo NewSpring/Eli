@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {compose, pure, setPropTypes} from 'recompose';
-import {View, Platform, StyleSheet} from 'react-native';
+import { compose, pure, setPropTypes } from 'recompose';
+import { View, Platform, StyleSheet } from 'react-native';
 import PaddedView from '@ui/PaddedView';
 import ProgressiveImage from '@ui/ProgressiveImage';
-import {H5, H7} from '@ui/typography';
-import {withThemeMixin} from '@ui/theme';
+import { H5, H7 } from '@ui/typography';
+import { withThemeMixin } from '@ui/theme';
 import styled from '@ui/styled';
 
-const Container = styled(({theme}) => ({
+const Container = styled(({ theme }) => ({
   backgroundColor: theme.colors.background.default,
 }), 'AlbumView.Container')(View);
 
@@ -28,7 +28,7 @@ const AlbumArt = styled({
   }),
 }, 'AlbumView.AlbumArt')(ProgressiveImage);
 
-const BlurredImage = styled(({theme}) => ({
+const BlurredImage = styled(({ theme }) => ({
   ...StyleSheet.absoluteFillObject,
   opacity: theme.alpha.low,
 }), 'AlbumView.BlurredImage')(ProgressiveImage);
@@ -49,15 +49,15 @@ const Artist = styled({
 }, 'AlbumView.Artist')(H7);
 
 const enhance = compose(
-    withThemeMixin({type: 'dark'}),
-    pure,
-    setPropTypes({
-      title: PropTypes.string,
-      artist: PropTypes.string,
-      blurredImage: ProgressiveImage.propTypes.source,
-      albumImage: ProgressiveImage.propTypes.source,
-      isLoading: PropTypes.bool,
-    }),
+  withThemeMixin({ type: 'dark' }),
+  pure,
+  setPropTypes({
+    title: PropTypes.string,
+    artist: PropTypes.string,
+    blurredImage: ProgressiveImage.propTypes.source,
+    albumImage: ProgressiveImage.propTypes.source,
+    isLoading: PropTypes.bool,
+  }),
 );
 
 const AlbumView = enhance(({

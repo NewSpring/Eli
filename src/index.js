@@ -1,14 +1,16 @@
 import setprototypeof from 'setprototypeof';
-import {AppRegistry, Platform, StyleSheet, View} from 'react-native';
-import {ApolloProvider} from 'react-apollo';
-import {nest, withProps} from 'recompose';
+import {
+  AppRegistry, Platform, StyleSheet, View,
+} from 'react-native';
+import { ApolloProvider } from 'react-apollo';
+import { nest, withProps } from 'recompose';
 
 import Sentry from '@utils/sentry';
 import Settings from '@utils/Settings';
 
-import {ThemeProvider} from '@ui/theme';
+import { ThemeProvider } from '@ui/theme';
 import FontLoader from '@ui/FontLoader';
-import {ActionSheetProvider} from '@ui/ActionSheet';
+import { ActionSheetProvider } from '@ui/ActionSheet';
 import Client from '@data/Client';
 import OnboardingModal from '@ui/OnboardingModal';
 import orientation from '@utils/orientation';
@@ -44,14 +46,14 @@ const WebLayoutFix = styled({
 })(View);
 
 const App = nest(
-    WebLayoutFix,
-    withProps({client: Client})(ApolloProvider),
-    ThemeProvider,
-    FontLoader,
-    ActionSheetProvider,
-    SentryContext,
-    OnboardingModal,
-    AppRouter,
+  WebLayoutFix,
+  withProps({ client: Client })(ApolloProvider),
+  ThemeProvider,
+  FontLoader,
+  ActionSheetProvider,
+  SentryContext,
+  OnboardingModal,
+  AppRouter,
 );
 
 orientation.allow(orientation.Orientation.PORTRAIT_UP);

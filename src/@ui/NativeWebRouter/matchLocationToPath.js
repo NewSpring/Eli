@@ -1,4 +1,4 @@
-import {matchPath} from 'react-router';
+import { matchPath } from 'react-router';
 
 const matchLocationToPath = (path, location) => matchPath(path, {
   path: location.pathname,

@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 export const QUERY = gql`
   query GetAddressState($state: Int!, $country: Int!) {
@@ -41,15 +41,15 @@ export default graphql(QUERY, {
       country: 45,
     },
   },
-  props({ownProps, data}) {
+  props({ ownProps, data }) {
     const {
       countries, states, person, loading,
     } = data;
 
     return {
       isLoading: ownProps.isLoading || loading,
-      countries: (countries || []).map((c) => ({label: c.description, id: c.value})),
-      states: (states || []).map((s) => ({label: s.description, id: s.value})),
+      countries: (countries || []).map(c => ({ label: c.description, id: c.value })),
+      states: (states || []).map(s => ({ label: s.description, id: s.value })),
       person,
     };
   },

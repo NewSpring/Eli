@@ -1,7 +1,7 @@
-import {AsyncStorage} from 'react-native';
-import {setContext} from 'apollo-link-context';
+import { AsyncStorage } from 'react-native';
+import { setContext } from 'apollo-link-context';
 
-export default setContext(async (_, {headers}) => {
+export default setContext(async (_, { headers }) => {
   try {
     // get the authentication token from local storage if it exists
     const token = await AsyncStorage.getItem('authToken');

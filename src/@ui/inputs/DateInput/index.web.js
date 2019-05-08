@@ -1,45 +1,45 @@
-import React, {PureComponent} from 'react';
-import {createElement} from 'react-native-web';
-import {compose, mapProps} from 'recompose';
+import React, { PureComponent } from 'react';
+import { createElement } from 'react-native-web';
+import { compose, mapProps } from 'recompose';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import withInputControlStyles from '@ui/inputs/withInputControlStyles';
 
-import {Text as TextInput} from '@ui/inputs';
+import { Text as TextInput } from '@ui/inputs';
 
 const displayFormat = 'YYYY-MM-DD';
 
 const NativeMappedDateInput = compose(
-    mapProps(({
-      onChangeText,
-      style,
-      ...otherProps
-    }) => ({
-      type: 'date',
-      onChange: (e) => {
-        const text = e.target.value;
-        if (onChangeText) {
-          onChangeText(text);
-        }
+  mapProps(({
+    onChangeText,
+    style,
+    ...otherProps
+  }) => ({
+    type: 'date',
+    onChange: (e) => {
+      const text = e.target.value;
+      if (onChangeText) {
+        onChangeText(text);
+      }
+    },
+    style: [ // this will all get flattened by "withInputControlStyles" below
+      {
+        appearance: 'none',
+        backgroundColor: 'transparent',
+        borderColor: 'black',
+        borderRadius: 0,
+        borderWidth: 0,
+        boxSizing: 'border-box',
+        color: 'inherit',
+        padding: 0,
+        resize: 'none',
       },
-      style: [ // this will all get flattened by "withInputControlStyles" below
-        {
-          appearance: 'none',
-          backgroundColor: 'transparent',
-          borderColor: 'black',
-          borderRadius: 0,
-          borderWidth: 0,
-          boxSizing: 'border-box',
-          color: 'inherit',
-          padding: 0,
-          resize: 'none',
-        },
-        style,
-      ],
-      ...otherProps,
-    })),
-    withInputControlStyles,
-)((props) => createElement('input', props));
+      style,
+    ],
+    ...otherProps,
+  })),
+  withInputControlStyles,
+)(props => createElement('input', props));
 
 class DateInput extends PureComponent {
   static propTypes = {
@@ -53,7 +53,7 @@ class DateInput extends PureComponent {
     internalDateValue: moment(this.props.value).format(displayFormat),
   };
 
-  componentWillReceiveProps({value}) {
+  componentWillReceiveProps({ value }) {
     if (value !== this.props.value) {
       this.setState({
         internalDateValue: moment(value).format(displayFormat),
@@ -68,10 +68,10 @@ class DateInput extends PureComponent {
   }
 
   handleChange = (text) => {
-    this.setState({internalDateValue: text});
+    this.setState({ internalDateValue: text });
   }
 
-  parseValue = (value) => moment(value, displayFormat).toDate();
+  parseValue = value => moment(value, displayFormat).toDate();
 
   render() {
     const {

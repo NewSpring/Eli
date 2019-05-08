@@ -1,6 +1,6 @@
 import React from 'react';
 import KeyboardAwareScrollView from '@ui/KeyboardAwareScrollView';
-import {Switch, Route, withRouter} from '@ui/NativeWebRouter';
+import { Switch, Route, withRouter } from '@ui/NativeWebRouter';
 import Header from '@ui/Header';
 import BackgroundView from '@ui/BackgroundView';
 import Progress from '@ui/Progress';
@@ -16,7 +16,7 @@ function lastDirectory(pathname = '') {
   return pathParts.slice(pathParts.length - 1)[0];
 }
 
-const progressForLocation = ({pathname}) => {
+const progressForLocation = ({ pathname }) => {
   let step = 0;
   const directory = lastDirectory(pathname);
   if (directory === 'address') step = 1;
@@ -25,7 +25,7 @@ const progressForLocation = ({pathname}) => {
   return step / 3; // 3 steps == start the user with progress
 };
 
-const Checkout = withRouter(({match, location}) => (
+const Checkout = withRouter(({ match, location }) => (
   <ModalView backTo="/give" onBackReplace>
     <BackgroundView>
       <Header titleText="Add Account" backButton />

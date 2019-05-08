@@ -1,7 +1,7 @@
-import {AsyncStorage} from 'react-native';
+import { AsyncStorage } from 'react-native';
 import query from './query';
 
-export async function didOnboard(result, variables, {cache}) {
+export async function didOnboard(result, variables, { cache }) {
   cache.writeQuery({
     query,
     variables,
@@ -12,7 +12,7 @@ export async function didOnboard(result, variables, {cache}) {
   return AsyncStorage.setItem('onboarded', 'true');
 }
 
-export async function showOnboarding(result, variables, {cache}) {
+export async function showOnboarding(result, variables, { cache }) {
   cache.writeQuery({
     query,
     variables,

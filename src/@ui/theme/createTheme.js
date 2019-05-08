@@ -1,4 +1,4 @@
-import {merge, mapValues} from 'lodash';
+import { merge, mapValues } from 'lodash';
 import PropTypes from 'prop-types';
 
 import * as defaultTheme from './defaultTheme';
@@ -12,8 +12,8 @@ const {
 // so we can merge a clean object. It's recursive and fairly abstract for flexibility.
 export const getDynamicThemePart = (part, theme) => {
   if (typeof part === 'function') return part(theme);
-  if (Array.isArray(part)) return part.map((item) => getDynamicThemePart(item, theme));
-  if (typeof part === 'object') return mapValues(part, (value) => getDynamicThemePart(value, theme));
+  if (Array.isArray(part)) return part.map(item => getDynamicThemePart(item, theme));
+  if (typeof part === 'object') return mapValues(part, value => getDynamicThemePart(value, theme));
   return part;
 };
 
@@ -38,11 +38,11 @@ const createTheme = ({
   };
 
   // inject theme type
-  merge(theme, getDynamicThemePart({types}, theme));
-  merge(theme, getDynamicThemePart({types: typesInput}, theme));
+  merge(theme, getDynamicThemePart({ types }, theme));
+  merge(theme, getDynamicThemePart({ types: typesInput }, theme));
   const availableTypes = theme.types;
   if (!availableTypes[theme.type]) throw new Error(`The theme type ${theme.type} is not supported`);
-  merge(theme, availableTypes[typeInput], {colors: colorsInput});
+  merge(theme, availableTypes[typeInput], { colors: colorsInput });
 
 
   // mixin other theme defaults (that might depend on base theme)

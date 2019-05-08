@@ -1,8 +1,8 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import cashTagQuery from './cashTagQuery';
 
 export default graphql(cashTagQuery, {
-  props: ({data: {error, account}}) => ({
+  props: ({ data: { error, account } }) => ({
     error,
     account,
   }),
@@ -12,4 +12,3 @@ export default graphql(cashTagQuery, {
     },
   }),
 });
-

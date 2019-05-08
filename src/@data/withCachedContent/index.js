@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
-import {merge} from 'lodash';
-import {contentDataImagesFragment} from '@data/fragments';
+import { graphql } from 'react-apollo';
+import { merge } from 'lodash';
+import { contentDataImagesFragment } from '@data/fragments';
 
 const cachedContentQuery = gql`
   query getCachedContent($id: ID!) {
@@ -46,8 +46,8 @@ const cachedContentParentQuery = gql`
   ${contentDataImagesFragment}
 `;
 
-const withQuery = (query) => graphql(query, {
-  props: ({data: {error, content, loading}, ownProps}) => ({
+const withQuery = query => graphql(query, {
+  props: ({ data: { error, content, loading }, ownProps }) => ({
     error: error || ownProps.error,
     content: merge({}, (content || {}), (ownProps.content || {})),
     isLoading: ownProps.isLoading || loading,

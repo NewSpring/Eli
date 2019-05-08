@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Card, {CardContent} from '@ui/Card';
-import {H4} from '@ui/typography';
-import {Link} from '@ui/NativeWebRouter';
+import Card, { CardContent } from '@ui/Card';
+import { H4 } from '@ui/typography';
+import { Link } from '@ui/NativeWebRouter';
 import Button from '@ui/Button';
 import styled from '@ui/styled';
 import PaddedView from '@ui/PaddedView';
 
-const Text = styled({textAlign: 'center'})(H4);
+const Text = styled({ textAlign: 'center' })(H4);
 
 const AdUnit = () => (
   <Card>

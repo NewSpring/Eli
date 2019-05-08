@@ -1,14 +1,14 @@
 import React from 'react';
-import {Platform, View} from 'react-native';
-import {get, without} from 'lodash';
-import {compose, withProps} from 'recompose';
+import { Platform, View } from 'react-native';
+import { get, without } from 'lodash';
+import { compose, withProps } from 'recompose';
 
 import Header from '@ui/Header';
 import BackgroundView from '@ui/BackgroundView';
 import withGroupFinderResults from '@data/withGroupFinderResults';
 import FeedView from '@ui/FeedView';
-import {parse, stringify} from '@utils/queryString';
-import SideBySideView, {Left, Right} from '@ui/SideBySideView';
+import { parse, stringify } from '@utils/queryString';
+import SideBySideView, { Left, Right } from '@ui/SideBySideView';
 import MediaQuery from '@ui/MediaQuery';
 import styled from '@ui/styled';
 import Meta from '@ui/Meta';
@@ -19,20 +19,20 @@ import NoResults from './NoResults';
 import GroupCard from './GroupCard';
 import Filter from './Filter';
 
-const FlexedSideBySideView = styled({flex: 1})(SideBySideView);
-const FlexedLeft = styled({flex: 1})(Left);
+const FlexedSideBySideView = styled({ flex: 1 })(SideBySideView);
+const FlexedLeft = styled({ flex: 1 })(Left);
 
-const withSearchProps = withProps(({location: {search = ''} = {}}) => ({
+const withSearchProps = withProps(({ location: { search = '' } = {} }) => ({
   query: parse(search),
 }));
 
 const enhance = compose(
-    withSearchProps,
-    withProps(({query}) => query),
-    withGroupFinderResults,
+  withSearchProps,
+  withProps(({ query }) => query),
+  withGroupFinderResults,
 );
 
-const tagPressHandler = ({query, location, history}) => (value) => {
+const tagPressHandler = ({ query, location, history }) => (value) => {
   const sanitizedValue = value.toLowerCase();
   let replaceTags = query.tags || [];
   if (replaceTags.indexOf(sanitizedValue) > -1) {
@@ -46,27 +46,27 @@ const tagPressHandler = ({query, location, history}) => (value) => {
   })}`);
 };
 
-const campusSelectHandler = ({query, location, history}) => (campus) => {
+const campusSelectHandler = ({ query, location, history }) => (campus) => {
   const sanitizedValue = campus.toLowerCase();
   const campuses = get(query, 'campuses', []);
   const selected = campuses.indexOf(sanitizedValue) >= 0;
 
-  let queryToReplace = {...query};
+  let queryToReplace = { ...query };
   if (selected) {
-    queryToReplace = {...queryToReplace, campuses: without(campuses, sanitizedValue)};
+    queryToReplace = { ...queryToReplace, campuses: without(campuses, sanitizedValue) };
   } else {
-    queryToReplace = {...queryToReplace, campuses: [...campuses, sanitizedValue]};
+    queryToReplace = { ...queryToReplace, campuses: [...campuses, sanitizedValue] };
   }
 
   history.replace(`${location.pathname}?${stringify(queryToReplace)}`);
 };
 
-const filterUpdateHandler = ({query, location, history}) => (newQuery) => {
-  const queryToReplace = {...query, ...newQuery};
+const filterUpdateHandler = ({ query, location, history }) => (newQuery) => {
+  const queryToReplace = { ...query, ...newQuery };
   history.replace(`${location.pathname}?${stringify(queryToReplace)}`);
 };
 
-const Results = enhance((props) => (
+const Results = enhance(props => (
   <BackgroundView>
     <Meta
       title="Group Finder - Results"
@@ -83,7 +83,7 @@ const Results = enhance((props) => (
           fetchMore={props.fetchMore}
           refetch={props.refetch}
           refreshing={props.isLoading}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <GroupCard
               {...item}
               selectedTags={props.query.tags}
@@ -94,7 +94,7 @@ const Results = enhance((props) => (
           )}
           ListEmptyComponent={NoResults}
           ListFooterComponent={AdUnit}
-          ListHeaderComponent={
+          ListHeaderComponent={(
             <View>
               <Filter
                 query={props.query}
@@ -103,7 +103,7 @@ const Results = enhance((props) => (
                 numResults={get(props, 'content.count', 0)}
               />
             </View>
-          }
+)}
         />
       </FlexedLeft>
       {Platform.OS === 'web' ? (

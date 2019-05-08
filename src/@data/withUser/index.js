@@ -1,4 +1,4 @@
-import {compose} from 'recompose';
+import { compose } from 'recompose';
 import withAddressState from './withAddressState';
 import withLogin from './withLogin';
 import withLogout from './withLogout';
@@ -13,16 +13,16 @@ import withUpdateProfile from './withUpdateProfile';
 import withAttachPhotoIdToUser from './withAttachPhotoIdToUser';
 
 export default compose(
-    withAddressState,
-    withLogin,
-    withLogout,
-    withRegister,
-    withChangePassword,
-    withForgotPassword,
-    withResetPassword,
-    withIsLoggedIn,
-    withUser,
-    withUpdateHomeAddress,
-    withUpdateProfile,
-    withAttachPhotoIdToUser,
+  withAddressState,
+  withLogin,
+  withLogout,
+  withRegister,
+  withChangePassword,
+  withForgotPassword,
+  withResetPassword,
+  withIsLoggedIn,
+  withUser,
+  withUpdateHomeAddress,
+  withUpdateProfile,
+  withAttachPhotoIdToUser,
 );

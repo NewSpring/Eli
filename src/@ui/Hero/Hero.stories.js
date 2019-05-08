@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {storiesOf} from '@storybook/react-native';
-import {H1} from '@ui/typography';
+import { StyleSheet } from 'react-native';
+import { storiesOf } from '@storybook/react-native';
+import { H1 } from '@ui/typography';
 import FlexedView from '@ui/FlexedView';
 import Video from '@ui/VideoPlayer';
 
-import Hero, {BackgroundImage} from './';
+import Hero, { BackgroundImage } from '.';
 
 const BackgroundVideo = () => (
   <Video
@@ -18,25 +18,25 @@ const BackgroundVideo = () => (
 );
 
 storiesOf('Hero', module)
-    .addDecorator((renderStory) => (
-      <FlexedView style={StyleSheet.absoluteFill}>{renderStory()}</FlexedView>
-    ))
-    .add('with image background', () => (
-      <Hero
-        brandText="My Cool Church"
-        backgroundOpacity={0.5}
-        background={<BackgroundImage source="https://picsum.photos/600/400/?image=63" />}
-      >
-        <H1>Hello!</H1>
-      </Hero>
-    ))
-    .add('with video background', () => (
-      <Hero brandText="My Cool Church" backgroundOpacity={0.5} background={<BackgroundVideo />}>
-        <H1>Hello!</H1>
-      </Hero>
-    ))
-    .add('with solid background', () => (
-      <Hero brandText="My Cool Church" backgroundColor="salmon">
-        <H1>Hello!</H1>
-      </Hero>
-    ));
+  .addDecorator(renderStory => (
+    <FlexedView style={StyleSheet.absoluteFill}>{renderStory()}</FlexedView>
+  ))
+  .add('with image background', () => (
+    <Hero
+      brandText="My Cool Church"
+      backgroundOpacity={0.5}
+      background={<BackgroundImage source="https://picsum.photos/600/400/?image=63" />}
+    >
+      <H1>Hello!</H1>
+    </Hero>
+  ))
+  .add('with video background', () => (
+    <Hero brandText="My Cool Church" backgroundOpacity={0.5} background={<BackgroundVideo />}>
+      <H1>Hello!</H1>
+    </Hero>
+  ))
+  .add('with solid background', () => (
+    <Hero brandText="My Cool Church" backgroundColor="salmon">
+      <H1>Hello!</H1>
+    </Hero>
+  ));

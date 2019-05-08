@@ -1,10 +1,12 @@
-import {Platform, Text} from 'react-native';
+import { Platform, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose, pure, setPropTypes, defaultProps} from 'recompose';
+import {
+  compose, pure, setPropTypes, defaultProps,
+} from 'recompose';
 import styled from '@ui/styled';
-import {withPlaceholder, Typography} from '@ui/Placeholder';
+import { withPlaceholder, Typography } from '@ui/Placeholder';
 
-const styles = styled(({theme, bold, italic}) => {
+const styles = styled(({ theme, bold, italic }) => {
   let fontStack = theme.typography.fontFamilySerif.regular.default;
   let fontStyle = null;
 
@@ -44,19 +46,19 @@ const styles = styled(({theme, bold, italic}) => {
 }, 'BodyText');
 
 const BodyText = compose(
-    setPropTypes({
-      bold: PropTypes.bool,
-      italic: PropTypes.bool,
-      isLoading: PropTypes.bool, // display loading placeholder
-      ...Text.propTypes,
-    }),
-    defaultProps({
-      bold: false,
-      italic: false,
-    }),
-    styles,
-    withPlaceholder(Typography),
-    pure,
+  setPropTypes({
+    bold: PropTypes.bool,
+    italic: PropTypes.bool,
+    isLoading: PropTypes.bool, // display loading placeholder
+    ...Text.propTypes,
+  }),
+  defaultProps({
+    bold: false,
+    italic: false,
+  }),
+  styles,
+  withPlaceholder(Typography),
+  pure,
 )(Text);
 
 export default BodyText;

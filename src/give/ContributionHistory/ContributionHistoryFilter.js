@@ -1,33 +1,35 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {View} from 'react-native';
-import {withFormik} from 'formik';
+import { View } from 'react-native';
+import { withFormik } from 'formik';
 import moment from 'moment';
 import Yup from 'yup';
-import {compose} from 'recompose';
+import { compose } from 'recompose';
 
-import {DateInput} from '@ui/inputs';
+import { DateInput } from '@ui/inputs';
 import Button from '@ui/Button';
-import {H7} from '@ui/typography';
+import { H7 } from '@ui/typography';
 import styled from '@ui/styled';
 import Touchable from '@ui/Touchable';
-import TableView, {Cell, CellText, CellIcon, Divider} from '@ui/TableView';
-import Chip, {ChipList} from '@ui/Chip';
-import {withTheme} from '@ui/theme';
+import TableView, {
+  Cell, CellText, CellIcon, Divider,
+} from '@ui/TableView';
+import Chip, { ChipList } from '@ui/Chip';
+import { withTheme } from '@ui/theme';
 import PaddedView from '@ui/PaddedView';
 import sentry from '@utils/sentry';
 
-const StyledTableView = styled({marginBottom: 0})(TableView);
+const StyledTableView = styled({ marginBottom: 0 })(TableView);
 
-const StyledH7 = styled(({theme}) => ({
+const StyledH7 = styled(({ theme }) => ({
   color: theme.colors.text.secondary,
 }))(H7);
 
-const Label = styled(({theme}) => ({
+const Label = styled(({ theme }) => ({
   paddingVertical: theme.sizing.baseUnit / 4,
 }))(StyledH7);
 
-const StyledIcon = withTheme(({theme}) => ({
+const StyledIcon = withTheme(({ theme }) => ({
   fill: theme.colors.text.secondary,
 }))(CellIcon);
 
@@ -66,33 +68,33 @@ class ContributionHistoryFilter extends PureComponent {
   dateRanges = [
     {
       key: moment()
-          .subtract(1, 'year')
-          .get('year'),
+        .subtract(1, 'year')
+        .get('year'),
       startDate: moment()
-          .subtract(1, 'year')
-          .startOf('year')
-          .toDate(),
+        .subtract(1, 'year')
+        .startOf('year')
+        .toDate(),
       endDate: moment()
-          .subtract(1, 'year')
-          .endOf('year')
-          .toDate(),
+        .subtract(1, 'year')
+        .endOf('year')
+        .toDate(),
     },
     {
       key: 'Last Month',
       startDate: moment()
-          .subtract(1, 'month')
-          .startOf('month')
-          .toDate(),
+        .subtract(1, 'month')
+        .startOf('month')
+        .toDate(),
       endDate: moment()
-          .subtract(1, 'month')
-          .endOf('month')
-          .toDate(),
+        .subtract(1, 'month')
+        .endOf('month')
+        .toDate(),
     },
     {
       key: 'Year to Date',
       startDate: moment()
-          .startOf('year')
-          .toDate(),
+        .startOf('year')
+        .toDate(),
       endDate: moment().toDate(),
     },
     {
@@ -114,12 +116,11 @@ class ContributionHistoryFilter extends PureComponent {
         <PaddedView>
           <Label>Date Range</Label>
           <ChipList>
-            {this.dateRanges.map(({key, startDate, endDate}) => {
-              const selected =
-                moment(this.props.values.startDate).format('MM/DD/YYYY') ===
-                  moment(startDate).format('MM/DD/YYYY') &&
-                moment(this.props.values.endDate).format('MM/DD/YYYY') ===
-                  moment(endDate).format('MM/DD/YYYY');
+            {this.dateRanges.map(({ key, startDate, endDate }) => {
+              const selected = moment(this.props.values.startDate).format('MM/DD/YYYY')
+                  === moment(startDate).format('MM/DD/YYYY')
+                && moment(this.props.values.endDate).format('MM/DD/YYYY')
+                  === moment(endDate).format('MM/DD/YYYY');
               return (
                 <Chip
                   key={key}
@@ -150,7 +151,7 @@ class ContributionHistoryFilter extends PureComponent {
                   : null
               }
               value={this.props.values.startDate}
-              onChange={(t) => this.props.setFieldValue('startDate', t)}
+              onChange={t => this.props.setFieldValue('startDate', t)}
               onBlur={() => this.props.setFieldTouched('startDate', true)}
               minimumDate={moment.utc('1/1/2000').toDate()}
             />
@@ -162,7 +163,7 @@ class ContributionHistoryFilter extends PureComponent {
                   : null
               }
               value={this.props.values.endDate}
-              onChange={(t) => this.props.setFieldValue('endDate', t)}
+              onChange={t => this.props.setFieldValue('endDate', t)}
               onBlur={() => this.props.setFieldTouched('endDate', true)}
               minimumDate={moment.utc('1/1/2000').toDate()}
             />
@@ -190,7 +191,7 @@ class ContributionHistoryFilter extends PureComponent {
         <Touchable onPress={this.toggle}>
           <Cell>
             <CellText>
-              <StyledH7>{'Filter Transactions'}</StyledH7>
+              <StyledH7>Filter Transactions</StyledH7>
             </CellText>
             <StyledIcon
               name={this.state.isVisible ? 'close' : 'filter'}
@@ -206,29 +207,29 @@ class ContributionHistoryFilter extends PureComponent {
 }
 
 const enhance = compose(
-    withTheme(({theme, ...otherProps}) => ({
-      iconSize: otherProps.iconSize || theme.helpers.rem(1),
-    })),
-    withFormik({
-      mapPropsToValues: ({startDate, endDate}) => ({
-        startDate: startDate ? moment(startDate, 'MM/DD/YYYY').toDate() : null,
-        endDate: endDate ? moment(endDate, 'MM/DD/YYYY').toDate() : null,
-      }),
-      validationSchema: Yup.object().shape({
-        startDate: Yup.date(),
-        endDate: Yup.date(),
-      }),
-      handleSubmit: async (formValues, {props, setSubmitting}) => {
-        try {
-          setSubmitting(true);
-          props.onSubmit(formValues);
-          setSubmitting(false);
-        } catch (e) {
-        // TODO: If there's an error, we want to stay on this page and display it.
-          sentry.captureException(e);
-        }
-      },
+  withTheme(({ theme, ...otherProps }) => ({
+    iconSize: otherProps.iconSize || theme.helpers.rem(1),
+  })),
+  withFormik({
+    mapPropsToValues: ({ startDate, endDate }) => ({
+      startDate: startDate ? moment(startDate, 'MM/DD/YYYY').toDate() : null,
+      endDate: endDate ? moment(endDate, 'MM/DD/YYYY').toDate() : null,
     }),
+    validationSchema: Yup.object().shape({
+      startDate: Yup.date(),
+      endDate: Yup.date(),
+    }),
+    handleSubmit: async (formValues, { props, setSubmitting }) => {
+      try {
+        setSubmitting(true);
+        props.onSubmit(formValues);
+        setSubmitting(false);
+      } catch (e) {
+        // TODO: If there's an error, we want to stay on this page and display it.
+        sentry.captureException(e);
+      }
+    },
+  }),
 );
 
 export default enhance(ContributionHistoryFilter);

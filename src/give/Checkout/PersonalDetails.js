@@ -1,9 +1,9 @@
 import React from 'react';
 import BackgroundView from '@ui/BackgroundView';
 import PaddedView from '@ui/PaddedView';
-import {PersonalDetailsForm} from '@ui/forms';
+import { PersonalDetailsForm } from '@ui/forms';
 
-import {Title} from './styles';
+import { Title } from './styles';
 
 const PersonalDetails = () => (
   <BackgroundView>

@@ -1,1 +1,1 @@
-export {default} from './getSiteLink';
+export { default } from './getSiteLink';

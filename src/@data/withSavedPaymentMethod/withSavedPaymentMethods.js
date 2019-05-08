@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 export const QUERY = gql`
   query SavedPaymentMethods {
@@ -15,10 +15,10 @@ export const QUERY = gql`
 `;
 
 export default graphql(QUERY, {
-  props: ({ownProps, data, data: {error, savedPaymentMethods, loading}}) => ({
+  props: ({ ownProps, data, data: { error, savedPaymentMethods, loading } }) => ({
     ...data,
     error: error || ownProps.error,
-    savedPaymentMethods: (savedPaymentMethods || []).map((pm) => ({
+    savedPaymentMethods: (savedPaymentMethods || []).map(pm => ({
       ...pm,
       paymentMethod: pm.payment.paymentType === 'ACH' ? 'bankAccount' : 'creditCard',
       accountNumber: pm.payment.accountNumber,

@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {contentDataImagesFragment} from '@data/fragments';
+import { contentDataImagesFragment } from '@data/fragments';
 
 export default gql`
   query getArticles($limit: Int!, $skip: Int!) {

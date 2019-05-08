@@ -1,9 +1,9 @@
 import React from 'react';
 import PaddedView from '@ui/PaddedView';
-import {ChangePaymentMethodForm} from '@ui/forms';
+import { ChangePaymentMethodForm } from '@ui/forms';
 import BackgroundView from '@ui/BackgroundView';
 
-import {Title} from './styles';
+import { Title } from './styles';
 
 const ChangePaymentMethod = () => (
   <BackgroundView>

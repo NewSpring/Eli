@@ -1,19 +1,19 @@
 import React from 'react';
-import {Platform, View, StyleSheet} from 'react-native';
+import { Platform, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from '@ui/styled';
 import ConnectedImage from '@ui/ConnectedImage';
 import PaddedView from '@ui/PaddedView';
 import FlexedView from '@ui/FlexedView';
-import {withThemeMixin} from '@ui/theme';
-import {H4} from '@ui/typography';
+import { withThemeMixin } from '@ui/theme';
+import { H4 } from '@ui/typography';
 
-const BackgroundContainer = styled(({theme, backgroundColor}) => ({
+const BackgroundContainer = styled(({ theme, backgroundColor }) => ({
   backgroundColor: backgroundColor || theme.colors.darkPrimary,
   ...StyleSheet.absoluteFillObject,
 }))(View);
 
-const BackgroundFade = styled(({opacity}) => ({
+const BackgroundFade = styled(({ opacity }) => ({
   opacity: opacity || 0.8,
   alignItems: 'stretch',
   ...StyleSheet.absoluteFillObject,
@@ -24,17 +24,17 @@ const Content = styled({
   justifyContent: 'center',
 })(PaddedView);
 
-const Brand = styled(({theme}) => ({
+const Brand = styled(({ theme }) => ({
   color: theme.colors.white,
   position: 'absolute',
   bottom: theme.sizing.baseUnit,
   right: theme.sizing.baseUnit,
   ...Platform.select({
     web: {
-      'right': 0,
-      'bottom': 0,
+      right: 0,
+      bottom: 0,
       'text-shadow': '0 0 10px #858585', // todo
-      'transform': 'rotate(-90deg) translateY(300%)',
+      transform: 'rotate(-90deg) translateY(300%)',
       'transform-origin': '0% 0%',
     },
   }),
@@ -52,7 +52,7 @@ export const BackgroundImage = styled({
   resizeMode: 'cover',
 })(ConnectedImage);
 
-const Hero = withThemeMixin({type: 'dark'})(({
+const Hero = withThemeMixin({ type: 'dark' })(({
   brandText = 'NEWSPRING',
   backgroundColor,
   backgroundOpacity,

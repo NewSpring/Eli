@@ -1,39 +1,41 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {pure, branch, withProps, compose} from 'recompose';
-import {times} from 'lodash';
+import {
+  pure, branch, withProps, compose,
+} from 'recompose';
+import { times } from 'lodash';
 import FlatList from '@ui/WebCompatibleFlatList';
 import PaddedView from '@ui/PaddedView';
 import Touchable from '@ui/Touchable';
-import {H5, BodyText} from '@ui/typography';
-import {Link} from '@ui/NativeWebRouter';
+import { H5, BodyText } from '@ui/typography';
+import { Link } from '@ui/NativeWebRouter';
 import styled from '@ui/styled';
 
-const TrackView = styled(({theme}) => ({
+const TrackView = styled(({ theme }) => ({
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignItems: 'center',
   paddingVertical: theme.sizing.baseUnit / 2,
 }))(PaddedView);
 
-const Ellipsis = styled(({theme}) => ({
+const Ellipsis = styled(({ theme }) => ({
   paddingVertical: theme.sizing.baseUnit / 4,
   opacity: theme.alpha.medium,
-}))((props) => <H5 {...props}>•••</H5>);
+}))(props => <H5 {...props}>•••</H5>);
 
 const enhance = compose(
-    pure,
-    withProps({isLoading: true}),
-    branch(({isLoading, tracks = []}) => isLoading && !tracks.length, withProps({
-      tracks: times(10, (i) => ({id: i, file: i})),
-    })),
+  pure,
+  withProps({ isLoading: true }),
+  branch(({ isLoading, tracks = [] }) => isLoading && !tracks.length, withProps({
+    tracks: times(10, i => ({ id: i, file: i })),
+  })),
 );
 
 class TracksList extends PureComponent {
   static defaultProps = {
     isLoading: false,
     onEndReachedThreshold: 0.7,
-    keyExtractor: (item) => item.file,
+    keyExtractor: item => item.file,
     tracks: [],
     refetch: undefined,
     fetchMore: undefined,
@@ -54,7 +56,7 @@ class TracksList extends PureComponent {
     if (this.props.onTrackPress) this.props.onTrackPress(item);
   }
 
-  renderTrack = ({item}) => (
+  renderTrack = ({ item }) => (
     <Touchable onPress={() => this.handleTrackPress(item)}>
       <TrackView>
         <BodyText isLoading={!item.title && this.props.isLoading}>{item.title}</BodyText>

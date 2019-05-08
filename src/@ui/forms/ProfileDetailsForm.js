@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {compose, branch, renderComponent} from 'recompose';
-import {get} from 'lodash';
+import { compose, branch, renderComponent } from 'recompose';
+import { get } from 'lodash';
 import Yup from 'yup';
-import {withFormik} from 'formik';
+import { withFormik } from 'formik';
 import moment from 'moment';
 
 import ActivityIndicator from '@ui/ActivityIndicator';
@@ -15,7 +15,7 @@ import withUser from '@data/withUser';
 import Button from '@ui/Button';
 import sentry from '@utils/sentry';
 import Status from './FormStatusText';
-import {withFieldValueHandler, withFieldTouchedHandler} from './formikSetters';
+import { withFieldValueHandler, withFieldTouchedHandler } from './formikSetters';
 
 export const ProfileDetailsFormWithoutData = ({
   createFieldValueHandler,
@@ -71,7 +71,7 @@ export const ProfileDetailsFormWithoutData = ({
         <Inputs.DateInput
           label="Birthday"
           value={values.birthday}
-          placeholder={'mm/dd/yyyy'}
+          placeholder="mm/dd/yyyy"
           displayValue={
             values.birthday ? moment(values.birthday).format('MM/DD/YYYY') : values.birthDay
           }
@@ -86,11 +86,11 @@ export const ProfileDetailsFormWithoutData = ({
         <Inputs.Picker
           label="Campus"
           value={values.campusId}
-          displayValue={get(campuses.find((campus) => campus.id === values.campusId), 'name')}
+          displayValue={get(campuses.find(campus => campus.id === values.campusId), 'name')}
           onValueChange={createFieldValueHandler('campusId')}
           error={errors.campusId}
         >
-          {campuses.map(({name, id}) => <Inputs.PickerItem label={name} value={id} key={id} />)}
+          {campuses.map(({ name, id }) => <Inputs.PickerItem label={name} value={id} key={id} />)}
         </Inputs.Picker>
       </PaddedView>
     </TableView>
@@ -133,10 +133,10 @@ ProfileDetailsFormWithoutData.propTypes = {
   isSubmitting: PropTypes.bool,
   isValid: PropTypes.bool,
   campuses: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        name: PropTypes.string,
-      }),
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      name: PropTypes.string,
+    }),
   ),
 };
 
@@ -145,63 +145,63 @@ const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('First Name is a required field'),
   lastName: Yup.string().required('Last Name is a required field'),
   email: Yup.string()
-      .email()
-      .required('Email is a required field'),
+    .email()
+    .required('Email is a required field'),
   birthday: Yup.date().required('Birthday is a required field'),
 });
 
-const mapPropsToValues = (props) => ({
+const mapPropsToValues = props => ({
   ...(props.user || {}),
   birthday:
     get(props, 'user.birthYear') && get(props, 'user.birthMonth') && get(props, 'user.birthDay')
       ? moment()
-          .year(get(props, 'user.birthYear'))
-          .month(get(props, 'user.birthMonth') - 1) // .month() is zero based 🙃
-          .date(get(props, 'user.birthDay'))
-          .toDate()
+        .year(get(props, 'user.birthYear'))
+        .month(get(props, 'user.birthMonth') - 1) // .month() is zero based 🙃
+        .date(get(props, 'user.birthDay'))
+        .toDate()
       : '',
   campusId: get(props, 'user.campus.id') || null,
 });
 
 const ProfileDetailsForm = compose(
-    withCampuses,
-    withUser,
-    branch(({isLoading}) => isLoading, renderComponent(ActivityIndicator)),
-    withFormik({
-      mapPropsToValues,
-      validationSchema,
-      handleSubmit: async (values, {props, setSubmitting, setStatus}) => {
-        try {
-          setSubmitting(true);
-          const birthMoment = moment(values.birthday);
+  withCampuses,
+  withUser,
+  branch(({ isLoading }) => isLoading, renderComponent(ActivityIndicator)),
+  withFormik({
+    mapPropsToValues,
+    validationSchema,
+    handleSubmit: async (values, { props, setSubmitting, setStatus }) => {
+      try {
+        setSubmitting(true);
+        const birthMoment = moment(values.birthday);
 
-          await props.updateProfile({
-            nickName: values.nickName,
-            firstName: values.firstName,
-            lastName: values.lastName,
-            email: values.email,
-            campus: values.campusId,
-            birthMonth: birthMoment.format('M'),
-            birthDay: birthMoment.format('D'),
-            birthYear: birthMoment.format('YYYY'),
-          });
-          setStatus('Your information was updated');
-        } catch (err) {
+        await props.updateProfile({
+          nickName: values.nickName,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          campus: values.campusId,
+          birthMonth: birthMoment.format('M'),
+          birthDay: birthMoment.format('D'),
+          birthYear: birthMoment.format('YYYY'),
+        });
+        setStatus('Your information was updated');
+      } catch (err) {
         // TODO: Add space for general errors
         // and set via setErrors
-          sentry.captureException(err);
-          // throw err;
-          setStatus('There was an error updating your information. Please try again.');
-        } finally {
-          setSubmitting(false);
-        }
-      },
-      isInitialValid(props) {
-        return validationSchema.isValidSync(mapPropsToValues(props));
-      },
-    }),
-    withFieldValueHandler,
-    withFieldTouchedHandler,
+        sentry.captureException(err);
+        // throw err;
+        setStatus('There was an error updating your information. Please try again.');
+      } finally {
+        setSubmitting(false);
+      }
+    },
+    isInitialValid(props) {
+      return validationSchema.isValidSync(mapPropsToValues(props));
+    },
+  }),
+  withFieldValueHandler,
+  withFieldTouchedHandler,
 )(ProfileDetailsFormWithoutData);
 
 export default ProfileDetailsForm;

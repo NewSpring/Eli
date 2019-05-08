@@ -1,10 +1,12 @@
-import React, {PureComponent, cloneElement, Children} from 'react';
+import React, { PureComponent, cloneElement, Children } from 'react';
 import PropTypes from 'prop-types';
-import {View, Text} from 'react-native';
-import {Parser, DomHandler} from 'htmlparser2';
-import {decodeHTML} from 'entities';
-import {BodyText, H1, H2, H3, H4, H5, H6, H7} from '@ui/typography';
-import {ButtonLink} from '@ui/Button';
+import { View, Text } from 'react-native';
+import { Parser, DomHandler } from 'htmlparser2';
+import { decodeHTML } from 'entities';
+import {
+  BodyText, H1, H2, H3, H4, H5, H6, H7,
+} from '@ui/typography';
+import { ButtonLink } from '@ui/Button';
 import ConnectedImage from '@ui/ConnectedImage';
 import Paragraph from '@ui/Paragraph';
 import BlockQuote from '@ui/BlockQuote';
@@ -32,13 +34,13 @@ export const wrapTextChildren = (children, Component = BodyText) => {
   });
   if (currentTextChildren.length) {
     newChildren.push(
-        <Component key="composed-children">{currentTextChildren}</Component>,
+      <Component key="composed-children">{currentTextChildren}</Component>,
     );
   }
   return newChildren;
 };
 
-export const defaultRenderer = (node, {children}) => {
+export const defaultRenderer = (node, { children }) => {
   if (node.type === 'text' && node.data && node.data.trim()) {
     return <Text>{decodeHTML(node.data)}</Text>;
   }
@@ -107,9 +109,9 @@ export default class HTMLView extends PureComponent {
   constructor(...args) {
     super(...args);
     this.parser = new Parser(
-        new DomHandler((err, dom) => {
-          this.parsed = this.renderDom(dom);
-        }, {normalizeWhitespace: true}),
+      new DomHandler((err, dom) => {
+        this.parsed = this.renderDom(dom);
+      }, { normalizeWhitespace: true }),
     );
     if (this.props.children) this.parse(this.props.children);
   }
@@ -125,21 +127,21 @@ export default class HTMLView extends PureComponent {
 
   renderDom(dom) {
     return dom
-        .map((node, index) => {
-          let children = [];
-          if (node.children) children = this.renderDom(node.children);
+      .map((node, index) => {
+        let children = [];
+        if (node.children) children = this.renderDom(node.children);
 
-          let renderedNode = this.props.renderer(node, {children});
-          if (!renderedNode && renderedNode !== null && this.props.renderer !== defaultRenderer) {
-            renderedNode = defaultRenderer(node, {children});
-          }
+        let renderedNode = this.props.renderer(node, { children });
+        if (!renderedNode && renderedNode !== null && this.props.renderer !== defaultRenderer) {
+          renderedNode = defaultRenderer(node, { children });
+        }
 
-          if (renderedNode && !Array.isArray(renderedNode)) {
-            renderedNode = cloneElement(renderedNode, {key: index});
-          }
-          return renderedNode;
-        })
-        .filter((e) => e !== undefined);
+        if (renderedNode && !Array.isArray(renderedNode)) {
+          renderedNode = cloneElement(renderedNode, { key: index });
+        }
+        return renderedNode;
+      })
+      .filter(e => e !== undefined);
   }
 
   render() {

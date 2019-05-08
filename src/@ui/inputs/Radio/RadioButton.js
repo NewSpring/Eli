@@ -1,16 +1,16 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import {
   View,
   TouchableWithoutFeedback,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose, getContext} from 'recompose';
+import { compose, getContext } from 'recompose';
 import isString from 'lodash/isString';
-import {H6} from '@ui/typography';
+import { H6 } from '@ui/typography';
 import styled from '@ui/styled';
 import RadioButtonIndicator from './RadioButtonIndicator';
 
-const Row = styled(({theme}) => ({
+const Row = styled(({ theme }) => ({
   padding: theme.sizing.baseUnit / 2,
   borderBottomWidth: 1,
   borderBottomColor: theme.colors.background.accent,
@@ -61,8 +61,8 @@ class RadioButton extends PureComponent {
           <Indicator
             isSelected={this.props.currentValue === this.props.value}
           />
-          {isString(this.props.Label) ?
-            (<H6>{this.props.Label}</H6>) : (<this.props.Label />)
+          {isString(this.props.Label)
+            ? (<H6>{this.props.Label}</H6>) : (<this.props.Label />)
           }
         </Row>
       </TouchableWithoutFeedback>
@@ -71,13 +71,13 @@ class RadioButton extends PureComponent {
 }
 
 const enhance = compose(
-    getContext({
-      onSelectValue: PropTypes.func,
-      currentValue: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-      ]),
-    }),
+  getContext({
+    onSelectValue: PropTypes.func,
+    currentValue: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+  }),
 );
 
 export default enhance(RadioButton);

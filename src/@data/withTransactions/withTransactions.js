@@ -1,4 +1,4 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import flatten from 'lodash/flatten';
 import isEmpty from 'lodash/isEmpty';
@@ -51,21 +51,19 @@ export default graphql(QUERY, {
     },
     fetchPolicy: 'cache-and-network',
   }),
-  props: ({ownProps, data} = {}) => ({
+  props: ({ ownProps, data } = {}) => ({
     // NOTE: This should happen in Heighliner
     error: data.error || ownProps.error,
     transactions:
-      data.transactions &&
-      flatten(
-          data.transactions.map((transaction) =>
-            transaction.details.map((detail) => ({
-              ...detail,
-              date: transaction.date,
-              transactionId: transaction.id,
-              person: transaction.person,
-              year: new Date(transaction.date).getFullYear(),
-            })),
-          ),
+      data.transactions
+      && flatten(
+        data.transactions.map(transaction => transaction.details.map(detail => ({
+          ...detail,
+          date: transaction.date,
+          transactionId: transaction.id,
+          person: transaction.person,
+          year: new Date(transaction.date).getFullYear(),
+        }))),
       ),
     isLoading: ownProps.isLoading || data.loading,
     fetchMore: fetchMoreResolver({

@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import get from 'lodash/get';
 import pushNewPaymentMethod from '@data/withGivingDashboard/pushNewPaymentMethod';
 
@@ -22,10 +22,10 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    completeOrder: (variables) => (mutate({
+  props: ({ mutate }) => ({
+    completeOrder: variables => (mutate({
       variables,
-      update(_, {data: {error, response}}) {
+      update(_, { data: { error, response } }) {
         if (error) return error;
         return pushNewPaymentMethod(get(response, 'savedPaymentMethod'));
       },

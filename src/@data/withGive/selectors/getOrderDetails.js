@@ -9,15 +9,15 @@ export default function getOrderDetails(state) {
 
   // here we format data for the NMI processing
   const joinedData = removeUndefined({
-    'billing': {
+    billing: {
       'first-name': isEmpty(state.firstName) ? undefined : state.firstName,
       'last-name': isEmpty(state.lastName) ? undefined : state.lastName,
-      'email': isEmpty(state.email) ? undefined : state.email,
-      'address1': isEmpty(state.street1) ? undefined : state.street1,
-      'address2': isEmpty(state.street2) ? undefined : state.street2,
-      'city': isEmpty(state.city) ? undefined : state.city,
-      'state': isEmpty(state.stateId) ? undefined : state.stateId,
-      'postal': isEmpty(state.zipCode) ? undefined : state.zipCode,
+      email: isEmpty(state.email) ? undefined : state.email,
+      address1: isEmpty(state.street1) ? undefined : state.street1,
+      address2: isEmpty(state.street2) ? undefined : state.street2,
+      city: isEmpty(state.city) ? undefined : state.city,
+      state: isEmpty(state.stateId) ? undefined : state.stateId,
+      postal: isEmpty(state.zipCode) ? undefined : state.zipCode,
     },
     'merchant-defined-field-2': isEmpty(state.campusId) ? undefined : state.campusId,
   });
@@ -51,8 +51,8 @@ export default function getOrderDetails(state) {
     joinedData['start-date'] = state.startDate
       ? moment(state.startDate).format('YYYYMMDD')
       : moment()
-          .add(1, 'days')
-          .format('YYYYMMDD');
+        .add(1, 'days')
+        .format('YYYYMMDD');
     joinedData['merchant-defined-field-3'] = joinedData['start-date'];
 
     // This isn't super well organized
@@ -60,21 +60,21 @@ export default function getOrderDetails(state) {
     // on a schedule
     // now we do but we have to support existing builds so
     // we create a comma sep string and split on heighliner
-    joinedData['merchant-defined-field-1'] = state.contributions.map(({id}) => id).join(',');
+    joinedData['merchant-defined-field-1'] = state.contributions.map(({ id }) => id).join(',');
 
     // in order to line up the amounts with the funds, we store the amounts
     // in a matching comma sep string
     joinedData['merchant-defined-field-4'] = state.contributions
-        .map(({amount}) => amount)
-        .join(',');
+      .map(({ amount }) => amount)
+      .join(',');
 
     // SINGLE
   } else if (state.contributions.length > 0) {
     joinedData.amount = total;
-    joinedData.product = state.contributions.map((contribution) => ({
-      'quantity': 1,
+    joinedData.product = state.contributions.map(contribution => ({
+      quantity: 1,
       'product-code': contribution.id,
-      'description': contribution.name, // Name of fund, why?
+      description: contribution.name, // Name of fund, why?
       'total-amount': contribution.amount,
       'unit-cost': contribution.amount,
     }));

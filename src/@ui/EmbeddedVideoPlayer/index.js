@@ -1,17 +1,17 @@
 import React from 'react';
-import {compose, pure, setPropTypes} from 'recompose';
+import { compose, pure, setPropTypes } from 'recompose';
 import PropTypes from 'prop-types';
 
 import WebView from './WebView';
 
 const enhance = compose(
-    pure,
-    setPropTypes({
-      src: PropTypes.string,
-    }),
+  pure,
+  setPropTypes({
+    src: PropTypes.string,
+  }),
 );
 
-const buildSourceObject = (source) => ({uri: source});
+const buildSourceObject = source => ({ uri: source });
 
 const EmbeddedVideoPlayer = enhance(({
   src,

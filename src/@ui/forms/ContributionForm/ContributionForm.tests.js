@@ -3,11 +3,11 @@ import renderer from 'react-test-renderer';
 import moment from 'moment';
 import Providers from '@ui/TestProviders';
 
-import {ContributionFormWithoutData} from './index';
+import { ContributionFormWithoutData } from './index';
 
 const createTestData = () => ({
   isOffline: false,
-  funds: [{id: 'one', name: 'sterling'}, {id: 'two', name: 'platinum'}],
+  funds: [{ id: 'one', name: 'sterling' }, { id: 'two', name: 'platinum' }],
   offlineContactEmail: 'offline@contact.email',
   offlineMessageBody: 'offline message body',
   offlineMessageTitle: 'offline message title',
@@ -45,9 +45,9 @@ const createTestData = () => ({
 describe('The ContributionForm component', () => {
   it('renders correctly', () => {
     const tree = renderer.create(
-        <Providers>
-          <ContributionFormWithoutData {...createTestData()} />
-        </Providers>,
+      <Providers>
+        <ContributionFormWithoutData {...createTestData()} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -56,9 +56,9 @@ describe('The ContributionForm component', () => {
     data.values.secondFundVisible = true;
 
     const tree = renderer.create(
-        <Providers>
-          <ContributionFormWithoutData {...data} />
-        </Providers>,
+      <Providers>
+        <ContributionFormWithoutData {...data} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -67,9 +67,9 @@ describe('The ContributionForm component', () => {
     data.isOffline = true;
 
     const tree = renderer.create(
-        <Providers>
-          <ContributionFormWithoutData {...data} />
-        </Providers>,
+      <Providers>
+        <ContributionFormWithoutData {...data} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -78,9 +78,9 @@ describe('The ContributionForm component', () => {
     data.values.frequencyId = 'monthly';
 
     const tree = renderer.create(
-        <Providers>
-          <ContributionFormWithoutData {...data} />
-        </Providers>,
+      <Providers>
+        <ContributionFormWithoutData {...data} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -92,9 +92,9 @@ describe('The ContributionForm component', () => {
     };
 
     const tree = renderer.create(
-        <Providers>
-          <ContributionFormWithoutData {...data} />
-        </Providers>,
+      <Providers>
+        <ContributionFormWithoutData {...data} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -103,9 +103,9 @@ describe('The ContributionForm component', () => {
     data.values.funds = [];
 
     const tree = renderer.create(
-        <Providers>
-          <ContributionFormWithoutData {...data} />
-        </Providers>,
+      <Providers>
+        <ContributionFormWithoutData {...data} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });

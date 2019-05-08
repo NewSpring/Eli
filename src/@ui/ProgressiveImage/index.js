@@ -1,11 +1,11 @@
 
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {Platform, View, StyleSheet} from 'react-native';
+import { Platform, View, StyleSheet } from 'react-native';
 import styled from '@ui/styled';
 import ConnectedImage from '@ui/ConnectedImage';
 
-const Wrapper = styled(({theme}) => ({
+const Wrapper = styled(({ theme }) => ({
   width: '100%',
   aspectRatio: 1,
   backgroundColor: theme.colors.background.inactive,

@@ -1,4 +1,4 @@
-import {compose} from 'recompose';
+import { compose } from 'recompose';
 import addContribution from './addContribution';
 import resetContributions from './resetContributions';
 import setContributionFrequency from './setContributionFrequency';
@@ -24,27 +24,27 @@ import setSavedPaymentMethod from './setSavedPaymentMethod';
 import restoreContributions from './restoreContributions';
 
 export default compose(
-    addContribution,
-    resetContributions,
-    setContributionFrequency,
-    setContributionStartDate,
-    setBillingPerson,
-    setBillingAddress,
-    createOrder,
-    createSavedPaymentOrder,
-    setCreditCard,
-    setBankAccount,
-    setPaymentMethod,
-    postPayment,
-    validateSingleCardTransaction,
-    completeOrder,
-    setPaymentResult,
-    setIsPaying,
-    withContributions,
-    savePaymentMethod,
-    setIsSavingPaymentMethod,
-    setWillSavePaymentMethod,
-    setSavedPaymentName,
-    setSavedPaymentMethod,
-    restoreContributions,
+  addContribution,
+  resetContributions,
+  setContributionFrequency,
+  setContributionStartDate,
+  setBillingPerson,
+  setBillingAddress,
+  createOrder,
+  createSavedPaymentOrder,
+  setCreditCard,
+  setBankAccount,
+  setPaymentMethod,
+  postPayment,
+  validateSingleCardTransaction,
+  completeOrder,
+  setPaymentResult,
+  setIsPaying,
+  withContributions,
+  savePaymentMethod,
+  setIsSavingPaymentMethod,
+  setWillSavePaymentMethod,
+  setSavedPaymentName,
+  setSavedPaymentMethod,
+  restoreContributions,
 );

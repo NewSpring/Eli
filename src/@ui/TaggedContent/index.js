@@ -1,24 +1,26 @@
 import React from 'react';
-import {compose, withProps, renderComponent} from 'recompose';
-import {get} from 'lodash';
-import {RelatedContentWithoutData} from '@ui/RelatedContent';
+import { compose, withProps, renderComponent } from 'recompose';
+import { get } from 'lodash';
+import { RelatedContentWithoutData } from '@ui/RelatedContent';
 import ThumbnailCard from '@ui/ThumbnailCard';
 import PaddedView from '@ui/PaddedView';
 import withTaggedContent from '@data/withTaggedContent';
 import FeedItemCard from '@ui/FeedItemCard';
-import {Link} from '@ui/NativeWebRouter';
-import {getLinkPath, getItemImages, getItemBgColor, getItemIsLight} from '@utils/content';
-import {enhancer as mediaQuery} from '@ui/MediaQuery';
-import {H4, H5} from '@ui/typography';
+import { Link } from '@ui/NativeWebRouter';
+import {
+  getLinkPath, getItemImages, getItemBgColor, getItemIsLight,
+} from '@utils/content';
+import { enhancer as mediaQuery } from '@ui/MediaQuery';
+import { H4, H5 } from '@ui/typography';
 import styled from '@ui/styled';
 import HTMLView from '@ui/HTMLView';
 
 const Title = compose(
-    styled({textAlign: 'center', width: '100%'}),
-    mediaQuery(({md}) => ({minWidth: md}), renderComponent(H4)),
+  styled({ textAlign: 'center', width: '100%' }),
+  mediaQuery(({ md }) => ({ minWidth: md }), renderComponent(H4)),
 )(H5);
 
-const renderMobileItem = (item) => (
+const renderMobileItem = item => (
   <Link to={getLinkPath(item)} key={item.id}>
     <FeedItemCard
       id={item.id}
@@ -33,7 +35,7 @@ const renderMobileItem = (item) => (
   </Link>
 );
 
-const renderWebItem = (item) => (
+const renderWebItem = item => (
   <Link to={getLinkPath(item)} key={item.id}>
     <ThumbnailCard
       title={item.title}
@@ -46,19 +48,19 @@ const renderWebItem = (item) => (
 );
 
 const TaggedContent = compose(
-    withTaggedContent,
-    withProps(({sectionTitle}) => ({
-      sectionTitle: (
-        <PaddedView>
-          <Title>{sectionTitle}</Title>
-        </PaddedView>
-      ),
-    })),
-    mediaQuery(
-        ({md}) => ({maxWidth: md}),
-        withProps({renderItem: renderMobileItem}),
-        withProps({renderItem: renderWebItem}),
+  withTaggedContent,
+  withProps(({ sectionTitle }) => ({
+    sectionTitle: (
+      <PaddedView>
+        <Title>{sectionTitle}</Title>
+      </PaddedView>
     ),
+  })),
+  mediaQuery(
+    ({ md }) => ({ maxWidth: md }),
+    withProps({ renderItem: renderMobileItem }),
+    withProps({ renderItem: renderWebItem }),
+  ),
 )(RelatedContentWithoutData);
 
 export default TaggedContent;

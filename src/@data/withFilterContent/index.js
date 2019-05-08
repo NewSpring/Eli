@@ -1,10 +1,9 @@
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import filterContentQuery from './filterContentQuery';
 
 export default graphql(filterContentQuery, {
-  props: ({data: {error, family}}) => ({
+  props: ({ data: { error, family } }) => ({
     error,
     family,
   }),
 });
-

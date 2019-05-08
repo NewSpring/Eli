@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 
 // Todo: port over values from
 // https://github.com/NewSpring/junction-framework/blob/master/lib/_defaults.scss

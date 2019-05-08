@@ -1,1 +1,1 @@
-export {LinearGradient as default} from 'expo';
+export { LinearGradient as default } from 'expo';

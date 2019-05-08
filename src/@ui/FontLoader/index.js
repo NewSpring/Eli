@@ -1,7 +1,7 @@
-import {StyleSheet} from 'react-native';
-import React, {Component} from 'react';
+import { StyleSheet } from 'react-native';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {AppLoading, Font} from 'expo';
+import { AppLoading, Font } from 'expo';
 import FONTS from 'assets/fonts';
 // import * as Font from './Font';
 
@@ -31,8 +31,8 @@ export default class FontLoader extends Component {
     // eslint-disable-next-line no-console
     console.disableYellowBox = true;
     StyleSheet.setStyleAttributePreprocessor(
-        'fontFamily',
-        Font.processFontFamily,
+      'fontFamily',
+      Font.processFontFamily,
     );
     // eslint-disable-next-line no-console
     console.disableYellowBox = false;
@@ -41,11 +41,9 @@ export default class FontLoader extends Component {
   async loadFonts() {
     try {
       await Promise.all(
-          FONTS.map(({name, asset}) =>
-            Font.loadAsync({
-              [name]: asset,
-            }),
-          ),
+        FONTS.map(({ name, asset }) => Font.loadAsync({
+          [name]: asset,
+        })),
       );
 
       this.setState({
@@ -57,7 +55,7 @@ export default class FontLoader extends Component {
   }
 
   render() {
-    const {isLoading} = this.state;
+    const { isLoading } = this.state;
     /* TODO: in the future consider moving AppLoading to the app's root index so as to block
      * rendering and to allow better async asset loading. Current not a problem as AppLoading is
      * only used here.

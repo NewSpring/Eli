@@ -1,5 +1,5 @@
-import {graphql} from 'react-apollo';
-import {get} from 'lodash';
+import { graphql } from 'react-apollo';
+import { get } from 'lodash';
 import fetchMoreResolver from '@data/utils/fetchMoreResolver';
 import groupsQuery from './groupsQuery';
 
@@ -25,7 +25,7 @@ const getDay = (schedule) => {
 };
 
 export default graphql(groupsQuery, {
-  props: ({ownProps, data} = {}) => ({
+  props: ({ ownProps, data } = {}) => ({
     error: data.error || ownProps.error,
     content: data.content,
     isLoading: ownProps.isLoading || data.loading,
@@ -51,9 +51,8 @@ export default graphql(groupsQuery, {
       campus: ownProps.campus || null,
       campuses: ownProps.campuses || [],
       schedules: ownProps.schedules && ownProps.schedules.length
-        ? ownProps.schedules.filter((x) => x).map((x) => getDay(x))
+        ? ownProps.schedules.filter(x => x).map(x => getDay(x))
         : [],
     },
   }),
 });
-

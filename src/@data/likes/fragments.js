@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {contentDataImagesFragment} from '@data/fragments';
+import { contentDataImagesFragment } from '@data/fragments';
 
 export const contentCard = gql`
   fragment ContentCard on Content {

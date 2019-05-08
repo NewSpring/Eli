@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, ScrollView} from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import PaddedView from '@ui/PaddedView';
-import {storiesOf} from '@storybook/react-native';
+import { storiesOf } from '@storybook/react-native';
 
-import Scripture from './';
-import {ItemWithoutData} from './Item';
+import Scripture from '.';
+import { ItemWithoutData } from './Item';
 
 const references = [
   'Psalm 1',
@@ -31,9 +31,7 @@ const ScriptureStory = (
 
 const stories = storiesOf('Scripture', module);
 
-references.forEach((reference) =>
-  stories.add(reference, () => <ScriptureStory reference={reference} />),
-);
+references.forEach(reference => stories.add(reference, () => <ScriptureStory reference={reference} />));
 
 stories.add('Loading State', () => (
   <PaddedView>

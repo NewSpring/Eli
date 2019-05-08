@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {BackHandler} from 'react-native';
+import { BackHandler } from 'react-native';
 
 export default class AndroidBackButton extends React.Component {
   static contextTypes = {
@@ -29,7 +29,7 @@ export default class AndroidBackButton extends React.Component {
   }
 
   handleBack = () => {
-    const {history} = this.context.router;
+    const { history } = this.context.router;
 
     if (history.index === 0) {
       return false; // home screen

@@ -46,4 +46,3 @@ export const INITIAL_STATE = {
 export function contributions() {
   return INITIAL_STATE;
 }
-

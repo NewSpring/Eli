@@ -1,28 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ScrollView} from 'react-native';
-import {compose, pure} from 'recompose';
+import { ScrollView } from 'react-native';
+import { compose, pure } from 'recompose';
 import PaddedView from '@ui/PaddedView';
-import {Switch} from '@ui/inputs';
-import {H7} from '@ui/typography';
+import { Switch } from '@ui/inputs';
+import { H7 } from '@ui/typography';
 import styled from '@ui/styled';
 import withTopics from '@data/withTopics';
 import withUser from '@data/withUser';
-import TableView, {Cell, CellText, Divider} from '@ui/TableView';
+import TableView, { Cell, CellText, Divider } from '@ui/TableView';
 import ErrorCard from '@ui/ErrorCard';
 
-const TabInfoText = styled({textAlign: 'center'})(H7);
+const TabInfoText = styled({ textAlign: 'center' })(H7);
 
 const enhance = compose(
-    withTopics,
-    withUser,
-    pure,
+  withTopics,
+  withUser,
+  pure,
 );
 
 const Topics = enhance(({
   topics = [],
   error,
-  user: {followedTopics = []} = {},
+  user: { followedTopics = [] } = {},
   toggleTopic,
 }) => (
   <ScrollView>

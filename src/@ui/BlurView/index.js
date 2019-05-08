@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, View, ViewPropTypes} from 'react-native';
-import {BlurView as ExpoBlurView} from 'expo';
+import { StyleSheet, View, ViewPropTypes } from 'react-native';
+import { BlurView as ExpoBlurView } from 'expo';
 import styled from '@ui/styled';
 
 const FilledBlurView = styled(StyleSheet.absoluteFill)(ExpoBlurView);

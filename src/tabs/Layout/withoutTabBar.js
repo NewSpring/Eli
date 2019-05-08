@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import {
   getContext,
   compose,
@@ -6,12 +6,12 @@ import {
 import PropTypes from 'prop-types';
 
 const withHideTabBar = compose(
-    getContext({
-      setHideTabBar: PropTypes.func,
-    }),
+  getContext({
+    setHideTabBar: PropTypes.func,
+  }),
 );
 
-export default (Component) => withHideTabBar(class withoutTabBar extends PureComponent {
+export default Component => withHideTabBar(class withoutTabBar extends PureComponent {
   static propTypes = {
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),

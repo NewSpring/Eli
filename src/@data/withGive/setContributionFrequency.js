@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 export const MUTATION = gql`
   mutation setContributionFrequency($id: String!) {
@@ -8,8 +8,8 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    setContributionFrequency: (id) => (mutate({
+  props: ({ mutate }) => ({
+    setContributionFrequency: id => (mutate({
       variables: {
         id,
       },

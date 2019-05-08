@@ -1,9 +1,9 @@
-import React, {PureComponent} from 'react';
-import {Animated, Easing} from 'react-native';
+import React, { PureComponent } from 'react';
+import { Animated, Easing } from 'react-native';
 import PropTypes from 'prop-types';
 
 // helper HOC to wrap an Input in a floating label and animated underline
-const withFocusAnimation = (Component) => (
+const withFocusAnimation = Component => (
   class WrappedInput extends PureComponent {
     static propTypes = {
       focusAnimationDuration: PropTypes.number,
@@ -42,7 +42,7 @@ const withFocusAnimation = (Component) => (
     }
 
     render() {
-      const {focusAnimationDuration, focusAnimationEasing, ...otherProps} = this.props;
+      const { focusAnimationDuration, focusAnimationEasing, ...otherProps } = this.props;
       return (
         <Component
           {...otherProps}

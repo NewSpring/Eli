@@ -1,6 +1,6 @@
 import Color from 'color';
 
-const dark = ({colors, alpha}) => ({
+const dark = ({ colors, alpha }) => ({
   colors: {
     text: {
       primary: colors.lightPrimary,

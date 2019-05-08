@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 export const MUTATION = gql`
   mutation isSavingPaymentMethod($isSavingPaymentMethod: Boolean!) {
@@ -8,8 +8,8 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    isSavingPaymentMethod: (isSavingPaymentMethod) => (mutate({
+  props: ({ mutate }) => ({
+    isSavingPaymentMethod: isSavingPaymentMethod => (mutate({
       variables: {
         isSavingPaymentMethod,
       },

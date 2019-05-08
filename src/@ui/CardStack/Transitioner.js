@@ -1,7 +1,9 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {Platform, Animated, StyleSheet, View, Easing, PanResponder} from 'react-native';
-import {clamp, get, findIndex} from 'lodash';
+import {
+  Platform, Animated, StyleSheet, View, Easing, PanResponder,
+} from 'react-native';
+import { clamp, get, findIndex } from 'lodash';
 import styled from '@ui/styled';
 
 import Interpolator from './Interpolator';
@@ -70,7 +72,7 @@ class Transitioner extends PureComponent {
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.key === this.props.location.key) return;
 
-    let {entries} = this.state;
+    let { entries } = this.state;
     const transition = nextProps.history.action;
     let toKey = this.keyForLocation(nextProps.location);
 
@@ -99,7 +101,7 @@ class Transitioner extends PureComponent {
 
     switch (nextProps.history.action) {
       case PUSH: {
-        const routeIndex = findIndex(entries, (entry) => this.keyForLocation(entry) === toKey);
+        const routeIndex = findIndex(entries, entry => this.keyForLocation(entry) === toKey);
         if (routeIndex > -1) {
           entries[routeIndex] = nextProps.location;
           toPosition = routeIndex;
@@ -111,7 +113,7 @@ class Transitioner extends PureComponent {
         break;
       }
       case POP:
-        toPosition = findIndex(entries, ({key}) => key === nextProps.location.key);
+        toPosition = findIndex(entries, ({ key }) => key === nextProps.location.key);
         if (toPosition < 0) {
           entries = [nextProps.location, ...entries];
           toPosition = 0;
@@ -125,7 +127,7 @@ class Transitioner extends PureComponent {
         break;
     }
 
-    let fromPosition = findIndex(entries, ({key}) => key === this.props.location.key);
+    let fromPosition = findIndex(entries, ({ key }) => key === this.props.location.key);
     if (fromPosition <= -1) fromPosition = toPosition;
 
     this.setState({
@@ -136,9 +138,9 @@ class Transitioner extends PureComponent {
       transition,
     }, () => {
       if (
-        !transition ||
-        this.isPanning ||
-        (nextProps.history.action === POP && nextProps.history.index < this.startingIndex)
+        !transition
+        || this.isPanning
+        || (nextProps.history.action === POP && nextProps.history.index < this.startingIndex)
       ) {
         return;
       }
@@ -166,8 +168,8 @@ class Transitioner extends PureComponent {
   get wouldPopToSameRouteKey() {
     const previous = get(this.props.history, `entries[${this.props.history.index - 1}]`);
     if (!previous) return true;
-    return this.keyForLocation(this.props.location) ===
-      this.keyForLocation(previous);
+    return this.keyForLocation(this.props.location)
+      === this.keyForLocation(previous);
   }
 
   get direction() {
@@ -190,6 +192,7 @@ class Transitioner extends PureComponent {
   animatedPosition = new Animated.Value(0);
 
   width = 0;
+
   height = 0;
 
   animatePosition = (fromPosition, toPosition) => {
@@ -207,7 +210,7 @@ class Transitioner extends PureComponent {
       easing: ANIMATION_EASING,
       toValue: toPosition,
       useNativeDriver: true,
-    }).start(({finished}) => {
+    }).start(({ finished }) => {
       if (finished) {
         this.afterNavigate();
         this.animation = null;
@@ -215,25 +218,25 @@ class Transitioner extends PureComponent {
     });
   }
 
-  handleLayout = ({nativeEvent: {layout: {height, width}}}) => {
+  handleLayout = ({ nativeEvent: { layout: { height, width } } }) => {
     this.height = height;
     this.width = width;
   };
 
   panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: (event, gesture) => (
-      !this.wouldPopToSameRouteKey &&
-      this.props.history.index > this.startingIndex &&
-      this.props.history.canGo(-1) &&
-      (
+      !this.wouldPopToSameRouteKey
+      && this.props.history.index > this.startingIndex
+      && this.props.history.canGo(-1)
+      && (
         (
-          this.isHorizontal &&
-          event.nativeEvent.pageX < GESTURE_RESPONSE_DISTANCE_HORIZONTAL &&
-          gesture.dx > RESPOND_THRESHOLD
+          this.isHorizontal
+          && event.nativeEvent.pageX < GESTURE_RESPONSE_DISTANCE_HORIZONTAL
+          && gesture.dx > RESPOND_THRESHOLD
         ) || (
-          this.isVertical &&
-          event.nativeEvent.pageY < GESTURE_RESPONSE_DISTANCE_VERTICAL &&
-          gesture.dy > RESPOND_THRESHOLD
+          this.isVertical
+          && event.nativeEvent.pageY < GESTURE_RESPONSE_DISTANCE_VERTICAL
+          && gesture.dy > RESPOND_THRESHOLD
         )
       )
     ),
@@ -244,7 +247,7 @@ class Transitioner extends PureComponent {
       });
     },
 
-    onPanResponderMove: (event, {dx, dy}) => {
+    onPanResponderMove: (event, { dx, dy }) => {
       const startValue = this.state.index;
       const dValue = this.isHorizontal ? dx : dy;
       const size = this.isHorizontal ? this.width : this.height;
@@ -302,8 +305,8 @@ class Transitioner extends PureComponent {
 
   // Determines if two locations would be driven by the same <Route> in props.children
   locationsfromSameRoute(locationA, locationB) {
-    return get(this.routeChildForLocation(locationA), 'props.computedMatch.path') ===
-      get(this.routeChildForLocation(locationB), 'props.computedMatch.path');
+    return get(this.routeChildForLocation(locationA), 'props.computedMatch.path')
+      === get(this.routeChildForLocation(locationB), 'props.computedMatch.path');
   }
 
   cancelNavigationFromPan = (duration) => {
@@ -312,7 +315,7 @@ class Transitioner extends PureComponent {
       duration,
       easing: Easing.linear(),
       useNativeDriver: true,
-    }).start(({finished}) => {
+    }).start(({ finished }) => {
       if (finished) {
         this.afterPan();
       }
@@ -325,7 +328,7 @@ class Transitioner extends PureComponent {
       duration,
       easing: Easing.linear(),
       useNativeDriver: true,
-    }).start(({finished}) => {
+    }).start(({ finished }) => {
       if (finished) {
         this.props.history.goBack();
         this.afterNavigate();
@@ -351,18 +354,18 @@ class Transitioner extends PureComponent {
 
   renderScreens() {
     const screens = this.state.entries
-        .filter((entry) => this.routeChildForLocation(entry))
-        .map((entry, index) => (
-          this.renderScreenWithAnimation({
-            index,
-            key: this.state.index === index ? this.state.toKey : this.keyForLocation(entry),
-            screen: this.routeChildForLocation(entry),
-          })
-        ));
+      .filter(entry => this.routeChildForLocation(entry))
+      .map((entry, index) => (
+        this.renderScreenWithAnimation({
+          index,
+          key: this.state.index === index ? this.state.toKey : this.keyForLocation(entry),
+          screen: this.routeChildForLocation(entry),
+        })
+      ));
     return screens;
   }
 
-  renderScreenWithAnimation = ({index, screen, key}) => (
+  renderScreenWithAnimation = ({ index, screen, key }) => (
     <Interpolator
       key={key}
       {...this.props}
@@ -390,7 +393,7 @@ class Transitioner extends PureComponent {
   }
 }
 
-export default styled(({theme}) => ({
+export default styled(({ theme }) => ({
   backgroundColor: theme.colors.black,
   ...StyleSheet.absoluteFillObject,
 }), 'CardStack.Transitioner')(Transitioner);

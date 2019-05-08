@@ -1,5 +1,5 @@
-import {createElement} from 'react-native-web';
-import {StyleSheet} from 'react-native';
+import { createElement } from 'react-native-web';
+import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
@@ -37,7 +37,7 @@ const WebView = ({
 );
 
 WebView.propTypes = {
-  source: PropTypes.shape({uri: PropTypes.string}),
+  source: PropTypes.shape({ uri: PropTypes.string }),
   onLoad: PropTypes.func,
   scrollEnabled: PropTypes.bool,
   allowsInlineMediaPlayback: PropTypes.bool,

@@ -1,1 +1,1 @@
-export {Svg} from 'expo';
+export { Svg } from 'expo';

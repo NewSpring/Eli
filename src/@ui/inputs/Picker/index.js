@@ -1,9 +1,9 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {Animated, Picker as NativePicker, TouchableOpacity} from 'react-native';
+import { Animated, Picker as NativePicker, TouchableOpacity } from 'react-native';
 import styled from '@ui/styled';
 
-import {H6} from '@ui/typography';
+import { H6 } from '@ui/typography';
 import Icon from '@ui/Icon';
 
 import FloatingLabel from '../FloatingLabel';
@@ -11,13 +11,13 @@ import InputUnderline from '../InputUnderline';
 import InputWrapper from '../InputWrapper';
 import withFocusAnimation from '../withFocusAnimation';
 
-import InputAddon, {AddonRow} from '../InputAddon';
+import InputAddon, { AddonRow } from '../InputAddon';
 import withInputControlStyles from '../withInputControlStyles';
 
 import PickerList from './PickerList';
 
 const StyledH6 = withInputControlStyles(H6);
-const Placeholder = styled(({theme}) => ({
+const Placeholder = styled(({ theme }) => ({
   color: theme.colors.input.placeholder,
 }), 'Inputs.Picker.Placeholder')(H6);
 
@@ -42,7 +42,7 @@ class Picker extends PureComponent {
 
   toggle = () => {
     const focused = !this.state.focused;
-    this.setState({focused}, () => {
+    this.setState({ focused }, () => {
       if (focused) {
         this.props.onFocus();
       } else {
@@ -71,13 +71,13 @@ class Picker extends PureComponent {
       <InputWrapper style={wrapperStyle}>
         <TouchableOpacity onPress={this.toggle}>
           <AddonRow>
-            <Animated.View style={{opacity: labelAnimation, flex: 1}}>
+            <Animated.View style={{ opacity: labelAnimation, flex: 1 }}>
               <StyledH6 style={style}>
                 {displayValue || (<Placeholder>{placeholder}</Placeholder>)}
               </StyledH6>
             </Animated.View>
             <InputAddon>
-              <Animated.View style={{transform: [{rotate}]}}>
+              <Animated.View style={{ transform: [{ rotate }] }}>
                 <Icon name="arrow-down" size={18} />
               </Animated.View>
             </InputAddon>
@@ -102,4 +102,4 @@ const EnhancedComponent = withFocusAnimation(Picker);
 EnhancedComponent.propTypes = Picker.propTypes;
 
 export default EnhancedComponent;
-export const {Item} = NativePicker;
+export const { Item } = NativePicker;

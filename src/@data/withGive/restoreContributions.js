@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 // NOTE: We're passing in the entire state as a JSON string
 // and allowing the resolver to parse it
@@ -11,7 +11,7 @@ export const MUTATION = gql`
 `;
 
 export default graphql(MUTATION, {
-  props: ({mutate}) => ({
-    restoreContributions: (state) => (mutate({variables: {state}})),
+  props: ({ mutate }) => ({
+    restoreContributions: state => (mutate({ variables: { state } })),
   }),
 });

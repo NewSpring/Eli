@@ -1,26 +1,26 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import {
   View,
   TouchableWithoutFeedback,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import {compose} from 'recompose';
+import { compose } from 'recompose';
 import Card from '@ui/Card';
 import ContributionsChart from '@ui/ContributionsChart';
 import withContributionsChartData from '@data/withContributionsChartData';
-import {BodyText, H6} from '@ui/typography';
+import { BodyText, H6 } from '@ui/typography';
 import CashAmountIndicator from '@ui/CashAmountIndicator';
 import styled from '@ui/styled';
 import Icon from '@ui/Icon';
 import Spacer from '@ui/Spacer';
 import PaddedView from '@ui/PaddedView';
-import {withTheme} from '@ui/theme';
+import { withTheme } from '@ui/theme';
 
-const StyledBodyText = styled(({theme}) => ({
+const StyledBodyText = styled(({ theme }) => ({
   color: theme.colors.text.teriary,
 }))(BodyText);
 
-const StyledH6 = styled(({theme}) => ({
+const StyledH6 = styled(({ theme }) => ({
   color: theme.colors.text.link,
 }))(H6);
 
@@ -53,13 +53,13 @@ export class ContributionsChartCard extends PureComponent {
             size={2}
           />
           <Spacer />
-          <StyledBodyText italic>{'Contributed so far this year'}</StyledBodyText>
+          <StyledBodyText italic>Contributed so far this year</StyledBodyText>
           <Spacer />
           <TouchableWithoutFeedback
             onPress={this.props.onPressHistory}
           >
             <Row>
-              <StyledH6>{'View Giving History'}</StyledH6>
+              <StyledH6>View Giving History</StyledH6>
               <Icon name="arrow-next" size={this.props.iconSize} fill={this.props.iconColor} />
             </Row>
           </TouchableWithoutFeedback>
@@ -70,11 +70,11 @@ export class ContributionsChartCard extends PureComponent {
 }
 
 const enhance = compose(
-    withContributionsChartData,
-    withTheme(({theme, ...otherProps}) => ({
-      iconSize: otherProps.iconSize || theme.helpers.rem(1),
-      iconColor: theme.colors.primary,
-    })),
+  withContributionsChartData,
+  withTheme(({ theme, ...otherProps }) => ({
+    iconSize: otherProps.iconSize || theme.helpers.rem(1),
+    iconColor: theme.colors.primary,
+  })),
 );
 
 export default enhance(ContributionsChartCard);

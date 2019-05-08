@@ -1,1 +1,1 @@
-export {WebView as default} from 'react-native';
+export { WebView as default } from 'react-native';

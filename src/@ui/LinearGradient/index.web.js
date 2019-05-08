@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
-import {View} from 'react-native';
+import { View } from 'react-native';
 import styled from '@ui/styled';
 
 // Finds the angle between two points (in radians)
 // Ex: getAngle([0,0],[0,1]) ~= 1.57rad or 90deg
 const getAngle = ([startX, startY], [endX, endY]) => (
   Math.atan2(
-      endY - startY,
-      endX - startX,
+    endY - startY,
+    endX - startX,
   ) + (90 * (Math.PI / 180)) // need to rotate 90 degrees for CSS
 );
 
 // transates in array of colors and locations to CSS color-stops
-const getColorStops = ({colors, locations}) => colors.map((color, index) => (
+const getColorStops = ({ colors, locations }) => colors.map((color, index) => (
   `${color}${locations[index] ? ` ${locations[index] * 100}%` : ''}`
 ));
 
@@ -27,7 +27,7 @@ const LinearGradient = styled(({
 }) => ({
   backgroundImage: `linear-gradient(
     ${getAngle(start, end)}rad,
-    ${getColorStops({colors, locations}).join(', ')}
+    ${getColorStops({ colors, locations }).join(', ')}
   )`,
 }))(View);
 

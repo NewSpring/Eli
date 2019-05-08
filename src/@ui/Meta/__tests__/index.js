@@ -5,15 +5,15 @@ describe('Meta', () => {
     expect(generateData()).toMatchSnapshot();
   });
   it('should override the default title', () => {
-    expect(generateData({title: 'this is a test title'})).toMatchSnapshot();
+    expect(generateData({ title: 'this is a test title' })).toMatchSnapshot();
   });
   it('should override the default image', () => {
-    expect(generateData({title: '#link-to-test-image'})).toMatchSnapshot();
+    expect(generateData({ title: '#link-to-test-image' })).toMatchSnapshot();
   });
   it('should have an id', () => {
-    expect(generateData({id: 'article.id'})).toMatchSnapshot();
+    expect(generateData({ id: 'article.id' })).toMatchSnapshot();
   });
   it('should have an og:type meta property', () => {
-    expect(generateData({meta: [{property: 'og:type', content: 'article'}]})).toMatchSnapshot();
+    expect(generateData({ meta: [{ property: 'og:type', content: 'article' }] })).toMatchSnapshot();
   });
 });

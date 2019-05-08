@@ -1,5 +1,5 @@
-import {AppState} from 'react-native';
-import {track, events} from '@utils/analytics';
+import { AppState } from 'react-native';
+import { track, events } from '@utils/analytics';
 
 const trackAppState = () => {
   const handleAppStateChange = (nextAppState) => {

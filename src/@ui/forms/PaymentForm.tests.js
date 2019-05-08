@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Providers from '@ui/TestProviders';
 
-import {PaymentFormWithoutData} from './PaymentForm';
+import { PaymentFormWithoutData } from './PaymentForm';
 
 const createTestData = () => ({
   createFieldValueHandler: jest.fn(),
@@ -45,9 +45,9 @@ const createTestData = () => ({
 describe('The PaymentForm component', () => {
   it('renders correctly', () => {
     const tree = renderer.create(
-        <Providers>
-          <PaymentFormWithoutData {...createTestData()} />
-        </Providers>,
+      <Providers>
+        <PaymentFormWithoutData {...createTestData()} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -55,9 +55,9 @@ describe('The PaymentForm component', () => {
     const data = createTestData();
     data.isLoading = true;
     const tree = renderer.create(
-        <Providers>
-          <PaymentFormWithoutData {...data} />
-        </Providers>,
+      <Providers>
+        <PaymentFormWithoutData {...data} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -65,9 +65,9 @@ describe('The PaymentForm component', () => {
     const data = createTestData();
     data.isSubmitting = true;
     const tree = renderer.create(
-        <Providers>
-          <PaymentFormWithoutData {...data} />
-        </Providers>,
+      <Providers>
+        <PaymentFormWithoutData {...data} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -75,9 +75,9 @@ describe('The PaymentForm component', () => {
     const data = createTestData();
     data.values.paymentMethod = 'bankAccount';
     const tree = renderer.create(
-        <Providers>
-          <PaymentFormWithoutData {...data} />
-        </Providers>,
+      <Providers>
+        <PaymentFormWithoutData {...data} />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });

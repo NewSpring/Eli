@@ -1,12 +1,14 @@
-import React, {PureComponent} from 'react';
-import {compose, mapProps} from 'recompose';
+import React, { PureComponent } from 'react';
+import { compose, mapProps } from 'recompose';
 import PropTypes from 'prop-types';
 import BackgroundView from '@ui/BackgroundView';
 import PaddedView from '@ui/PaddedView';
-import {PaymentConfirmationForm} from '@ui/forms';
-import {withRouter} from '@ui/NativeWebRouter';
+import { PaymentConfirmationForm } from '@ui/forms';
+import { withRouter } from '@ui/NativeWebRouter';
 
-import {Title, Row, TinyButton, TinyButtonText} from './styles';
+import {
+  Title, Row, TinyButton, TinyButtonText,
+} from './styles';
 
 export class PaymentConfirmation extends PureComponent {
   static propTypes = {
@@ -40,15 +42,15 @@ export class PaymentConfirmation extends PureComponent {
 }
 
 const enhance = compose(
-    withRouter,
-    mapProps((props) => ({
-      onPressChangePaymentMethod() {
-        props.history.push('/give/checkout/change-payment-method');
-      },
-      onPressEdit() {
-        props.history.push('/give/checkout');
-      },
-    })),
+  withRouter,
+  mapProps(props => ({
+    onPressChangePaymentMethod() {
+      props.history.push('/give/checkout/change-payment-method');
+    },
+    onPressEdit() {
+      props.history.push('/give/checkout');
+    },
+  })),
 );
 
 export default enhance(PaymentConfirmation);

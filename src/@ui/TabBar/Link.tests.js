@@ -6,22 +6,22 @@ import Component from './Link';
 describe('TabBar Link', () => {
   it('renders correctly', () => {
     const tree = renderer.create(
-        <Providers>
-          <Component />
-        </Providers>,
+      <Providers>
+        <Component />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });
   it('renders with basic props', () => {
     const tree = renderer.create(
-        <Providers>
-          <Component
-            icon="arrow-back"
-            label="my label"
-            to="/my-link"
-            color="red"
-          />
-        </Providers>,
+      <Providers>
+        <Component
+          icon="arrow-back"
+          label="my label"
+          to="/my-link"
+          color="red"
+        />
+      </Providers>,
     );
     expect(tree).toMatchSnapshot();
   });

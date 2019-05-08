@@ -1,1 +1,1 @@
-export {SafeAreaView as default} from 'react-native';
+export { SafeAreaView as default } from 'react-native';

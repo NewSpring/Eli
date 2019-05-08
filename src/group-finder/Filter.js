@@ -1,57 +1,57 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, ScrollView} from 'react-native';
-import {compose, withProps} from 'recompose';
-import {get, without, debounce} from 'lodash';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { compose, withProps } from 'recompose';
+import { get, without, debounce } from 'lodash';
 import pluralize from 'pluralize';
 
 import withCampuses from '@data/withCampuses';
 import withGroupAttributes from '@data/withGroupAttributes';
-import {H4, H6, H7} from '@ui/typography';
+import { H4, H6, H7 } from '@ui/typography';
 import Icon from '@ui/Icon';
-import Chip, {ChipList} from '@ui/Chip';
+import Chip, { ChipList } from '@ui/Chip';
 import PaddedView from '@ui/PaddedView';
 import styled from '@ui/styled';
 import Touchable from '@ui/Touchable';
-import {Text as TextInput} from '@ui/inputs';
-import TableView, {FormFields} from '@ui/TableView';
-import {enhancer as mediaQuery} from '@ui/MediaQuery';
+import { Text as TextInput } from '@ui/inputs';
+import TableView, { FormFields } from '@ui/TableView';
+import { enhancer as mediaQuery } from '@ui/MediaQuery';
 
 const enhance = compose(
-    withCampuses,
-    withGroupAttributes,
+  withCampuses,
+  withGroupAttributes,
 );
 
-const Filters = styled({alignItems: 'center', paddingHorizontal: 0})(PaddedView);
-const List = styled({alignItems: 'center', justifyContent: 'center'})(ChipList);
+const Filters = styled({ alignItems: 'center', paddingHorizontal: 0 })(PaddedView);
+const List = styled({ alignItems: 'center', justifyContent: 'center' })(ChipList);
 
-const NumResultsText = styled(({theme}) => ({
+const NumResultsText = styled(({ theme }) => ({
   color: theme.colors.text.tertiary,
 }))(H6);
 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 const Toolbar = compose(
-    mediaQuery(({md}) => ({minWidth: md}), styled(({theme}) => ({
-      paddingHorizontal: theme.sizing.baseUnit,
-      paddingTop: theme.sizing.baseUnit,
-      paddingBottom: theme.sizing.baseUnit - (theme.sizing.baseUnit / 2),
-    }))),
-    styled(({theme}) => ({
-      borderBottomWidth: StyleSheet.hairlineWidth,
-      borderBottomColor: theme.colors.shadows.default,
-      paddingHorizontal: theme.sizing.baseUnit / 2,
-      paddingBottom: 0,
-      paddingTop: theme.sizing.baseUnit / 2,
-      backgroundColor: theme.colors.background.paper,
-    })),
-    withProps({
-      showsHorizontalScrollIndicator: false,
-      horizontal: true,
-    }),
+  mediaQuery(({ md }) => ({ minWidth: md }), styled(({ theme }) => ({
+    paddingHorizontal: theme.sizing.baseUnit,
+    paddingTop: theme.sizing.baseUnit,
+    paddingBottom: theme.sizing.baseUnit - (theme.sizing.baseUnit / 2),
+  }))),
+  styled(({ theme }) => ({
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: theme.colors.shadows.default,
+    paddingHorizontal: theme.sizing.baseUnit / 2,
+    paddingBottom: 0,
+    paddingTop: theme.sizing.baseUnit / 2,
+    backgroundColor: theme.colors.background.paper,
+  })),
+  withProps({
+    showsHorizontalScrollIndicator: false,
+    horizontal: true,
+  }),
 )(ScrollView);
 
-const FilterLists = styled(({theme}) => ({
+const FilterLists = styled(({ theme }) => ({
   backgroundColor: theme.colors.background.paper,
 }))(PaddedView);
 
@@ -92,7 +92,7 @@ class Filter extends PureComponent {
   }
 
   get selectedTags() {
-    return this.props.groupAttributes.filter(({value}) => {
+    return this.props.groupAttributes.filter(({ value }) => {
       const sanitizedValue = value.toLowerCase();
       const tags = get(this.props.query, 'tags', []);
       return tags.indexOf(sanitizedValue) >= 0;
@@ -108,9 +108,9 @@ class Filter extends PureComponent {
   }
 
   get selectedCampuses() {
-    return this.props.campuses.filter(({name = ''}) => {
+    return this.props.campuses.filter(({ name = '' }) => {
       const campuses = get(this.props.query, 'campuses', []);
-      return campuses.findIndex((campusId) => campusId === name.toLowerCase()) >= 0;
+      return campuses.findIndex(campusId => campusId === name.toLowerCase()) >= 0;
     });
     // NOTE: Uncomment when Heighliner accepts id's
     // return this.props.campuses.filter(({ id }) => {
@@ -120,7 +120,7 @@ class Filter extends PureComponent {
   }
 
   toggleFilterView = () => {
-    this.setState({showFilters: !this.state.showFilters});
+    this.setState({ showFilters: !this.state.showFilters });
   }
 
   handleToggle = (filter, value) => {
@@ -128,15 +128,15 @@ class Filter extends PureComponent {
     const selected = filterObject.indexOf(value) >= 0;
 
     if (selected) {
-      this.props.onUpdateFilter({[filter]: without(filterObject, value)});
+      this.props.onUpdateFilter({ [filter]: without(filterObject, value) });
     } else {
-      this.props.onUpdateFilter({[filter]: [...filterObject, value]});
+      this.props.onUpdateFilter({ [filter]: [...filterObject, value] });
     }
   }
 
   queueUpdate = (update) => {
     if (!this.queuedUpdate) this.queuedUpdate = {};
-    this.queuedUpdate = {...this.queuedUpdate, ...update};
+    this.queuedUpdate = { ...this.queuedUpdate, ...update };
     this.debouncedUpdate();
   }
 
@@ -146,17 +146,17 @@ class Filter extends PureComponent {
   }, 500);
 
   handleTextSearch = (text) => {
-    this.setState({searchText: text});
-    this.queueUpdate({q: text});
+    this.setState({ searchText: text });
+    this.queueUpdate({ q: text });
   }
 
   cancelSearch = () => {
-    this.queueUpdate({q: ''});
-    this.setState({showSearch: false, searchText: ''});
+    this.queueUpdate({ q: '' });
+    this.setState({ showSearch: false, searchText: '' });
   }
 
   toggleSearch = () => {
-    this.setState({showSearch: !this.state.showSearch});
+    this.setState({ showSearch: !this.state.showSearch });
   }
 
   renderFilter = ({
@@ -176,20 +176,20 @@ class Filter extends PureComponent {
     );
   };
 
-  renderTag = (tag) => this.renderFilter({
+  renderTag = tag => this.renderFilter({
     filter: 'tags',
     displayValue: tag.value,
     value: tag.value.toLowerCase(),
     key: tag.id,
   });
 
-  renderDay = (day) => this.renderFilter({
+  renderDay = day => this.renderFilter({
     filter: 'schedules',
     displayValue: day,
     value: day.toLowerCase(),
   });
 
-  renderCampus = (campus) => this.renderFilter({
+  renderCampus = campus => this.renderFilter({
     filter: 'campuses',
     displayValue: campus.name,
     value: campus.name.toLowerCase(), // NOTE: Change this when id's are supported in Heighliner

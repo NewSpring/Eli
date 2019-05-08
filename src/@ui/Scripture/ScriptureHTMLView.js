@@ -1,22 +1,22 @@
 import React from 'react';
-import {withProps} from 'recompose';
+import { withProps } from 'recompose';
 
-import HTMLView, {defaultRenderer, wrapTextChildren} from '@ui/HTMLView';
-import {Platform, Text, View} from 'react-native';
-import {H7, BodyText} from '@ui/typography';
+import HTMLView, { defaultRenderer, wrapTextChildren } from '@ui/HTMLView';
+import { Platform, Text, View } from 'react-native';
+import { H7, BodyText } from '@ui/typography';
 import Paragraph from '@ui/Paragraph';
 import styled from '@ui/styled';
 
-const BlockIndent = styled(({theme}) => ({
+const BlockIndent = styled(({ theme }) => ({
   paddingTop: theme.sizing.baseUnit / 2,
   paddingLeft: theme.sizing.baseUnit / 2,
 }))(View);
 
-const RedLetters = styled(({theme}) => ({
+const RedLetters = styled(({ theme }) => ({
   color: theme.colors.wordOfChrist,
 }))(Text);
 
-const NumText = styled(({theme}) => ({
+const NumText = styled(({ theme }) => ({
   color: theme.colors.text.tertiary,
   ...Platform.select({
     android: {
@@ -26,7 +26,7 @@ const NumText = styled(({theme}) => ({
   }),
 }))(H7);
 
-const renderer = (node, {children, ...other}) => {
+const renderer = (node, { children, ...other }) => {
   // eslint-disable-line
   // the defaultRenderer support several basic elements out of the box,
   // this function only needs to handle the cases that are unique to scripture.
@@ -37,7 +37,12 @@ const renderer = (node, {children, ...other}) => {
      * beginning of a sentence or paragraph. It affects all instences (albeit less noticably in
      * somecases) so a more procise fix in the future is prefered.
      */
-    return <NumText> {children}</NumText>;
+    return (
+      <NumText>
+        {' '}
+        {children}
+      </NumText>
+    );
   }
 
   if (className.includes('line-group')) {
@@ -80,7 +85,7 @@ const renderer = (node, {children, ...other}) => {
     );
   }
 
-  return defaultRenderer(node, {children, ...other});
+  return defaultRenderer(node, { children, ...other });
 };
 
 const ScriptureHTMLView = withProps({
