@@ -3,6 +3,27 @@
     "name": "NewSpring",
     "icon": "./ns-logo.png",
     "version": "6.3.0",
-    "sdkVersion": "32.0.0"
+    "sdkVersion": "32.0.0",
+    "slug": "newspring",
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "isDetached": true,
+    "detach": {
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.10.6-sdk32.0.0-e50ee83a-41bd-4965-b067-4c815a3b3fcc.tar.gz",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.10.8-sdk32.0.0-bca0f957-de78-44c8-91ed-f3151372d79d.tar.gz"
+    },
+    "scheme": "expf0480b9ae47344d19cc9872f1763c3e5",
+    "ios": {
+      "bundleIdentifier": "com.subsplashstudio31.NewSpring-Church",
+      "publishBundlePath": "ios/newspring/Supporting/shell-app.bundle",
+      "publishManifestPath": "ios/newspring/Supporting/shell-app-manifest.json"
+    },
+    "android": {
+      "package": "cc.newspring.newspringapp",
+      "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
+      "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
+    }
   }
 }
