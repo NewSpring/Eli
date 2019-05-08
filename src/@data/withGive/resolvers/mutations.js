@@ -1,6 +1,5 @@
 import pick from 'lodash/pick';
 import { QUERY as contributionsQuery } from '@data/withGive/withContributions';
-import sentry from '@utils/sentry';
 import { INITIAL_STATE } from './queries';
 
 export function addContribution(result, variables, { cache }) {
@@ -367,9 +366,7 @@ export function restoreContributions(result, variables, { cache }) {
   try {
     stateVariables = JSON.parse(variables.state);
   } catch (e) {
-    sentry.captureException(e, {
-      extra: { stateVariables: variables.state },
-    });
+    console.log(e);
   }
 
   cache.writeQuery({

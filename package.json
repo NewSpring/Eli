@@ -7,6 +7,14 @@
     "lint": "eslint . --ext .js"
   },
   "dependencies": {
+    "@expo/react-native-action-sheet": "^2.1.0",
+    "apollo-cache-inmemory": "^1.5.1",
+    "apollo-client": "^2.5.1",
+    "apollo-link": "^1.2.11",
+    "apollo-link-context": "^1.0.17",
+    "apollo-link-http": "^1.5.14",
+    "apollo-link-schema": "^1.2.2",
+    "apollo-link-state": "^0.4.2",
     "color": "^3.1.1",
     "creditcardutils": "^1.0.0",
     "entities": "^1.1.2",
@@ -16,6 +24,7 @@
     "file-saver": "^2.0.1",
     "formik": "^1.5.4",
     "graphql-tag": "^2.10.1",
+    "graphql-tools": "^4.0.4",
     "history": "^4.9.0",
     "htmlparser2": "^3.10.1",
     "isomorphic-fetch": "^2.2.1",
@@ -46,6 +55,7 @@
     "shuffle-seed": "^1.1.6",
     "truncate": "^2.0.1",
     "url-parse": "^1.4.7",
+    "victory": "^32.2.2",
     "victory-native": "^32.0.2",
     "yup": "^0.27.0"
   },

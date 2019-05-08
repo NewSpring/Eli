@@ -1,3 +1,7 @@
-import * as Victory from 'victory-native';
-
-module.exports = Victory;
+export {
+  VictoryLine,
+  VictoryScatter,
+  VictoryArea,
+  VictoryChart,
+  VictoryAxis,
+} from 'victory-native';
