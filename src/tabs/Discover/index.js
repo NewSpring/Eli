@@ -28,10 +28,16 @@ const enhance = compose(
   withProps(({ location: { search = '' } = {} }) => ({
     term: parse(search).q,
   })),
-  withTheme(({ theme: { web: { backgroundVideo, backgroundVideoThumbnail = {} } = {} } = {} }) => ({
-    webBackgroundSource: backgroundVideo,
-    webBackgroundThumbnail: backgroundVideoThumbnail,
-  })),
+  withTheme(
+    ({
+      theme: {
+        web: { backgroundVideo, backgroundVideoThumbnail = {} } = {},
+      } = {},
+    }) => ({
+      webBackgroundSource: backgroundVideo,
+      webBackgroundThumbnail: backgroundVideoThumbnail,
+    }),
+  ),
 );
 
 const flexed = styled({
@@ -45,11 +51,13 @@ const fixedWidthLeftSide = styled(({ theme }) => ({
   flex: 1,
   backgroundColor: theme.colors.background.default,
 }));
-const LeftSide = compose(mediaQuery(({ md }) => ({ minWidth: md }), fixedWidthLeftSide, flexed))(
-  Left,
-);
+const LeftSide = compose(
+  mediaQuery(({ md }) => ({ minWidth: md }), fixedWidthLeftSide, flexed),
+)(Left);
 
-const CancelText = styled(({ theme }) => ({ paddingHorizontal: theme.sizing.baseUnit / 2 }))(H7);
+const CancelText = styled(({ theme }) => ({
+  paddingHorizontal: theme.sizing.baseUnit / 2,
+}))(H7);
 
 const WebHeader = styled(({ theme }) => ({
   backgroundColor: theme.colors.background.paper,
@@ -75,6 +83,12 @@ class Discover extends PureComponent {
     searchText: this.props.term,
   };
 
+  debouncedUpdate = debounce((q) => {
+    this.props.history.replace(
+      `${this.props.location.pathname}?${stringify({ q })}`,
+    );
+  }, 500);
+
   get searchForm() {
     return (
       <FlexedView>
@@ -85,7 +99,9 @@ class Discover extends PureComponent {
           prefix={<Icon name="search" size={24} />}
           suffix={
             this.state.searchText && this.state.searchText.length ? (
-              <CancelText onPress={() => this.handleSearch('')}>Cancel</CancelText>
+              <CancelText onPress={() => this.handleSearch('')}>
+                Cancel
+              </CancelText>
             ) : null
           }
           placeholder="Type your search here"
@@ -93,10 +109,6 @@ class Discover extends PureComponent {
       </FlexedView>
     );
   }
-
-  debouncedUpdate = debounce((q) => {
-    this.props.history.replace(`${this.props.location.pathname}?${stringify({ q })}`);
-  }, 500);
 
   handleSearch = (searchText) => {
     this.setState({ searchText });

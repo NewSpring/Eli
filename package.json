@@ -9,11 +9,13 @@
   "dependencies": {
     "color": "^3.1.1",
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "pluralize": "^7.0.0",
     "prop-types": "^15.7.2",
     "react": "16.6.3",
     "react-apollo": "^2.5.5",
     "react-native": "0.58.6",
+    "react-native-tab-view": "^2.2.0",
     "react-native-unimodules": "0.3.1",
     "react-test-renderer": "^16.8.6",
     "recompose": "^0.30.0",
