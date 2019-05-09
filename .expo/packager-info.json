@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 31042,
-  "expoServerNgrokUrl": "https://2e-qs2.michael-neeley.eli.exp.direct",
-  "packagerNgrokUrl": "https://packager.2e-qs2.michael-neeley.eli.exp.direct",
-  "ngrokPid": 31071,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }
