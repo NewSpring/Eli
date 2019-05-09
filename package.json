@@ -43,7 +43,6 @@
     "react-list": "^0.8.11",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-app-intro-slider": "^2.0.1",
-    "react-native-gesture-handler": "^1.2.1",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-modal-datetime-picker": "^7.4.0",
     "react-native-tab-view": "^2.2.0",
