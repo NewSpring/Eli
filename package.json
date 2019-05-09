@@ -2,7 +2,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start": "expo start",
     "test": "jest",
     "lint": "eslint . --ext .js"
   },
@@ -56,6 +56,7 @@
     "react-test-renderer": "^16.8.6",
     "recompose": "^0.30.0",
     "rn-placeholder": "^2.0.0",
+    "schedule": "^0.5.0",
     "shuffle-seed": "^1.1.6",
     "truncate": "^2.0.1",
     "url-parse": "^1.4.7",
