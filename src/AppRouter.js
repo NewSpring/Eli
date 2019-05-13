@@ -383,7 +383,7 @@ class AppRouter extends PureComponent {
                   component={ResetPassword}
                 />
 
-                <Route cardStackKey="tabs" component={this.tabs} />
+                <Route path="/" component={this.tabs} />
               </CardStack>
             </AppLayout>
             <Switch>{this.isModal ? this.largeScreenModals : null}</Switch>

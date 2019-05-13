@@ -60,6 +60,7 @@ class Transitioner extends PureComponent {
 
   constructor(...args) {
     super(...args);
+    console.log(...args);
     this.state = {
       transition: null,
       entries: [this.props.location],
@@ -99,6 +100,7 @@ class Transitioner extends PureComponent {
 
     let toPosition = this.state.index;
 
+    console.log('HELLLO', nextProps.history.action);
     switch (nextProps.history.action) {
       case PUSH: {
         const routeIndex = findIndex(entries, entry => this.keyForLocation(entry) === toKey);
@@ -294,6 +296,7 @@ class Transitioner extends PureComponent {
 
   // Finds the first matching <Route> for a given location object in props.children
   routeChildForLocation(location) {
+    console.log(this.props.children);
     return location && findFirstMatch(this.props.children, location);
   }
 
@@ -354,7 +357,7 @@ class Transitioner extends PureComponent {
 
   renderScreens() {
     const screens = this.state.entries
-      .filter(entry => this.routeChildForLocation(entry))
+      .filter(entry => console.log(entry, this.routeChildForLocation(entry)) || this.routeChildForLocation(entry))
       .map((entry, index) => (
         this.renderScreenWithAnimation({
           index,
@@ -362,6 +365,7 @@ class Transitioner extends PureComponent {
           screen: this.routeChildForLocation(entry),
         })
       ));
+    console.log('SCREENS ', screens.length ? screens : 'NO DATA');
     return screens;
   }
 
@@ -380,6 +384,7 @@ class Transitioner extends PureComponent {
   )
 
   render() {
+    console.log('RENDERING ', this.renderScreens().length ? this.renderScreens() : 'NO DATA');
     const panProps = Platform.OS !== 'android' ? this.panResponder.panHandlers : {};
     return (
       <View
