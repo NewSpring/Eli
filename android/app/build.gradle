@@ -23,7 +23,7 @@ android {
     applicationId 'cc.newspring.newspringapp'
     minSdkVersion 21
     targetSdkVersion 26
-    versionCode 1
+    versionCode 1905140957
     versionName '6.3.0'
     ndk {
       abiFilters 'armeabi-v7a', 'x86'
