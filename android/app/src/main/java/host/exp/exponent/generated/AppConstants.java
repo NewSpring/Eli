@@ -14,7 +14,7 @@ public class AppConstants {
   public static final String VERSION_NAME = "2.10.8";
   public static String INITIAL_URL = "exp://exp.host/@michael.neeley/eli";
   public static final String SHELL_APP_SCHEME = "exp9c6c74da2a2e462a85f96e7b33d67fe7";
-  public static final String RELEASE_CHANNEL = "default";
+  public static final String RELEASE_CHANNEL = "v6.3.0";
   public static boolean SHOW_LOADING_VIEW_IN_SHELL_APP = false;
   public static boolean ARE_REMOTE_UPDATES_ENABLED = true;
   public static final List<Constants.EmbeddedResponse> EMBEDDED_RESPONSES;
@@ -23,9 +23,12 @@ public class AppConstants {
   static {
     List<Constants.EmbeddedResponse> embeddedResponses = new ArrayList<>();
 
-    // ADD EMBEDDED RESPONSES HERE
-    // START EMBEDDED RESPONSES
-    // END EMBEDDED RESPONSES
+    
+        // ADD EMBEDDED RESPONSES HERE
+        // START EMBEDDED RESPONSES
+        embeddedResponses.add(new Constants.EmbeddedResponse("https://exp.host/@michael.neeley/eli", "assets://shell-app-manifest.json", "application/json"));
+        embeddedResponses.add(new Constants.EmbeddedResponse("https://d1wp6m56sqw74a.cloudfront.net/%40michael.neeley%2Feli%2F6.3.0%2F8228ab4d264e89dce8b6dbb0667c8577-32.0.0-android.js", "assets://shell-app.bundle", "application/javascript"));
+        // END EMBEDDED RESPONSES
     EMBEDDED_RESPONSES = embeddedResponses;
   }
 
