@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Onboarding should render 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "bottom": 16,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "height": 16,
+          "justifyContent": "center",
+          "margin": 16,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "rgba(255, 255, 255, .9)",
+            },
+            Object {
+              "borderRadius": 5,
+              "height": 10,
+              "marginHorizontal": 4,
+              "width": 10,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "rgba(0, 0, 0, .2)",
+            },
+            Object {
+              "borderRadius": 5,
+              "height": 10,
+              "marginHorizontal": 4,
+              "width": 10,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "rgba(0, 0, 0, .2)",
+            },
+            Object {
+              "borderRadius": 5,
+              "height": 10,
+              "marginHorizontal": 4,
+              "width": 10,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "rgba(0, 0, 0, .2)",
+            },
+            Object {
+              "borderRadius": 5,
+              "height": 10,
+              "marginHorizontal": 4,
+              "width": 10,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "rgba(0, 0, 0, .2)",
+            },
+            Object {
+              "borderRadius": 5,
+              "height": 10,
+              "marginHorizontal": 4,
+              "width": 10,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "rgba(0, 0, 0, .2)",
+            },
+            Object {
+              "borderRadius": 5,
+              "height": 10,
+              "marginHorizontal": 4,
+              "width": 10,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "rgba(0, 0, 0, .2)",
+            },
+            Object {
+              "borderRadius": 5,
+              "height": 10,
+              "marginHorizontal": 4,
+              "width": 10,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "rgba(0, 0, 0, .2)",
+            },
+            Object {
+              "borderRadius": 5,
+              "height": 10,
+              "marginHorizontal": 4,
+              "width": 10,
+            },
+          ]
+        }
+      />
+    </View>
+  </View>
+</View>
+`;
